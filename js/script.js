@@ -37,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   setTimeout(typeText, 500);
 
+  // Fade-in ao rolar
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -73,6 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
   let demoSnake = [];
   let demoVelocity = { x: 1, y: 0 };
   let demoFood = {};
+  let flashCounter = 0;
 
   function startDemo() {
     demoSnake = [
@@ -82,6 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
     ];
     demoVelocity = { x: 1, y: 0 };
     demoFood = generateDemoFood();
+    flashCounter = 0;
     demoInterval = setInterval(drawDemo, 200);
   }
 
@@ -100,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const head = demoSnake[0];
     let targetDirection = { x: 0, y: 0 };
 
-    // Escolhe a direção para ir em linha reta até a fruta (prioridade: eixo X)
+    // Direção simples até a fruta
     if (head.x < demoFood.x) targetDirection = { x: 1, y: 0 };
     else if (head.x > demoFood.x) targetDirection = { x: -1, y: 0 };
     else if (head.y < demoFood.y) targetDirection = { x: 0, y: 1 };
@@ -109,12 +112,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const nextX = head.x + targetDirection.x;
     const nextY = head.y + targetDirection.y;
 
-    // Verifica colisão com parede
-    if (
-      nextX < 0 || nextY < 0 ||
-      nextX >= tileCount || nextY >= tileCount
-    ) {
-      // Vira para outra direção válida que não encoste na parede
+    // Evita parede
+    if (nextX < 0 || nextY < 0 || nextX >= tileCount || nextY >= tileCount) {
       const safeMoves = [
         { x: 0, y: -1 }, { x: 1, y: 0 },
         { x: 0, y: 1 }, { x: -1, y: 0 }
@@ -136,39 +135,41 @@ document.addEventListener('DOMContentLoaded', function () {
       y: head.y + targetDirection.y
     };
 
-    // Impede colisão com o próprio corpo
     if (demoSnake.some(s => s.x === newHead.x && s.y === newHead.y)) {
-      restartDemo(); // ← reinicia a demo se travar
-      return;
-}
+      restartDemo(); return;
+    }
 
     demoSnake.unshift(newHead);
 
-    // Come a fruta? Não remove a cauda = cresce!
     if (newHead.x === demoFood.x && newHead.y === demoFood.y) {
-      demoFood = generateDemoFood(); // Nova frutinha
+      demoFood = generateDemoFood();
     } else {
-      demoSnake.pop(); // Movimento normal
+      demoSnake.pop();
     }
 
-    // Desenha o frame
+    // Desenho
     ctx.fillStyle = "#333";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    ctx.fillStyle = "lime";
-    demoSnake.forEach(segment => {
-      ctx.fillRect(segment.x * tileSize, segment.y * tileSize, tileSize - 1, tileSize - 1);
-    });
-
-    ctx.fillStyle = "red";
+    // Frutinha brilhando
+    flashCounter++;
+    ctx.fillStyle = flashCounter % 8 < 4 ? "red" : "orangered";
     ctx.fillRect(demoFood.x * tileSize, demoFood.y * tileSize, tileSize - 1, tileSize - 1);
-  }
-    function restartDemo() {
-      clearInterval(demoInterval);
-      startDemo();
-    }
 
-  // --- JOGO PRINCIPAL ---
+    // Cobra piscando suavemente no início
+    const cor = flashCounter < 10 ? (flashCounter % 2 === 0 ? "#66ff66" : "lime") : "lime";
+    ctx.fillStyle = cor;
+    demoSnake.forEach(seg => {
+      ctx.fillRect(seg.x * tileSize, seg.y * tileSize, tileSize - 1, tileSize - 1);
+    });
+  }
+
+  function restartDemo() {
+    clearInterval(demoInterval);
+    setTimeout(startDemo, 300);
+  }
+
+  // --- JOGO REAL ---
   function drawGame() {
     const headX = snake[0].x + velocity.x;
     const headY = snake[0].y + velocity.y;
@@ -176,14 +177,12 @@ document.addEventListener('DOMContentLoaded', function () {
     if (velocity.x === 0 && velocity.y === 0) return;
 
     if (headX < 0 || headY < 0 || headX >= tileCount || headY >= tileCount) {
-      endGame();
-      return;
+      endGame(); return;
     }
 
     for (let i = 1; i < snake.length; i++) {
       if (snake[i].x === headX && snake[i].y === headY) {
-        endGame();
-        return;
+        endGame(); return;
       }
     }
 
@@ -206,7 +205,6 @@ document.addEventListener('DOMContentLoaded', function () {
       ctx.fillRect(segment.x * tileSize, segment.y * tileSize, tileSize, tileSize);
     });
   }
-     
 
   function generateFood() {
     let newFood;
@@ -239,11 +237,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
   document.addEventListener('keydown', function (e) {
     if (!gameRunning) return;
-
     if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) {
       e.preventDefault();
     }
-
     switch (e.key) {
       case "ArrowLeft":
         if (velocity.x !== 1) velocity = { x: -1, y: 0 };
@@ -262,13 +258,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
   document.getElementById('startSnake').addEventListener('click', function () {
     if (!gameRunning) {
-      clearInterval(demoInterval); // Para a demonstração
+      clearInterval(demoInterval);
       gameRunning = true;
       document.getElementById('startSnake').style.display = 'none';
       gameInterval = setInterval(drawGame, 100);
     }
   });
 
-  resetGame(); // Inicializa
-  startDemo(); // Inicia demonstração
+  resetGame();
+  startDemo(); // Inicia a demonstração automaticamente
 });
