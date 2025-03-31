@@ -138,8 +138,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Impede colisão com o próprio corpo
     if (demoSnake.some(s => s.x === newHead.x && s.y === newHead.y)) {
-      return; // trava a demo (evita bug visual)
-    }
+      restartDemo(); // ← reinicia a demo se travar
+      return;
+}
 
     demoSnake.unshift(newHead);
 
@@ -162,6 +163,10 @@ document.addEventListener('DOMContentLoaded', function () {
     ctx.fillStyle = "red";
     ctx.fillRect(demoFood.x * tileSize, demoFood.y * tileSize, tileSize - 1, tileSize - 1);
   }
+    function restartDemo() {
+      clearInterval(demoInterval);
+      startDemo();
+    }
 
   // --- JOGO PRINCIPAL ---
   function drawGame() {
@@ -201,6 +206,7 @@ document.addEventListener('DOMContentLoaded', function () {
       ctx.fillRect(segment.x * tileSize, segment.y * tileSize, tileSize, tileSize);
     });
   }
+     
 
   function generateFood() {
     let newFood;
