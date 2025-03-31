@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const consoleElem = document.getElementById('console');
 
   // Textos que serão "digitados"
@@ -73,7 +73,6 @@ document.addEventListener('DOMContentLoaded', function() {
   let demoSnake = [];
   let demoVelocity = { x: 1, y: 0 };
   let demoFood = {};
-  let demoStep = 0;
 
   function startDemo() {
     demoSnake = [
@@ -82,58 +81,87 @@ document.addEventListener('DOMContentLoaded', function() {
       { x: 3, y: 5 }
     ];
     demoVelocity = { x: 1, y: 0 };
-    demoFood = { x: 10, y: 5 };
-    demoStep = 0;
-
+    demoFood = generateDemoFood();
     demoInterval = setInterval(drawDemo, 200);
   }
 
+  function generateDemoFood() {
+    let food;
+    do {
+      food = {
+        x: Math.floor(Math.random() * tileCount),
+        y: Math.floor(Math.random() * tileCount)
+      };
+    } while (demoSnake.some(s => s.x === food.x && s.y === food.y));
+    return food;
+  }
+
   function drawDemo() {
-  // Direção automática em direção à comida
-  const head = demoSnake[0];
-  if (head.x < demoFood.x) demoVelocity = { x: 1, y: 0 };
-  else if (head.x > demoFood.x) demoVelocity = { x: -1, y: 0 };
-  else if (head.y < demoFood.y) demoVelocity = { x: 0, y: 1 };
-  else if (head.y > demoFood.y) demoVelocity = { x: 0, y: -1 };
+    const head = demoSnake[0];
+    let targetDirection = { x: 0, y: 0 };
 
-  const newHead = {
-    x: head.x + demoVelocity.x,
-    y: head.y + demoVelocity.y
-  };
+    // Escolhe a direção para ir em linha reta até a fruta (prioridade: eixo X)
+    if (head.x < demoFood.x) targetDirection = { x: 1, y: 0 };
+    else if (head.x > demoFood.x) targetDirection = { x: -1, y: 0 };
+    else if (head.y < demoFood.y) targetDirection = { x: 0, y: 1 };
+    else if (head.y > demoFood.y) targetDirection = { x: 0, y: -1 };
 
-  // Impede ultrapassar as paredes
-  if (
-    newHead.x < 0 || newHead.x >= tileCount ||
-    newHead.y < 0 || newHead.y >= tileCount
-  ) {
-    return; // Não desenha se for sair da tela
-  }
+    const nextX = head.x + targetDirection.x;
+    const nextY = head.y + targetDirection.y;
 
-  // Atualiza cobra
-  demoSnake.unshift(newHead);
+    // Verifica colisão com parede
+    if (
+      nextX < 0 || nextY < 0 ||
+      nextX >= tileCount || nextY >= tileCount
+    ) {
+      // Vira para outra direção válida que não encoste na parede
+      const safeMoves = [
+        { x: 0, y: -1 }, { x: 1, y: 0 },
+        { x: 0, y: 1 }, { x: -1, y: 0 }
+      ];
+      for (const move of safeMoves) {
+        const newX = head.x + move.x;
+        const newY = head.y + move.y;
+        const noWall = newX >= 0 && newX < tileCount && newY >= 0 && newY < tileCount;
+        const noBody = !demoSnake.some(s => s.x === newX && s.y === newY);
+        if (noWall && noBody) {
+          targetDirection = move;
+          break;
+        }
+      }
+    }
 
-  // Come ficticiamente
-  if (newHead.x === demoFood.x && newHead.y === demoFood.y) {
-    demoFood = {
-      x: Math.floor(Math.random() * tileCount),
-      y: Math.floor(Math.random() * tileCount)
+    const newHead = {
+      x: head.x + targetDirection.x,
+      y: head.y + targetDirection.y
     };
-  } else {
-    demoSnake.pop();
+
+    // Impede colisão com o próprio corpo
+    if (demoSnake.some(s => s.x === newHead.x && s.y === newHead.y)) {
+      return; // trava a demo (evita bug visual)
+    }
+
+    demoSnake.unshift(newHead);
+
+    // Come a fruta? Não remove a cauda = cresce!
+    if (newHead.x === demoFood.x && newHead.y === demoFood.y) {
+      demoFood = generateDemoFood(); // Nova frutinha
+    } else {
+      demoSnake.pop(); // Movimento normal
+    }
+
+    // Desenha o frame
+    ctx.fillStyle = "#333";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "lime";
+    demoSnake.forEach(segment => {
+      ctx.fillRect(segment.x * tileSize, segment.y * tileSize, tileSize - 1, tileSize - 1);
+    });
+
+    ctx.fillStyle = "red";
+    ctx.fillRect(demoFood.x * tileSize, demoFood.y * tileSize, tileSize - 1, tileSize - 1);
   }
-
-  // Desenha no canvas
-  ctx.fillStyle = "#333";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  ctx.fillStyle = "lime";
-  demoSnake.forEach(segment => {
-    ctx.fillRect(segment.x * tileSize, segment.y * tileSize, tileSize - 1, tileSize - 1);
-  });
-
-  ctx.fillStyle = "red";
-  ctx.fillRect(demoFood.x * tileSize, demoFood.y * tileSize, tileSize - 1, tileSize - 1);
-}
 
   // --- JOGO PRINCIPAL ---
   function drawGame() {
@@ -203,7 +231,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('startSnake').style.display = 'block';
   }
 
-  document.addEventListener('keydown', function(e) {
+  document.addEventListener('keydown', function (e) {
     if (!gameRunning) return;
 
     if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) {
@@ -226,7 +254,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  document.getElementById('startSnake').addEventListener('click', function() {
+  document.getElementById('startSnake').addEventListener('click', function () {
     if (!gameRunning) {
       clearInterval(demoInterval); // Para a demonstração
       gameRunning = true;
