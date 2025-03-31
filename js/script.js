@@ -89,44 +89,51 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function drawDemo() {
-    const head = {
-      x: (demoSnake[0].x + demoVelocity.x + tileCount) % tileCount,
-      y: (demoSnake[0].y + demoVelocity.y + tileCount) % tileCount
-    };
+  // Direção automática em direção à comida
+  const head = demoSnake[0];
+  if (head.x < demoFood.x) demoVelocity = { x: 1, y: 0 };
+  else if (head.x > demoFood.x) demoVelocity = { x: -1, y: 0 };
+  else if (head.y < demoFood.y) demoVelocity = { x: 0, y: 1 };
+  else if (head.y > demoFood.y) demoVelocity = { x: 0, y: -1 };
 
-    demoStep++;
-    if (demoStep % 20 === 0) {
-      const directions = [
-        { x: 0, y: -1 },
-        { x: 1, y: 0 },
-        { x: 0, y: 1 },
-        { x: -1, y: 0 }
-      ];
-      demoVelocity = directions[Math.floor(Math.random() * directions.length)];
-    }
+  const newHead = {
+    x: head.x + demoVelocity.x,
+    y: head.y + demoVelocity.y
+  };
 
-    demoSnake.unshift(head);
-
-    if (head.x === demoFood.x && head.y === demoFood.y) {
-      demoFood = {
-        x: Math.floor(Math.random() * tileCount),
-        y: Math.floor(Math.random() * tileCount)
-      };
-    } else {
-      demoSnake.pop();
-    }
-
-    ctx.fillStyle = "#333";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    ctx.fillStyle = "lime";
-    demoSnake.forEach(segment => {
-      ctx.fillRect(segment.x * tileSize, segment.y * tileSize, tileSize - 1, tileSize - 1);
-    });
-
-    ctx.fillStyle = "red";
-    ctx.fillRect(demoFood.x * tileSize, demoFood.y * tileSize, tileSize - 1, tileSize - 1);
+  // Impede ultrapassar as paredes
+  if (
+    newHead.x < 0 || newHead.x >= tileCount ||
+    newHead.y < 0 || newHead.y >= tileCount
+  ) {
+    return; // Não desenha se for sair da tela
   }
+
+  // Atualiza cobra
+  demoSnake.unshift(newHead);
+
+  // Come ficticiamente
+  if (newHead.x === demoFood.x && newHead.y === demoFood.y) {
+    demoFood = {
+      x: Math.floor(Math.random() * tileCount),
+      y: Math.floor(Math.random() * tileCount)
+    };
+  } else {
+    demoSnake.pop();
+  }
+
+  // Desenha no canvas
+  ctx.fillStyle = "#333";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = "lime";
+  demoSnake.forEach(segment => {
+    ctx.fillRect(segment.x * tileSize, segment.y * tileSize, tileSize - 1, tileSize - 1);
+  });
+
+  ctx.fillStyle = "red";
+  ctx.fillRect(demoFood.x * tileSize, demoFood.y * tileSize, tileSize - 1, tileSize - 1);
+}
 
   // --- JOGO PRINCIPAL ---
   function drawGame() {
