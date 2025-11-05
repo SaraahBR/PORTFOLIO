@@ -1,0 +1,243 @@
+{
+  "nav": {
+    "about": "Sobre mí",
+    "skills": "Habilidades",
+    "experience": "Experiencia",
+    "languages": "Idiomas",
+    "courses": "Cursos",
+    "education": "Formación",
+    "projects": "Proyectos",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "title": "Sarah Vitória Hernandes Gaspar",
+    "subtitle": "Desarrolladora Full Stack",
+    "greeting1": "Hola, Mundo... ☕︎",
+    "greeting2": "¡Soy Sarah y estás en mi portafolio, mucho gusto! ♡",
+    "typing": [
+      "Hola, Mundo... ☕︎",
+      "¡Soy Sarah y estás en mi portafolio, mucho gusto! ♡"
+    ],
+    "cta": "Conoce Mi Trabajo"
+  },
+  "about": {
+    "title": "Sobre Mí",
+    "paragraph1": "¡Mucho gusto, soy Sarah! Me estoy graduando en Ciencias de la Computación y busco mi primer empleo CLT (tiempo completo) en programación y desarrollo web y de software. Amo el universo de la computación y la tecnología, con interés en ciberseguridad, peritaje cibernético, desarrollo de aplicaciones, software, inteligencia artificial, bioinformática y juegos.",
+    "paragraph2": "Durante mi período en la universidad, fui líder de clase (gestionando un grupo de 64 compañeros) y gané el 2º lugar en la Olimpiada de Física de Paraná, entre otros logros académicos. Soy reconocida por cualidades como organización, creatividad, liderazgo y resiliencia, y siempre estoy dispuesta a aprender cosas nuevas y enfrentar desafíos.",
+    "paragraph3": "En busca de oportunidades para aplicar mis conocimientos, aprender nuevas tecnologías y contribuir a proyectos de impacto."
+  },
+  "skills": {
+    "title": "Habilidades",
+    "programming": "Lenguajes de Programación",
+    "frontend": "Front-end y Bibliotecas",
+    "backend": "Back-end y DevOps",
+    "database": "Bases de Datos",
+    "concepts": "Conceptos y Metodologías",
+    "behavioral": "Habilidades Comportamentales",
+    "lists": {
+      "programming": ["Python", "Java", "C++", "PHP", "JavaScript", "TypeScript"],
+      "frontend": ["HTML", "CSS", "Tailwind", "Sass Modules", "Material UI (MUI)", "Bootstrap", "React (Next.js)", "Angular", "Desarrollo Web Responsivo"],
+      "backend": ["Node.js", ".NET (C#)", "Django", "APIs RESTful", "Git y GitHub", "CI/CD (Vercel, Render)", "Microsoft Azure", "AWS (EC2, S3, RDS, IAM, Lambda, CloudFormation)", "Docker y Kubernetes"],
+      "database": ["PostgreSQL (Vercel, Neon)", "MySQL", "Oracle Database (XE/ADB)", "NoSQL", "Administración de Bases de Datos"],
+      "concepts": [
+        "Lógica de Programación", "Algoritmos y Estructuras de Datos", "POO", "Accesibilidad (A11Y)",
+        "Seguridad de la Información y Ciberseguridad", "Criptografía y Computación Forense",
+        "Pruebas (JUnit, Jest, Testing Library, Mockito)", "Ágil (Scrum, Kanban)", "Ingeniería de Software"
+      ],
+      "behavioral": [
+        "Aprendizaje continuo", "Resolución de Problemas", "Trabajo en equipo", "Proactividad",
+        "Adaptabilidad y Resiliencia", "Pensamiento Crítico", "Comunicación Efectiva", "Gestión del Tiempo",
+        "Inteligencia Emocional", "Liderazgo", "Empatía", "Creatividad e Innovación", "Organización",
+        "Compromiso", "Enfoque y Determinación", "Relaciones Interpersonales", "Responsabilidad",
+        "Autonomía", "Ética e Integridad"
+      ]
+    }
+  },
+  "experience": {
+    "title": "Experiencia",
+    "items": [
+      {
+        "company": "DBC Company",
+        "role": "Practicante de Desarrollo Full Stack",
+        "period": "May 2025 - Sep 2025",
+        "summary": "Aplicaciones modernas y accesibles, integraciones de API, autenticación y CI/CD.",
+        "details": [
+          "ScoreOn: sistema de notas multilingüe (Next.js, TypeScript, MUI, NextAuth, Vercel Postgres, Recharts)",
+          "Liderazgo en Hackathon de Accesibilidad (React, Next.js, Tailwind, TypeScript, A11Y)",
+          "Blog y panel admin en el Proyecto Final de Accesibilidad",
+          "GamerzNew (Angular, SSR, PostgreSQL Serverless, OAuth2) y CyberVenus (Next.js, TypeScript, Sass Modules)"
+        ]
+      }
+    ]
+  },
+  "languagesSection": {
+    "title": "Idiomas",
+    "items": [
+      { "name": "Inglés", "level": "C1" },
+      { "name": "Español", "level": "B1" },
+      { "name": "Francés", "level": "A2" }
+    ]
+  },
+  "courses": {
+    "title": "Cursos",
+    "items": [
+      {
+        "title": "Nube AWS + IA",
+        "period": "Ago 2025",
+        "description": "Laboratorios prácticos con AWS: EC2, S3, RDS, IAM, Route 53, seguridad en la nube, monitoreo e infraestructura como código (CloudFormation)."
+      }
+    ]
+  },
+  "education": {
+    "title": "Formación Académica",
+    "ongoing": "en curso",
+    "transfer": "transferencia a UNIP",
+    "completed": "completado",
+    "items": [
+      {
+        "institution": "UNIP",
+        "course": "Licenciatura en Ciencias de la Computación",
+        "period": "2024 - 2026",
+        "status": "en curso"
+      },
+      {
+        "institution": "UniFil",
+        "course": "Licenciatura en Ciencias de la Computación",
+        "period": "2022 - 2024",
+        "status": "transferencia a UNIP"
+      },
+      {
+        "institution": "ENNET",
+        "course": "Técnico en Informática",
+        "period": "Completado en 2019",
+        "status": "completado"
+      },
+      {
+        "institution": "Colégio José de Anchieta",
+        "course": "Educación Secundaria",
+        "period": "Completado en 2020",
+        "status": "completado"
+      }
+    ]
+  },
+  "projects": {
+    "title": "Mis Proyectos",
+    "viewSite": "Ver Sitio",
+    "viewVideo": "Ver Video",
+    "viewCode": "Ver Código",
+    "items": [
+      {
+        "title": "🛍️ LUIGARAH - Frontend",
+        "subtitle": null,
+        "description": "E-commerce de moda de lujo con Next.js 15 (App Router), React 19 y TypeScript. Filtros, paginación universal, wishlist/carrito, A11Y, Redux Toolkit + RTK Query, NextAuth (Google/Facebook/Credenciales/JWT), panel admin con CRUD y roles. Integra API Spring Boot, Oracle DB y Cloudflare R2.",
+        "technologies": ["Next.js", "React", "TypeScript", "Redux Toolkit", "RTK Query", "NextAuth", "Tailwind"],
+        "linkSite": "https://luigarah.vercel.app/",
+        "linkGithub": "https://github.com/SaraahBR/Luigarah",
+        "linkVideo": null
+      },
+      {
+        "title": "🧱 LUIGARAH - Backend",
+        "subtitle": "API RESTful (Java/Spring Boot)",
+        "description": "DDD, DTO/Mapper, seguridad con Spring Security, JWT, BCrypt, CORS, OAuth2; Oracle ADB con Flyway y HikariCP; Cloudflare R2 vía AWS S3 SDK; Swagger/OpenAPI 3, logs estructurados, Docker y CI/CD (Render).",
+        "technologies": ["Java", "Spring Boot", "Oracle ADB", "Flyway", "JWT", "Swagger"],
+        "linkSite": "https://luigarah-backend.onrender.com/swagger-ui/index.html",
+        "linkGithub": "https://github.com/SaraahBR/luigarah-backend",
+        "linkVideo": null
+      },
+      {
+        "title": "🧠 Identificador de Pronombres Clíticos Átonos",
+        "subtitle": "PROYECTO FREELANCE",
+        "description": "Desarrollé un sistema robusto en Python para identificar pronombres clíticos átonos en textos periodísticos y clasificarlos en proclisis, enclisis o mesoclisis, basándose en reglas morfosintácticas. Utilicé el modelo spaCy pt_core_news_lg, expresiones regulares para manejar mesoclisis compuestas (ej: entregar-lhe-ei) y generar informes automatizados con contexto y clasificación gramatical. El proyecto se realizó como parte de una investigación de doctorado en Ciencias de la Computación en la Universidad Estatal de Londrina (UEL).",
+        "technologies": ["Python", "spaCy", "NLP", "Regex"],
+        "linkSite": null,
+        "linkGithub": "https://github.com/SaraahBR/PROJETO-ESTATISTICA-FREEL",
+        "linkVideo": "https://drive.google.com/file/d/1vt7lu-QAWxtiKVmqNp1rhBoltAlpR5Sf/view?usp=sharing"
+      },
+      {
+        "title": "🎮 GamerzNew — Descubre, marca como favorito y sigue juegos",
+        "subtitle": null,
+        "description": "Sitio moderno para descubrimiento y favoritos con Angular 20 (Standalone), SSR/Prerender en Vercel, Neon Postgres serverless y Google OAuth. UI responsiva con tema rosa nude.",
+        "technologies": ["Angular", "TypeScript", "SSR", "Vercel Functions", "Neon Postgres", "OAuth2"],
+        "linkSite": "https://gamerz-new.vercel.app/",
+        "linkGithub": "https://github.com/SaraahBR/GamerzNew",
+        "linkVideo": null
+      },
+      {
+        "title": "🧮 ScoreOn",
+        "subtitle": "Sistema de Control de Notas",
+        "description": "Sistema moderno, accesible y multilingüe (pt, en, es) con Next.js 15, React 19, TypeScript y MUI; NextAuth, Vercel Postgres y gráficos con Recharts.",
+        "technologies": ["Next.js", "React", "TypeScript", "MUI", "NextAuth", "Vercel Postgres", "Recharts"],
+        "linkSite": "https://score-on.vercel.app/",
+        "linkGithub": "https://github.com/SaraahBR/ScoreOn",
+        "linkVideo": null
+      },
+      {
+        "title": "🛡️ CyberVenus",
+        "subtitle": "Portal Educativo",
+        "description": "Portal educativo moderno y accesible con Next.js 14, TypeScript y Sass Modules; vitrina de cursos, materiales y páginas institucionales; deploy en Vercel.",
+        "technologies": ["Next.js", "React", "TypeScript", "Sass Modules", "Bootstrap", "Vercel"],
+        "linkSite": "https://cyber-venus.vercel.app/",
+        "linkGithub": "https://github.com/saracristinas/CyberVenus",
+        "linkVideo": null
+      },
+      {
+        "title": "📐 Calculadora Científica en Línea",
+        "subtitle": null,
+        "description": "Calculadora científica interactiva con diversas funcionalidades matemáticas (logaritmos, trigonometría, potenciación, etc.). Interfaz intuitiva y responsiva desarrollada con HTML, CSS y JavaScript, publicada a través de GitHub Pages.",
+        "technologies": ["HTML", "CSS", "JavaScript"],
+        "linkSite": "https://saraahbr.github.io/CalculadoraHTMLCSSJAVASCRIPT",
+        "linkGithub": "https://github.com/SaraahBR/CalculadoraHTMLCSSJAVASCRIPT",
+        "linkVideo": null
+      },
+      {
+        "title": "💸 Sistema de Gastos Personales",
+        "subtitle": null,
+        "description": "Desarrollé una aplicación interactiva en React para control de gastos personales, con diseño moderno, animaciones y diseño responsivo (en construcción). El sistema permite registrar gastos por categoría y visualizar el historial total por mes. La aplicación utiliza localStorage para persistencia de datos y está integrada con GitHub Pages para acceso público en línea. Actualmente, el proyecto está en expansión para incluir autenticación con nombre de usuario y contraseña, envío de historial por correo electrónico y migración a backend con API REST.",
+        "technologies": ["React", "Vite", "Tailwind CSS", "JavaScript"],
+        "linkSite": "https://saraahbr.github.io/SistemasGastosPessoais/",
+        "linkGithub": null,
+        "linkVideo": "https://drive.google.com/file/d/12UCXY-rqVtd0o-RX3SYe7BuzbcJ_b7QT/view?usp=sharing"
+      },
+      {
+        "title": "🏥 Sistema Bio Hospitalario",
+        "subtitle": null,
+        "description": "Este proyecto es un sistema simple de diagnóstico médico desarrollado en C++, que ayuda a reconocer posibles enfermedades basándose en los síntomas informados por el paciente. El sistema compara los síntomas ingresados con una base interna de enfermedades y devuelve las más probables, junto con sugerencias de medicamentos asociados.",
+        "technologies": ["C++", "Algoritmos"],
+        "linkSite": null,
+        "linkGithub": "https://github.com/SaraahBR/Sistema-Bio-Hospitalar",
+        "linkVideo": null
+      },
+      {
+        "title": "💼 Sistema de Gastos Empresariales",
+        "subtitle": null,
+        "description": "Sistema simple y funcional para controlar gastos empresariales (servicios, personal, etc.), desarrollado en PHP con POO y arquitectura limpia por capas.",
+        "technologies": ["PHP", "POO", "MVC"],
+        "linkSite": null,
+        "linkGithub": "https://github.com/SaraahBR/Sistema-Gastos-Empresa",
+        "linkVideo": null
+      }
+    ]
+  },
+  "contact": {
+    "title": "Ponte en Contacto",
+    "subtitle": "¡Hablemos! Siempre estoy abierta a nuevas oportunidades y conexiones.",
+    "thankYou": "¡Gracias por visitar mi portafolio! 🤝"
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados."
+  },
+  "snake": {
+    "title": "Juego de la Serpiente",
+    "description": "Un mini juego interactivo desarrollado en React/JavaScript. ¡Haz clic en \"Iniciar\" para jugar!",
+    "instructions": "Usa las flechas del teclado ↑ ↓ ← → o W A S D para jugar",
+    "score": "Puntuación",
+    "start": "Iniciar Juego de la Serpiente",
+    "gameOver": "¡Fin del Juego!",
+    "finalScore": "Puntuación final"
+  },
+  "theme": {
+    "toggle": "Cambiar tema",
+    "light": "Modo claro",
+    "dark": "Modo oscuro"
+  }
+}

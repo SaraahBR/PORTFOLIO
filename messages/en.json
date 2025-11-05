@@ -1,0 +1,243 @@
+{
+  "nav": {
+    "about": "About",
+    "skills": "Skills",
+    "experience": "Experience",
+    "languages": "Languages",
+    "courses": "Courses",
+    "education": "Education",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Sarah Vitória Hernandes Gaspar",
+    "subtitle": "Full Stack Developer",
+    "greeting1": "Hello, World... ☕︎",
+    "greeting2": "I'm Sarah and you're on my portfolio, nice to meet you! ♡",
+    "typing": [
+      "Hello, World... ☕︎",
+      "I'm Sarah and you're on my portfolio, nice to meet you! ♡"
+    ],
+    "cta": "Check Out My Work"
+  },
+  "about": {
+    "title": "About Me",
+    "paragraph1": "Nice to meet you, I'm Sarah! I'm graduating in Computer Science and looking for my first full‑time (CLT) job in programming and web/software development. I love the world of computing and technology, with interests in cybersecurity, digital forensics, app development, software, artificial intelligence, bioinformatics, and games.",
+    "paragraph2": "During my time in college, I was a class leader (managing a group of 64 colleagues) and won 2nd place in the Paraná Physics Olympiad, among other academic achievements. I'm recognized for qualities like organization, creativity, leadership, and resilience, and I'm always willing to learn new things and face challenges.",
+    "paragraph3": "Seeking opportunities to apply my knowledge, learn new technologies, and contribute to impactful projects."
+  },
+  "skills": {
+    "title": "Skills",
+    "programming": "Programming Languages",
+    "frontend": "Front-end & Libraries",
+    "backend": "Back-end & DevOps",
+    "database": "Databases",
+    "concepts": "Concepts & Methodologies",
+    "behavioral": "Behavioral",
+    "lists": {
+      "programming": ["Python", "Java", "C++", "PHP", "JavaScript", "TypeScript"],
+      "frontend": ["HTML", "CSS", "Tailwind", "Sass Modules", "Material UI (MUI)", "Bootstrap", "React (Next.js)", "Angular", "Responsive Web Development"],
+      "backend": ["Node.js", ".NET (C#)", "Django", "RESTful APIs", "Git & GitHub", "CI/CD (Vercel, Render)", "Microsoft Azure", "AWS (EC2, S3, RDS, IAM, Lambda, CloudFormation)", "Docker & Kubernetes"],
+      "database": ["PostgreSQL (Vercel, Neon)", "MySQL", "Oracle Database (XE/ADB)", "NoSQL", "Database Administration"],
+      "concepts": [
+        "Programming Logic", "Algorithms & Data Structures", "OOP", "Accessibility (A11Y)",
+        "Information Security & Cybersecurity", "Cryptography & Digital Forensics",
+        "Testing (JUnit, Jest, Testing Library, Mockito)", "Agile (Scrum, Kanban)", "Software Engineering"
+      ],
+      "behavioral": [
+        "Continuous Learning", "Problem Solving", "Teamwork", "Proactivity",
+        "Adaptability & Resilience", "Critical Thinking", "Effective Communication", "Time Management",
+        "Emotional Intelligence", "Leadership", "Empathy", "Creativity & Innovation", "Organization",
+        "Commitment", "Focus & Determination", "Interpersonal Relations", "Responsibility",
+        "Autonomy", "Ethics & Integrity"
+      ]
+    }
+  },
+  "experience": {
+    "title": "Experience",
+    "items": [
+      {
+        "company": "DBC Company",
+        "role": "Full Stack Development Intern",
+        "period": "May 2025 - Sep 2025",
+        "summary": "Built modern accessible apps, API integrations, authentication and CI/CD.",
+        "details": [
+          "Developed ScoreOn: multilingual grading system (Next.js, TypeScript, MUI, NextAuth, Vercel Postgres, Recharts)",
+          "Led Accessibility Digital Hackathon (frontend with React, Next.js, Tailwind, TypeScript, A11Y best practices)",
+          "Contributed to Accessibility Final Project (blog and admin panel)",
+          "Worked on GamerzNew (Angular, SSR, PostgreSQL Serverless, OAuth2) and CyberVenus (Next.js, TypeScript, Sass Modules)"
+        ]
+      }
+    ]
+  },
+  "languagesSection": {
+    "title": "Languages",
+    "items": [
+      { "name": "English", "level": "C1" },
+      { "name": "Spanish", "level": "B1" },
+      { "name": "French", "level": "A2" }
+    ]
+  },
+  "courses": {
+    "title": "Courses",
+    "items": [
+      {
+        "title": "AWS Cloud + AI",
+        "period": "Aug 2025",
+        "description": "Hands-on labs with AWS: EC2, S3, RDS, IAM, Route 53, cloud security, monitoring and infrastructure as code (CloudFormation)."
+      }
+    ]
+  },
+  "education": {
+    "title": "Academic Background",
+    "ongoing": "ongoing",
+    "transfer": "transferred to UNIP",
+    "completed": "completed",
+    "items": [
+      {
+        "institution": "UNIP",
+        "course": "Bachelor's in Computer Science",
+        "period": "2024 - 2026",
+        "status": "ongoing"
+      },
+      {
+        "institution": "UniFil",
+        "course": "Bachelor's in Computer Science",
+        "period": "2022 - 2024",
+        "status": "transferred to UNIP"
+      },
+      {
+        "institution": "ENNET",
+        "course": "Technical Diploma in Information Technology",
+        "period": "Completed in 2019",
+        "status": "completed"
+      },
+      {
+        "institution": "Colégio José de Anchieta",
+        "course": "High School",
+        "period": "Completed in 2020",
+        "status": "completed"
+      }
+    ]
+  },
+  "projects": {
+    "title": "My Projects",
+    "viewSite": "View Site",
+    "viewVideo": "Watch Video",
+    "viewCode": "View Code",
+    "items": [
+      {
+        "title": "🛍️ LUIGARAH - Frontend",
+        "subtitle": null,
+        "description": "Luxury fashion e-commerce built with Next.js 15 (App Router), React 19 and TypeScript. Filters, universal pagination, wishlist/cart, A11Y, Redux Toolkit + RTK Query, NextAuth (Google/Facebook/Credentials/JWT), admin panel with CRUD and roles. Integrates Spring Boot API, Oracle DB and Cloudflare R2.",
+        "technologies": ["Next.js", "React", "TypeScript", "Redux Toolkit", "RTK Query", "NextAuth", "Tailwind"],
+        "linkSite": "https://luigarah.vercel.app/",
+        "linkGithub": "https://github.com/SaraahBR/Luigarah",
+        "linkVideo": null
+      },
+      {
+        "title": "🧱 LUIGARAH - Backend",
+        "subtitle": "RESTful API (Java/Spring Boot)",
+        "description": "DDD, DTO/Mapper, security with Spring Security, JWT, BCrypt, CORS, OAuth2; Oracle ADB with Flyway and HikariCP; Cloudflare R2 via AWS S3 SDK; Swagger/OpenAPI 3, structured logs, Docker and CI/CD (Render).",
+        "technologies": ["Java", "Spring Boot", "Oracle ADB", "Flyway", "JWT", "Swagger"],
+        "linkSite": "https://luigarah-backend.onrender.com/swagger-ui/index.html",
+        "linkGithub": "https://github.com/SaraahBR/luigarah-backend",
+        "linkVideo": null
+      },
+      {
+        "title": "🧠 Atonic Clitic Pronouns Identifier",
+        "subtitle": "FREELANCE PROJECT",
+        "description": "I developed a robust system in Python to identify atonic clitic pronouns in journalistic texts and classify them as proclisis, enclisis or mesoclisis, based on morphosyntactic rules. I used the spaCy pt_core_news_lg model, regular expressions to handle compound mesoclisis (e.g.: entregar-lhe-ei) and generate automated reports with context and grammatical classification. The project was carried out as part of a PhD research in Computer Science at the State University of Londrina (UEL).",
+        "technologies": ["Python", "spaCy", "NLP", "Regex"],
+        "linkSite": null,
+        "linkGithub": "https://github.com/SaraahBR/PROJETO-ESTATISTICA-FREEL",
+        "linkVideo": "https://drive.google.com/file/d/1vt7lu-QAWxtiKVmqNp1rhBoltAlpR5Sf/view?usp=sharing"
+      },
+      {
+        "title": "🎮 GamerzNew — Discover, favorite and track games",
+        "subtitle": null,
+        "description": "Modern site for game discovery and favorites using Angular 20 (Standalone), SSR/Prerender on Vercel, Neon serverless Postgres and Google OAuth. Responsive UI with nude‑pink theme.",
+        "technologies": ["Angular", "TypeScript", "SSR", "Vercel Functions", "Neon Postgres", "OAuth2"],
+        "linkSite": "https://gamerz-new.vercel.app/",
+        "linkGithub": "https://github.com/SaraahBR/GamerzNew",
+        "linkVideo": null
+      },
+      {
+        "title": "🧮 ScoreOn",
+        "subtitle": "Grades Management System",
+        "description": "Modern, accessible and multilingual (pt, en, es) with Next.js 15, React 19, TypeScript and MUI; NextAuth, Vercel Postgres and charts with Recharts.",
+        "technologies": ["Next.js", "React", "TypeScript", "MUI", "NextAuth", "Vercel Postgres", "Recharts"],
+        "linkSite": "https://score-on.vercel.app/",
+        "linkGithub": "https://github.com/SaraahBR/ScoreOn",
+        "linkVideo": null
+      },
+      {
+        "title": "🛡️ CyberVenus",
+        "subtitle": "Educational Portal",
+        "description": "Modern, accessible educational portal with Next.js 14, TypeScript and Sass Modules; courses showcase, materials and institutional pages; deployed on Vercel.",
+        "technologies": ["Next.js", "React", "TypeScript", "Sass Modules", "Bootstrap", "Vercel"],
+        "linkSite": "https://cyber-venus.vercel.app/",
+        "linkGithub": "https://github.com/saracristinas/CyberVenus",
+        "linkVideo": null
+      },
+      {
+        "title": "📐 Online Scientific Calculator",
+        "subtitle": null,
+        "description": "Interactive scientific calculator with various mathematical functionalities (logarithms, trigonometry, exponentiation, etc.). Intuitive and responsive interface developed with HTML, CSS and JavaScript, published via GitHub Pages.",
+        "technologies": ["HTML", "CSS", "JavaScript"],
+        "linkSite": "https://saraahbr.github.io/CalculadoraHTMLCSSJAVASCRIPT",
+        "linkGithub": "https://github.com/SaraahBR/CalculadoraHTMLCSSJAVASCRIPT",
+        "linkVideo": null
+      },
+      {
+        "title": "💸 Personal Expenses System",
+        "subtitle": null,
+        "description": "I developed an interactive React application for personal expense control, with modern visuals, animations and responsive layout (under construction). The system allows recording expenses by category and viewing the total history per month. The application uses localStorage for data persistence and is integrated with GitHub Pages for public online access. Currently, the project is expanding to include authentication with username and password, sending history by email and migration to backend with REST API.",
+        "technologies": ["React", "Vite", "Tailwind CSS", "JavaScript"],
+        "linkSite": "https://saraahbr.github.io/SistemasGastosPessoais/",
+        "linkGithub": null,
+        "linkVideo": "https://drive.google.com/file/d/12UCXY-rqVtd0o-RX3SYe7BuzbcJ_b7QT/view?usp=sharing"
+      },
+      {
+        "title": "🏥 Bio Hospital System",
+        "subtitle": null,
+        "description": "This project is a simple medical diagnosis system developed in C++, which assists in recognizing possible diseases based on symptoms reported by the patient. The system compares the entered symptoms with an internal disease database and returns the most likely ones, along with suggestions for associated medications.",
+        "technologies": ["C++", "Algorithms"],
+        "linkSite": null,
+        "linkGithub": "https://github.com/SaraahBR/Sistema-Bio-Hospitalar",
+        "linkVideo": null
+      },
+      {
+        "title": "💼 Business Expenses System",
+        "subtitle": null,
+        "description": "Simple, functional system to control business expenses (utilities, staff, etc.), built with PHP OOP and a clean layered architecture.",
+        "technologies": ["PHP", "OOP", "MVC"],
+        "linkSite": null,
+        "linkGithub": "https://github.com/SaraahBR/Sistema-Gastos-Empresa",
+        "linkVideo": null
+      }
+    ]
+  },
+  "contact": {
+    "title": "Get In Touch",
+    "subtitle": "Let's talk! I'm always open to new opportunities and connections.",
+    "thankYou": "Thank you for visiting my portfolio! 🤝"
+  },
+  "footer": {
+    "rights": "All rights reserved."
+  },
+  "snake": {
+    "title": "Snake Game",
+    "description": "An interactive mini game developed in React/JavaScript. Click \"Start\" to play!",
+    "instructions": "Use arrow keys ↑ ↓ ← → or W A S D to play",
+    "score": "Score",
+    "start": "Start Snake Game",
+    "gameOver": "Game Over!",
+    "finalScore": "Final score"
+  },
+  "theme": {
+    "toggle": "Toggle theme",
+    "light": "Light mode",
+    "dark": "Dark mode"
+  }
+}

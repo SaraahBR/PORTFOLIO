@@ -1,0 +1,183 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body {
+    @apply overflow-x-hidden;
+  }
+
+  body {
+    @apply bg-nude-100 dark:bg-dark text-gray-800 dark:text-gray-100 antialiased transition-colors;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold text-gray-800 dark:text-white;
+  }
+
+  * {
+    @apply scroll-smooth;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-[#b8968a] via-[#8a6d63] to-[#b8968a] dark:from-gray-400 dark:via-white dark:to-gray-400 bg-clip-text text-transparent;
+  }
+  
+  .text-gradient.dark-only-shadow {
+    text-shadow: none;
+    filter: none;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .text-gradient.dark-only-shadow {
+      text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+    }
+  }
+  
+  .dark .text-gradient.dark-only-shadow {
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+  }
+  
+  .dark .text-gradient {
+    @apply from-gray-400 via-white to-gray-400;
+  }
+
+  .glass-effect {
+    @apply bg-white dark:bg-gray-800 backdrop-blur-[1px] border border-nude-200/25 dark:border-white/5 shadow-sm;
+  }
+
+  .section-blur {
+    @apply bg-[#f0e5e0] dark:bg-black/20 backdrop-blur-[2px];
+  }
+
+  .glow-effect {
+    box-shadow: none;
+  }
+  
+  .dark .glow-effect {
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.6),
+                0 0 50px rgba(30, 30, 30, 0.5);
+  }
+
+  .hover-glow {
+    transition: all 0.3s ease;
+  }
+
+  .hover-glow:hover {
+    box-shadow: 0 8px 20px rgba(198, 142, 130, 0.3),
+                0 4px 10px rgba(180, 120, 105, 0.2);
+    transform: translateY(-3px);
+  }
+  
+  .dark .hover-glow:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8),
+                0 4px 15px rgba(20, 20, 20, 0.6);
+    transform: translateY(-5px);
+  }
+
+  .glitter {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .glitter::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      rgba(198, 142, 130, 0.12) 50%,
+      transparent 70%
+    );
+    animation: glitter-sweep 3s infinite;
+  }
+  
+  .dark .glitter::before {
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      rgba(60, 60, 60, 0.15) 50%,
+      transparent 70%
+    );
+    animation: glitter-sweep 3s infinite;
+  }
+
+  @keyframes glitter-sweep {
+    0% {
+      transform: translate(-100%, -100%) rotate(45deg);
+    }
+    100% {
+      transform: translate(100%, 100%) rotate(45deg);
+    }
+  }
+}
+
+/* Animação de partículas de fundo */
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Scroll customizado */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-nude-200 dark:bg-darker;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #4a4a4a, #2a2a2a);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #5a5a5a, #3a3a3a);
+}
+
+/* Animação de aparecimento suave */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+/* Efeito de digitação */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.typing-cursor::after {
+  content: '|';
+  animation: blink 1s infinite;
+  margin-left: 2px;
+}
+/* Fonts */
+@import "@fontsource/poppins/400.css";
+@import "@fontsource/poppins/500.css";
+@import "@fontsource/poppins/600.css";
+@import "@fontsource/poppins/700.css";
