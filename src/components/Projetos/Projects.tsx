@@ -10,11 +10,13 @@ import { useLanguage } from '@/app/internacionalizacao/LanguageContext'
 export default function Projects() {
   const { t } = useLanguage()
   const ref = useRef(null)
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
-  const [viewMode, setViewMode] = useState<'desktop' | 'mobile'>('desktop')
+  const [currentImageIndexFrontend, setCurrentImageIndexFrontend] = useState(0)
+  const [currentImageIndexBackend, setCurrentImageIndexBackend] = useState(0)
+  const [viewModeFrontend, setViewModeFrontend] = useState<'desktop' | 'mobile'>('desktop')
+  const [viewModeBackend, setViewModeBackend] = useState<'desktop' | 'mobile'>('desktop')
 
-  // Imagens do projeto LUIGARAH - Desktop
-  const luigarahDesktopImages = [
+  // Imagens do projeto LUIGARAH Frontend - Desktop
+  const luigarahFrontendDesktopImages = [
     'LUIGARAH-front/1oVIDEO-LUIGARAH.gif',
     'LUIGARAH-front/2oVIDEO-LUIGARAH.gif',
     'LUIGARAH-front/3oVIDEO-LUIGARAH.gif',
@@ -22,29 +24,56 @@ export default function Projects() {
     'LUIGARAH-front/LightHouse-LUIGARAH.png'
   ]
 
-  // Imagens do projeto LUIGARAH - Mobile
-  const luigarahMobileImages = [
+  // Imagens do projeto LUIGARAH Frontend - Mobile
+  const luigarahFrontendMobileImages = [
     'LUIGARAH-front/1oVIDEO-MOBILE-LUIGARAHF.gif',
     'LUIGARAH-front/2oVIDEO-MOBILE-LUIGARAHF.gif',
     'LUIGARAH-front/3oVIDEO-MOBILE-LUIGARAHF.gif',
     'LUIGARAH-front/4oVIDEO-MOBILE-LUIGARAHF.gif'
   ]
 
-  // Seleciona as imagens baseado no modo de visualização
-  const currentImages = viewMode === 'desktop' ? luigarahDesktopImages : luigarahMobileImages
+  // Imagens do projeto LUIGARAH Backend - Desktop (por enquanto só desktop)
+  const luigarahBackendDesktopImages = [
+    'LUIGARAH-back/1oVIDEO-LUIGARAH-BACKEND.gif',
+    'LUIGARAH-back/2oVIDEO-LUIGARAH-BACKEND.gif',
+    'LUIGARAH-back/3oVIDEO-LUIGARAH-BACKEND.gif',
+    'LUIGARAH-back/4oVIDEO-LUIGARAH-BACKEND-SQL.gif',
+    'LUIGARAH-back/5oVIDEO-LUIGARAH-BACKEND.gif'
+  ]
 
-  const handleNextImage = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % currentImages.length)
+  // Imagens do projeto LUIGARAH Backend - Mobile
+  const luigarahBackendMobileImages = [
+    'LUIGARAH-back/1oVIDEO-LUIGARAH-BACKEND-MOBILE.gif'
+  ]
+
+  // Seleciona as imagens baseado no modo de visualização e projeto
+  const currentImagesFrontend = viewModeFrontend === 'desktop' ? luigarahFrontendDesktopImages : luigarahFrontendMobileImages
+  const currentImagesBackend = viewModeBackend === 'desktop' ? luigarahBackendDesktopImages : luigarahBackendMobileImages
+
+  const handleNextImageFrontend = () => {
+    setCurrentImageIndexFrontend((prev) => (prev + 1) % currentImagesFrontend.length)
   }
 
-  const handlePrevImage = () => {
-    setCurrentImageIndex((prev) => (prev - 1 + currentImages.length) % currentImages.length)
+  const handlePrevImageFrontend = () => {
+    setCurrentImageIndexFrontend((prev) => (prev - 1 + currentImagesFrontend.length) % currentImagesFrontend.length)
+  }
+
+  const handleNextImageBackend = () => {
+    setCurrentImageIndexBackend((prev) => (prev + 1) % currentImagesBackend.length)
+  }
+
+  const handlePrevImageBackend = () => {
+    setCurrentImageIndexBackend((prev) => (prev - 1 + currentImagesBackend.length) % currentImagesBackend.length)
   }
 
   // Resetar índice ao mudar entre desktop e mobile
   useEffect(() => {
-    setCurrentImageIndex(0)
-  }, [viewMode])
+    setCurrentImageIndexFrontend(0)
+  }, [viewModeFrontend])
+
+  useEffect(() => {
+    setCurrentImageIndexBackend(0)
+  }, [viewModeBackend])
 
   const projetos = t('projects.items') as Array<{
     title: string
@@ -73,16 +102,16 @@ export default function Projects() {
                 transition={{ delay: indice * 0.1, duration: 0.6 }}
                 className="glass-effect rounded-xl p-6 sm:p-8 hover-glow w-full max-w-full overflow-hidden glitter"
               >
-                <div className={`flex flex-col ${indice === 0 ? 'lg:flex-row' : ''} gap-6`}>
+                <div className={`flex flex-col ${(indice === 0 || indice === 1) ? 'lg:flex-row' : ''} gap-6`}>
                   {/* Imagem/Vídeo/Carousel */}
-                  {indice === 0 ? (
+                  {(indice === 0 || indice === 1) ? (
                     <div className="w-full md:w-2/5 flex-shrink-0 relative">
                       {/* Botões de alternância Desktop/Mobile */}
                       <div className="flex justify-center gap-2 mb-4">
                         <button
-                          onClick={() => setViewMode('desktop')}
+                          onClick={() => indice === 0 ? setViewModeFrontend('desktop') : setViewModeBackend('desktop')}
                           className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${
-                            viewMode === 'desktop'
+                            (indice === 0 ? viewModeFrontend : viewModeBackend) === 'desktop'
                               ? 'bg-[#b8968a] dark:bg-white text-white dark:text-gray-900 shadow-md'
                               : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
                           }`}
@@ -91,9 +120,9 @@ export default function Projects() {
                           Desktop
                         </button>
                         <button
-                          onClick={() => setViewMode('mobile')}
+                          onClick={() => indice === 0 ? setViewModeFrontend('mobile') : setViewModeBackend('mobile')}
                           className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${
-                            viewMode === 'mobile'
+                            (indice === 0 ? viewModeFrontend : viewModeBackend) === 'mobile'
                               ? 'bg-[#b8968a] dark:bg-white text-white dark:text-gray-900 shadow-md'
                               : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
                           }`}
@@ -104,31 +133,31 @@ export default function Projects() {
                       </div>
 
                       {/* Visualização Desktop (Monitor) */}
-                      {viewMode === 'desktop' ? (
+                      {(indice === 0 ? viewModeFrontend : viewModeBackend) === 'desktop' ? (
                         <div className="pb-0">
                           {/* Frame da TV com padding para as bordas */}
                           <div className="relative bg-gray-100 dark:bg-gradient-to-br dark:from-black dark:via-gray-950 dark:to-black border-4 dark:border-white/10 shadow-lg rounded-lg p-3 sm:p-4 mb-0.5">
                             {/* Área da imagem */}
                             <div className="relative aspect-video rounded overflow-hidden bg-gray-200 dark:bg-gray-900">
                               <Image
-                                src={currentImages[currentImageIndex]}
-                                alt={`LUIGARAH Screenshot ${currentImageIndex + 1}`}
+                                src={indice === 0 ? currentImagesFrontend[currentImageIndexFrontend] : currentImagesBackend[currentImageIndexBackend]}
+                                alt={`LUIGARAH Screenshot ${(indice === 0 ? currentImageIndexFrontend : currentImageIndexBackend) + 1}`}
                                 fill
-                                className="object-cover"
+                                className={indice === 0 ? "object-cover" : "object-contain"}
                                 sizes="(max-width: 768px) 100vw, 40vw"
                               />
                             </div>
 
                             {/* Botões de navegação nas laterais da borda (sem fundo) */}
                             <button
-                              onClick={handlePrevImage}
+                              onClick={indice === 0 ? handlePrevImageFrontend : handlePrevImageBackend}
                               className="absolute left-0 top-1/2 -translate-y-1/2 hover:scale-110 transition-all z-20"
                               aria-label="Imagem anterior"
                             >
                               <FaChevronLeft size={15} className="text-gray-700 dark:text-white drop-shadow-lg" />
                             </button>
                             <button
-                              onClick={handleNextImage}
+                              onClick={indice === 0 ? handleNextImageFrontend : handleNextImageBackend}
                               className="absolute right-0 top-1/2 -translate-y-1/2 hover:scale-110 transition-all z-20"
                               aria-label="Próxima imagem"
                             >
@@ -137,12 +166,12 @@ export default function Projects() {
 
                             {/* Indicadores (bolinhas) embaixo da imagem, dentro da borda */}
                             <div className="flex justify-center gap-2 pt-3">
-                              {currentImages.map((_, idx) => (
+                              {(indice === 0 ? currentImagesFrontend : currentImagesBackend).map((_, idx) => (
                                 <button
                                   key={idx}
-                                  onClick={() => setCurrentImageIndex(idx)}
+                                  onClick={() => indice === 0 ? setCurrentImageIndexFrontend(idx) : setCurrentImageIndexBackend(idx)}
                                   className={`h-2 rounded-full transition-all shadow-sm ${
-                                    idx === currentImageIndex
+                                    idx === (indice === 0 ? currentImageIndexFrontend : currentImageIndexBackend)
                                       ? 'bg-[#b8968a] dark:bg-white w-6'
                                       : 'bg-gray-400 dark:bg-gray-500 hover:bg-gray-500 dark:hover:bg-gray-400 w-2'
                                   }`}
@@ -187,14 +216,14 @@ export default function Projects() {
                                 
                                 {/* Setas de navegação na borda do celular */}
                                 <button
-                                  onClick={handlePrevImage}
+                                  onClick={indice === 0 ? handlePrevImageFrontend : handlePrevImageBackend}
                                   className="absolute left-0 top-1/2 -translate-y-1/2 hover:scale-110 transition-all z-30"
                                   aria-label="Imagem anterior"
                                 >
                                   <FaChevronLeft size={10} className="text-gray-900 dark:text-white drop-shadow-lg" />
                                 </button>
                                 <button
-                                  onClick={handleNextImage}
+                                  onClick={indice === 0 ? handleNextImageFrontend : handleNextImageBackend}
                                   className="absolute right-0 top-1/2 -translate-y-1/2 hover:scale-110 transition-all z-30"
                                   aria-label="Próxima imagem"
                                 >
@@ -217,8 +246,8 @@ export default function Projects() {
                                   <div className="absolute top-4 left-0 right-0 bottom-8 overflow-hidden">
                                     <div className="relative w-full h-full" style={{ transform: 'scaleX(1.15)' }}>
                                       <Image
-                                        src={currentImages[currentImageIndex]}
-                                        alt={`LUIGARAH Screenshot ${currentImageIndex + 1}`}
+                                        src={indice === 0 ? currentImagesFrontend[currentImageIndexFrontend] : currentImagesBackend[currentImageIndexBackend]}
+                                        alt={`LUIGARAH Screenshot ${(indice === 0 ? currentImageIndexFrontend : currentImageIndexBackend) + 1}`}
                                         fill
                                         className="object-contain"
                                         sizes="160px"
@@ -226,12 +255,12 @@ export default function Projects() {
 
                                       {/* Indicadores */}
                                       <div className="absolute bottom-0.5 left-0 right-0 flex justify-center gap-1 z-30">
-                                        {currentImages.map((_, idx) => (
+                                        {(indice === 0 ? currentImagesFrontend : currentImagesBackend).map((_, idx) => (
                                           <button
                                             key={idx}
-                                            onClick={() => setCurrentImageIndex(idx)}
+                                            onClick={() => indice === 0 ? setCurrentImageIndexFrontend(idx) : setCurrentImageIndexBackend(idx)}
                                             className={`h-1 rounded-full transition-all ${
-                                              idx === currentImageIndex
+                                              idx === (indice === 0 ? currentImageIndexFrontend : currentImageIndexBackend)
                                                 ? 'bg-[#b8968a] dark:bg-white w-3'
                                                 : 'bg-gray-400 dark:bg-gray-500 hover:bg-gray-500 dark:hover:bg-gray-400 w-1'
                                             }`}
