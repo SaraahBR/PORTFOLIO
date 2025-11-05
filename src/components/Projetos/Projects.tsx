@@ -15,19 +15,19 @@ export default function Projects() {
 
   // Imagens do projeto LUIGARAH - Desktop
   const luigarahDesktopImages = [
-    '/LUIGARAH-front/1oVIDEO-LUIGARAH.gif',
-    '/LUIGARAH-front/2oVIDEO-LUIGARAH.gif',
-    '/LUIGARAH-front/3oVIDEO-LUIGARAH.gif',
-    '/LUIGARAH-front/4oVIDEO-LUIGARAH.gif',
-    '/LUIGARAH-front/LightHouse-LUIGARAH.png'
+    'LUIGARAH-front/1oVIDEO-LUIGARAH.gif',
+    'LUIGARAH-front/2oVIDEO-LUIGARAH.gif',
+    'LUIGARAH-front/3oVIDEO-LUIGARAH.gif',
+    'LUIGARAH-front/4oVIDEO-LUIGARAH.gif',
+    'LUIGARAH-front/LightHouse-LUIGARAH.png'
   ]
 
   // Imagens do projeto LUIGARAH - Mobile
   const luigarahMobileImages = [
-    '/LUIGARAH-front/1oVIDEO-MOBILE-LUIGARAHF.gif',
-    '/LUIGARAH-front/2oVIDEO-MOBILE-LUIGARAHF.gif',
-    '/LUIGARAH-front/3oVIDEO-MOBILE-LUIGARAHF.gif',
-    '/LUIGARAH-front/4oVIDEO-MOBILE-LUIGARAHF.gif'
+    'LUIGARAH-front/1oVIDEO-MOBILE-LUIGARAHF.gif',
+    'LUIGARAH-front/2oVIDEO-MOBILE-LUIGARAHF.gif',
+    'LUIGARAH-front/3oVIDEO-MOBILE-LUIGARAHF.gif',
+    'LUIGARAH-front/4oVIDEO-MOBILE-LUIGARAHF.gif'
   ]
 
   // Seleciona as imagens baseado no modo de visualização
