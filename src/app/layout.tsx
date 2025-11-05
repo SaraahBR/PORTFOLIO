@@ -21,12 +21,18 @@ export const metadata: Metadata = {
     url: 'https://saraahbr.github.io/PORTFOLIO/',
     images: [
       {
-        url: 'https://media.licdn.com/dms/image/v2/D4D03AQGG-sDPII1WPQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1731438153736?e=1749081600&v=beta&t=2DjPCCqNqEyHdrh6moaQTyfbgUTbcOittu7QoJOib7s',
+        url: 'https://saraahbr.github.io/PORTFOLIO/images/FOTOMINHA.jpg',
         width: 1200,
-        height: 630,
-        alt: 'Sarah Hernandes',
+        height: 1200,
+        alt: 'Sarah Hernandes - Desenvolvedora Full Stack',
       },
     ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Sarah Hernandes - Desenvolvedora Full Stack',
+    description: 'Meu portfólio como desenvolvedora Full Stack. Confira meus projetos e habilidades!',
+    images: ['https://saraahbr.github.io/PORTFOLIO/images/FOTOMINHA.jpg'],
   },
 }
 
