@@ -13,7 +13,7 @@ export default function Hero() {
       <div className="absolute top-20 left-5 sm:left-10 w-40 sm:w-72 h-40 sm:h-72 bg-[#f5f1ed]/40 dark:bg-gray-800/20 rounded-full blur-3xl animate-float" />
       <div className="absolute bottom-20 right-5 sm:right-10 w-48 sm:w-96 h-48 sm:h-96 bg-[#ebe5df]/40 dark:bg-gray-700/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }} />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-20 text-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 pb-24 sm:pb-20 text-center">
         {/* Fundo preto com transição suave nas bordas - Menor no mobile */}
         <div className="absolute inset-0 bg-nude-100 dark:bg-black rounded-3xl opacity-0 sm:opacity-100 dark:opacity-70" style={{
           maskImage: 'radial-gradient(ellipse at center, black 40%, transparent 85%)',
@@ -108,7 +108,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1, repeat: Infinity, duration: 2 }}
-          className="absolute bottom-5 sm:bottom-13 md:bottom-1 left-1/2 -translate-x-1/2 z-10"
+          className="absolute bottom-4 sm:-bottom-3 md:-bottom-4 lg:bottom-2 left-1/2 -translate-x-1/2 z-10"
         >
           <div className="w-6 h-10 border-2 border-[#c4b5a6] dark:border-gray-500 rounded-full flex justify-center p-2">
             <motion.div
