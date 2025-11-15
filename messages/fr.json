@@ -22,9 +22,9 @@
   },
   "about": {
     "title": "À Propos de Moi",
-    "paragraph1": "Ravi de vous rencontrer, je suis Sarah! Je me diplôme en informatique et je recherche mon premier emploi à temps plein (CLT) en programmation et en développement web et logiciel. J'aime le monde de l'informatique et de la technologie, avec un intérêt pour la cybersécurité, l'expertise cybernétique, le développement d'applications, les logiciels, l'intelligence artificielle, la bioinformatique et les jeux.",
-    "paragraph2": "Pendant mes études universitaires, j'ai été leader de classe (gérant un groupe de 64 collègues) et j'ai remporté la 2ème place à l'Olympiade de Physique du Paraná, parmi d'autres réalisations académiques. Je suis reconnue pour des qualités comme l'organisation, la créativité, le leadership et la résilience, et je suis toujours prête à apprendre de nouvelles choses et à relever des défis.",
-    "paragraph3": "À la recherche d'opportunités pour appliquer mes connaissances, apprendre de nouvelles technologies et contribuer à des projets à fort impact."
+    "paragraph1": "Bonjour ! Je suis Sarah, je termine mes études en informatique et je recherche ma première opportunité professionnelle en tant que développeuse. J'ai un fort intérêt pour le développement web full stack, le backend avec des APIs RESTful et l'intégration de bases de données relationnelles.",
+    "paragraph2": "Pendant mes études, j'ai été déléguée de classe gérant 64 camarades et j'ai obtenu la 2e place à l'Olympiade de Physique du Paraná. Mes projets démontrent une expérience pratique avec des technologies comme Next.js, React, TypeScript, Spring Boot, Java, Node.js, PostgreSQL et Oracle Database, ainsi que l'implémentation d'authentification (JWT, OAuth2), l'intégration avec des APIs externes et le déploiement dans le cloud.",
+    "paragraph3": "Je cherche à appliquer mes connaissances techniques dans des projets réels, à apprendre continuellement et à contribuer avec des solutions efficaces et évolutives."
   },
   "skills": {
     "title": "Compétences",
@@ -220,8 +220,7 @@
   },
   "contact": {
     "title": "Contactez-moi",
-    "subtitle": "Discutons! Je suis toujours ouverte à de nouvelles opportunités et connexions.",
-    "thankYou": "Merci d'avoir visité mon portfolio! 🤝"
+    "subtitle": "Discutons! Je suis toujours ouverte à de nouvelles opportunités et connexions."
   },
   "footer": {
     "rights": "Tous droits réservés."

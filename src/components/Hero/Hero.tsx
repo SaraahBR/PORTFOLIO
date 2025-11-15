@@ -4,9 +4,12 @@ import { motion } from 'framer-motion'
 import { TypeAnimation } from 'react-type-animation'
 import Image from 'next/image'
 import { useLanguage } from '@/app/internacionalizacao/LanguageContext'
+import { useState } from 'react'
 
 export default function Hero() {
   const { t, idioma } = useLanguage()
+  const [isHovered, setIsHovered] = useState(false)
+  
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
       {/* Círculos Animados */}
@@ -20,27 +23,45 @@ export default function Hero() {
           WebkitMaskImage: 'radial-gradient(ellipse at center, black 40%, transparent 85%)'
         }}></div>
         
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ type: 'spring', stiffness: 100, damping: 10 }}
-          className="mb-8 relative inline-block z-10"
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-white to-gray-200 dark:from-gray-700 dark:to-gray-800 rounded-full blur-2xl opacity-50 animate-pulse" />
-          <Image
-            src="images/FOTOMINHA.jpg"
-            alt="Sarah Hernandes"
-            width={200}
-            height={200}
-            className="relative rounded-full border-4 border-white/90 dark:border-primary/50 shadow-2xl glow-effect w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-52 lg:h-52"
-            priority
-          />
-        </motion.div>
+        {/* Foto de Perfil - Fixa e Centralizada */}
+        <div className="flex justify-center mb-8">
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ type: 'spring', stiffness: 60, damping: 15, duration: 1.2 }}
+            className="relative z-10"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-white to-gray-200 dark:from-gray-700 dark:to-gray-800 rounded-full blur-2xl opacity-50 animate-pulse" />
+            
+            <div className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-52 lg:h-52 rounded-full overflow-hidden border-4 border-white/90 dark:border-primary/50 shadow-2xl glow-effect">
+              {/* Imagem Profissional (padrão) */}
+              <Image
+                src="images/SARAH_Profissional.jpg"
+                alt="Sarah Hernandes - Profissional"
+                fill
+                style={{ objectPosition: 'center 20%' }}
+                className={`object-cover transition-opacity duration-500 ${isHovered ? 'opacity-0' : 'opacity-100'}`}
+                priority
+              />
+              
+              {/* Imagem Neutra (hover) */}
+              <Image
+                src="images/SARAH_Neutra.jpg"
+                alt="Sarah Hernandes - Neutra"
+                fill
+                className={`object-cover transition-opacity duration-500 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
+                priority
+              />
+            </div>
+          </motion.div>
+        </div>
 
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
           className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 px-4 relative z-10"
         >
           <span className="text-gradient">Sarah</span>
@@ -51,48 +72,50 @@ export default function Hero() {
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
+          transition={{ delay: 0.8, duration: 0.8 }}
           className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-gray-700 dark:text-gray-300 mb-8 px-4 relative z-10"
         >
           {t('hero.subtitle')}
         </motion.h2>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-          className="bg-black dark:bg-white/15 backdrop-blur-[1px] border border-gray-700 dark:border-white/5 shadow-sm rounded-lg p-4 inline-block mb-8 relative z-10"
-        >
-          <div className="font-mono text-[#C68E82] dark:text-[#CE9178] text-sm sm:text-base md:text-lg lg:text-xl px-2">
-            {(() => {
-              const typing = t<string[]>('hero.typing')
-              const sequence: (string | number)[] = []
-              typing.forEach((text, i) => {
-                sequence.push(text)
-                sequence.push(2000)
-                if (i < typing.length - 1) {
-                  sequence.push('')
-                  sequence.push(500)
-                }
-              })
-              return (
-                <TypeAnimation
-                  key={idioma}
-                  sequence={sequence}
-                  wrapper="span"
-                  speed={50}
-                  repeat={Infinity}
-                  className="typing-cursor"
-                />
-              )
-            })()}
-          </div>
-        </motion.div>
+        <div className="flex justify-center mb-8">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.1, duration: 0.8 }}
+            className="bg-black dark:bg-white/15 backdrop-blur-[1px] border border-gray-700 dark:border-white/5 shadow-sm rounded-lg p-4 relative z-10 max-w-full"
+          >
+            <div className="font-mono text-[#C68E82] dark:text-[#CE9178] text-sm sm:text-base md:text-lg lg:text-xl px-2 min-h-[32px]">
+              {(() => {
+                const typing = t<string[]>('hero.typing')
+                const sequence: (string | number)[] = []
+                typing.forEach((text, i) => {
+                  sequence.push(text)
+                  sequence.push(2000)
+                  if (i < typing.length - 1) {
+                    sequence.push('')
+                    sequence.push(500)
+                  }
+                })
+                return (
+                  <TypeAnimation
+                    key={idioma}
+                    sequence={sequence}
+                    wrapper="span"
+                    speed={50}
+                    repeat={Infinity}
+                    className="typing-cursor"
+                  />
+                )
+              })()}
+            </div>
+          </motion.div>
+        </div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8 }}
+          transition={{ delay: 1.4, duration: 0.8 }}
           className="relative z-10"
         >
           <a

@@ -22,9 +22,9 @@
   },
   "about": {
     "title": "Sobre Mim",
-    "paragraph1": "Prazer, eu sou a Sarah! Estou me formando como cientista da computação e busco meu primeiro emprego CLT na área de programação e desenvolvimento web e software. Amo o universo da computação e tecnologia, tenho interesse em cibersegurança, perícia cibernética, desenvolvimento de aplicativos, software, inteligência artificial, bioinformática e games.",
-    "paragraph2": "Durante meu período na faculdade, fui líder de turma (gerenciando um grupo de 64 colegas) e conquistei o 2º lugar na Olimpíada de Física Paranaense, entre outras realizações acadêmicas. Sou reconhecida por qualidades como organização, criatividade, liderança e resiliência, e estou sempre disposta a aprender coisas novas e encarar desafios.",
-    "paragraph3": "Em busca de oportunidades para aplicar meus conhecimentos, aprender novas tecnologias e contribuir para projetos de impacto."
+    "paragraph1": "Olá! Sou a Sarah, me formando em Ciência da Computação e buscando minha primeira oportunidade CLT como desenvolvedora. Tenho forte interesse em desenvolvimento web full stack, backend com APIs RESTful e integração de bancos de dados relacionais.",
+    "paragraph2": "Durante a graduação, fui líder de turma gerenciando 64 colegas e conquistei o 2º lugar na Olimpíada de Física Paranaense. Meus projetos demonstram experiência prática com tecnologias como Next.js, React, TypeScript, Spring Boot, Java, Node.js, PostgreSQL e Oracle Database, além de implementação de autenticação (JWT, OAuth2), integração com APIs externas e deploy em nuvem.",
+    "paragraph3": "Busco aplicar meus conhecimentos técnicos em projetos reais, aprender continuamente e contribuir com soluções eficientes e escaláveis."
   },
   "skills": {
     "title": "Conhecimentos",
@@ -168,8 +168,7 @@
   },
   "contact": {
     "title": "Entre em Contato",
-    "subtitle": "Vamos conversar! Estou sempre aberta a novas oportunidades e conexões.",
-    "thankYou": "Obrigada por visitar meu portfólio! 🤝"
+    "subtitle": "Vamos conversar! Estou sempre aberta a novas oportunidades e conexões."
   },
   "footer": {
     "rights": "Todos os direitos reservados."

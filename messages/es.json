@@ -22,9 +22,9 @@
   },
   "about": {
     "title": "Sobre Mí",
-    "paragraph1": "¡Mucho gusto, soy Sarah! Me estoy graduando en Ciencias de la Computación y busco mi primer empleo CLT (tiempo completo) en programación y desarrollo web y de software. Amo el universo de la computación y la tecnología, con interés en ciberseguridad, peritaje cibernético, desarrollo de aplicaciones, software, inteligencia artificial, bioinformática y juegos.",
-    "paragraph2": "Durante mi período en la universidad, fui líder de clase (gestionando un grupo de 64 compañeros) y gané el 2º lugar en la Olimpiada de Física de Paraná, entre otros logros académicos. Soy reconocida por cualidades como organización, creatividad, liderazgo y resiliencia, y siempre estoy dispuesta a aprender cosas nuevas y enfrentar desafíos.",
-    "paragraph3": "En busca de oportunidades para aplicar mis conocimientos, aprender nuevas tecnologías y contribuir a proyectos de impacto."
+    "paragraph1": "¡Hola! Soy Sarah, graduándome en Ciencias de la Computación y buscando mi primera oportunidad profesional como desarrolladora. Tengo fuerte interés en desarrollo web full stack, backend con APIs RESTful e integración de bases de datos relacionales.",
+    "paragraph2": "Durante la graduación, fui líder de clase gestionando 64 compañeros y conseguí el 2º lugar en la Olimpiada de Física de Paraná. Mis proyectos demuestran experiencia práctica con tecnologías como Next.js, React, TypeScript, Spring Boot, Java, Node.js, PostgreSQL y Oracle Database, además de implementación de autenticación (JWT, OAuth2), integración con APIs externas y despliegue en la nube.",
+    "paragraph3": "Busco aplicar mis conocimientos técnicos en proyectos reales, aprender continuamente y contribuir con soluciones eficientes y escalables."
   },
   "skills": {
     "title": "Habilidades",
@@ -220,8 +220,7 @@
   },
   "contact": {
     "title": "Ponte en Contacto",
-    "subtitle": "¡Hablemos! Siempre estoy abierta a nuevas oportunidades y conexiones.",
-    "thankYou": "¡Gracias por visitar mi portafolio! 🤝"
+    "subtitle": "¡Hablemos! Siempre estoy abierta a nuevas oportunidades y conexiones."
   },
   "footer": {
     "rights": "Todos los derechos reservados."

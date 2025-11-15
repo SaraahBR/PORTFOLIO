@@ -139,13 +139,15 @@ export default function Projects() {
                           <div className="relative bg-gray-100 dark:bg-gradient-to-br dark:from-black dark:via-gray-950 dark:to-black border-4 dark:border-white/10 shadow-lg rounded-lg p-3 sm:p-4 mb-0.5">
                             {/* Área da imagem */}
                             <div className="relative aspect-video rounded overflow-hidden bg-gray-200 dark:bg-gray-900">
-                              <Image
-                                src={indice === 0 ? currentImagesFrontend[currentImageIndexFrontend] : currentImagesBackend[currentImageIndexBackend]}
-                                alt={`LUIGARAH Screenshot ${(indice === 0 ? currentImageIndexFrontend : currentImageIndexBackend) + 1}`}
-                                fill
-                                className={indice === 0 ? "object-cover" : "object-contain"}
-                                sizes="(max-width: 768px) 100vw, 40vw"
-                              />
+                              <div style={indice === 1 ? { transform: 'scale(1.0)', width: '100%', height: '100%' } : undefined} className="relative w-full h-full">
+                                <Image
+                                  src={indice === 0 ? currentImagesFrontend[currentImageIndexFrontend] : currentImagesBackend[currentImageIndexBackend]}
+                                  alt={`LUIGARAH Screenshot ${(indice === 0 ? currentImageIndexFrontend : currentImageIndexBackend) + 1}`}
+                                  fill
+                                  className={indice === 0 ? "object-cover" : "object-contain"}
+                                  sizes="(max-width: 780px) 100vw, 40vw"
+                                />
+                              </div>
                             </div>
 
                             {/* Botões de navegação nas laterais da borda (sem fundo) */}

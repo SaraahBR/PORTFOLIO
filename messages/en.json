@@ -22,9 +22,9 @@
   },
   "about": {
     "title": "About Me",
-    "paragraph1": "Nice to meet you, I'm Sarah! I'm graduating in Computer Science and looking for my first full‑time (CLT) job in programming and web/software development. I love the world of computing and technology, with interests in cybersecurity, digital forensics, app development, software, artificial intelligence, bioinformatics, and games.",
-    "paragraph2": "During my time in college, I was a class leader (managing a group of 64 colleagues) and won 2nd place in the Paraná Physics Olympiad, among other academic achievements. I'm recognized for qualities like organization, creativity, leadership, and resilience, and I'm always willing to learn new things and face challenges.",
-    "paragraph3": "Seeking opportunities to apply my knowledge, learn new technologies, and contribute to impactful projects."
+    "paragraph1": "Hello! I'm Sarah, graduating in Computer Science and seeking my first full-time opportunity as a developer. I have a strong interest in full stack web development, backend with RESTful APIs, and relational database integration.",
+    "paragraph2": "During my undergraduate studies, I served as class leader managing 64 classmates and achieved 2nd place in the Paraná Physics Olympiad. My projects demonstrate practical experience with technologies like Next.js, React, TypeScript, Spring Boot, Java, Node.js, PostgreSQL, and Oracle Database, as well as authentication implementation (JWT, OAuth2), external API integration, and cloud deployment.",
+    "paragraph3": "I'm looking to apply my technical knowledge in real projects, continuously learn, and contribute with efficient and scalable solutions."
   },
   "skills": {
     "title": "Skills",
@@ -220,8 +220,7 @@
   },
   "contact": {
     "title": "Get In Touch",
-    "subtitle": "Let's talk! I'm always open to new opportunities and connections.",
-    "thankYou": "Thank you for visiting my portfolio! 🤝"
+    "subtitle": "Let's talk! I'm always open to new opportunities and connections."
   },
   "footer": {
     "rights": "All rights reserved."

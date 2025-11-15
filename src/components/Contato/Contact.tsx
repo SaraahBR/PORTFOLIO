@@ -90,17 +90,6 @@ export default function Contact() {
               </motion.a>
             ))}
           </div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={estaVisivel ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ delay: 0.8, duration: 0.6 }}
-            className="mt-12 text-center"
-          >
-            <p className="text-[#a89583] dark:text-[#f5f1ed] text-xl font-semibold">
-              {t('contact.thankYou')}
-            </p>
-          </motion.div>
         </motion.div>
       </div>
     </section>
