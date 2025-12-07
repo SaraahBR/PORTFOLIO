@@ -1,20 +1,25 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { useInView } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { FaCertificate } from 'react-icons/fa'
 import { useLanguage } from '@/app/internacionalizacao/LanguageContext'
+
+interface Course {
+  title: string
+  period: string
+  description: string
+}
 
 export default function Courses() {
   const { t } = useLanguage()
   const ref = useRef(null)
   const visible = useInView(ref, { once: true, amount: 0.2 })
 
-  const items = t('courses.items') as Array<{ title: string; period: string; description: string }>
+  const items: Course[] = t('courses.items')
 
   return (
-    <section id="courses" className="relative py-20 px-4 sm:px-6 lg:px-8 section-blur">
+    <section id="courses" className="relative py-20 px-4 sm:px-6 lg:px-8 section-blur section-divider">
       <div className="max-w-6xl mx-auto">
         <motion.div
           ref={ref}

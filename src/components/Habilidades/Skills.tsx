@@ -43,7 +43,7 @@ export default function Skills() {
   ]
 
   return (
-    <section id="skills" className="relative pt-6 pb-16 sm:py-20 px-4 sm:px-6 lg:px-8 section-blur">
+    <section id="skills" className="relative pt-6 pb-16 sm:py-20 px-4 sm:px-6 lg:px-8 section-blur section-divider">
       <div className="max-w-7xl mx-auto">
         <motion.div
           ref={ref}

@@ -42,7 +42,8 @@ export default function ParticlesBackground() {
 
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-      particles.forEach((particle, index) => {
+      for (let index = 0; index < particles.length; index++) {
+        const particle = particles[index]
         particle.x += particle.speedX
         particle.y += particle.speedY
 
@@ -57,10 +58,11 @@ export default function ParticlesBackground() {
         ctx.fill()
 
         // Conectar partículas próximas
-        particles.slice(index + 1).forEach((particle2) => {
+        for (let j = index + 1; j < particles.length; j++) {
+          const particle2 = particles[j]
           const dx = particle.x - particle2.x
           const dy = particle.y - particle2.y
-          const distance = Math.sqrt(dx * dx + dy * dy)
+          const distance = Math.hypot(dx, dy)
 
           if (distance < 100) {
             ctx.strokeStyle = `rgba(100, 255, 218, ${0.1 * (1 - distance / 100)})`
@@ -70,8 +72,8 @@ export default function ParticlesBackground() {
             ctx.lineTo(particle2.x, particle2.y)
             ctx.stroke()
           }
-        })
-      })
+        }
+      }
 
       requestAnimationFrame(animate)
     }

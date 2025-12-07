@@ -159,14 +159,14 @@ export default function SnakeGame() {
   const desenharCobra = (ctx, cobra, dir) => {
     // Corpo
     ctx.fillStyle = '#80cbc4'
-    cobra.slice(1).forEach(segmento => {
+    for (const segmento of cobra.slice(1)) {
       ctx.fillRect(
         segmento.x * tamanhoQuadrado,
         segmento.y * tamanhoQuadrado,
         tamanhoQuadrado,
         tamanhoQuadrado
       )
-    })
+    }
     // Cabeça
     const cab = cobra[0]
     ctx.fillStyle = '#00cc00'

@@ -1,26 +1,27 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { useInView } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { FaBriefcase } from 'react-icons/fa'
 import { useLanguage } from '@/app/internacionalizacao/LanguageContext'
+
+interface Experience {
+  company: string
+  role: string
+  period: string
+  summary: string
+  details: string[]
+}
 
 export default function Experience() {
   const { t } = useLanguage()
   const ref = useRef(null)
   const visible = useInView(ref, { once: true, amount: 0.2 })
 
-  const items = t('experience.items') as Array<{
-    company: string
-    role: string
-    period: string
-    summary: string
-    details: string[]
-  }>
+  const items: Experience[] = t('experience.items')
 
   return (
-    <section id="experience" className="relative pt-14 pb-20 sm:py-20 px-4 sm:px-6 lg:px-8 section-blur">
+    <section id="experience" className="relative pt-14 pb-20 sm:py-20 px-4 sm:px-6 lg:px-8 section-blur section-divider">
       <div className="max-w-6xl mx-auto">
         <motion.div
           ref={ref}
@@ -50,8 +51,8 @@ export default function Experience() {
                     <p className="text-[#8a6d63] dark:text-gray-300 font-medium">{job.company} • {job.period}</p>
                     <p className="text-gray-800 dark:text-gray-300 mt-2 break-words">{job.summary}</p>
                     <ul className="list-disc pl-5 mt-3 space-y-1 text-gray-800 dark:text-gray-300 break-words">
-                      {job.details.map((d, idx) => (
-                        <li key={idx} className="text-sm leading-snug">{d}</li>
+                      {job.details.map((d) => (
+                        <li key={d} className="text-sm leading-snug">{d}</li>
                       ))}
                     </ul>
                   </div>

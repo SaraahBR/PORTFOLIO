@@ -1,7 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { useInView } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { FaEnvelope, FaLinkedin, FaGithub, FaInstagram, FaFacebook } from 'react-icons/fa'
 import { useLanguage } from '@/app/internacionalizacao/LanguageContext'
@@ -50,7 +49,7 @@ export default function Contact() {
   ]
 
   return (
-    <section id="contact" className="relative py-20 px-4 sm:px-6 lg:px-8 section-blur">
+    <section id="contact" className="relative py-20 px-4 sm:px-6 lg:px-8 section-blur section-divider">
       <div className="max-w-5xl mx-auto">
         <motion.div
           ref={ref}

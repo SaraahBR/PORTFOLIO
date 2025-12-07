@@ -11,16 +11,19 @@ export default function Hero() {
   const [isHovered, setIsHovered] = useState(false)
   
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
-      {/* Círculos Animados */}
-      <div className="absolute top-20 left-5 sm:left-10 w-40 sm:w-72 h-40 sm:h-72 bg-[#f5f1ed]/40 dark:bg-gray-800/20 rounded-full blur-3xl animate-float" />
-      <div className="absolute bottom-20 right-5 sm:right-10 w-48 sm:w-96 h-48 sm:h-96 bg-[#ebe5df]/40 dark:bg-gray-700/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }} />
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 z-20">
+      {/* Círculos Animados - Apenas Modo Claro */}
+      <div className="absolute top-20 left-5 sm:left-10 w-40 sm:w-72 h-40 sm:h-72 bg-[#f5f1ed]/40 dark:bg-transparent rounded-full blur-3xl animate-float" />
+      <div className="absolute bottom-20 right-5 sm:right-10 w-48 sm:w-96 h-48 sm:h-96 bg-[#ebe5df]/40 dark:bg-transparent rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }} />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 pb-24 sm:pb-20 text-center">
-        {/* Fundo preto com transição suave nas bordas - Menor no mobile */}
-        <div className="absolute inset-0 bg-nude-100 dark:bg-black rounded-3xl opacity-0 sm:opacity-100 dark:opacity-70" style={{
-          maskImage: 'radial-gradient(ellipse at center, black 40%, transparent 85%)',
-          WebkitMaskImage: 'radial-gradient(ellipse at center, black 40%, transparent 85%)'
+        {/* Fundo fixo com gradiente esfumado nas bordas - Modo Claro */}
+        <div className="absolute inset-0 rounded-3xl dark:hidden" style={{
+          background: 'radial-gradient(ellipse at center, rgba(245, 235, 229, 0.95) 40%, rgba(245, 235, 229, 0.7) 70%, transparent 100%)',
+        }}></div>
+        {/* Fundo fixo com gradiente esfumado nas bordas - Modo Escuro */}
+        <div className="absolute inset-0 rounded-3xl hidden dark:block" style={{
+          background: 'radial-gradient(ellipse at center, rgba(10, 10, 20, 0.95) 40%, rgba(10, 10, 20, 0.7) 70%, transparent 100%)',
         }}></div>
         
         {/* Foto de Perfil - Fixa e Centralizada */}
@@ -58,45 +61,48 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 px-4 relative z-10"
-        >
-          <span className="text-gradient">Sarah</span>
-          <br />
-          <span className="text-gray-800 dark:text-white">Hernandes</span>
-        </motion.h1>
+        <div className="flex justify-center mb-4">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold px-6 relative z-10 inline-block text-center"
+          >
+            <span className="text-gradient">Sarah</span>
+            <br />
+            <span className="text-gray-800 dark:text-white">Hernandes</span>
+          </motion.h1>
+        </div>
 
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.8 }}
-          className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-gray-700 dark:text-gray-300 mb-8 px-4 relative z-10"
-        >
-          {t('hero.subtitle')}
-        </motion.h2>
+        <div className="flex justify-center mb-8">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 0.8 }}
+            className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-gray-700 dark:text-gray-300 px-6 relative z-10 inline-block text-center"
+          >
+            {t('hero.subtitle')}
+          </motion.h2>
+        </div>
 
         <div className="flex justify-center mb-8">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.1, duration: 0.8 }}
-            className="bg-black dark:bg-white/15 backdrop-blur-[1px] border border-gray-700 dark:border-white/5 shadow-sm rounded-lg p-4 relative z-10 max-w-full"
+            className="bg-black dark:bg-white/15 backdrop-blur-[1px] border border-gray-700 dark:border-white/5 shadow-sm rounded-lg p-3 relative z-10 w-[60%] sm:w-auto max-w-full"
           >
             <div className="font-mono text-[#C68E82] dark:text-[#CE9178] text-sm sm:text-base md:text-lg lg:text-xl px-2 min-h-[32px]">
               {(() => {
                 const typing = t<string[]>('hero.typing')
                 const sequence: (string | number)[] = []
-                typing.forEach((text, i) => {
-                  sequence.push(text)
-                  sequence.push(2000)
+                for (let i = 0; i < typing.length; i++) {
+                  const text = typing[i]
+                  sequence.push(text, 2000)
                   if (i < typing.length - 1) {
-                    sequence.push('')
-                    sequence.push(500)
+                    sequence.push('', 500)
                   }
-                })
+                }
                 return (
                   <TypeAnimation
                     key={idioma}
@@ -116,11 +122,11 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.4, duration: 0.8 }}
-          className="relative z-10"
+          className="relative z-10 inline-block"
         >
           <a
             href="#about"
-            className="inline-block px-6 sm:px-8 py-2 sm:py-3 text-sm sm:text-base bg-gradient-to-r from-[#f5f1ed] via-[#ebe5df] to-[#e8dfd6] dark:from-gray-700 dark:to-gray-800 text-gray-800 dark:text-white font-bold rounded-full hover-glow transition-all duration-300 border border-[#d4c4b8]/30 dark:border-gray-600"
+            className="inline-block px-6 sm:px-8 py-2 sm:py-3 text-sm sm:text-base bg-gradient-to-r from-[#f5f1ed] via-[#ebe5df] to-[#e8dfd6] dark:from-gray-700 dark:to-gray-800 text-gray-800 dark:text-white font-bold rounded-full hover-glow transition-all duration-300 border border-[#d4c4b8]/30 dark:border-gray-600 shadow-lg"
           >
             {t('hero.cta')}
           </a>

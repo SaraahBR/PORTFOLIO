@@ -95,16 +95,11 @@ export default function Navbar() {
 
   return (
     <>
-      <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
+      <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           rolagemAtiva 
-            ? 'bg-nude-50/95 dark:bg-gray-900 backdrop-blur-md shadow-lg' 
-            : theme === 'dark' 
-              ? 'bg-gray-900 shadow-lg' 
-              : 'bg-transparent'
+            ? 'bg-[#d4b5a8] dark:bg-gray-900 backdrop-blur-md shadow-xl border-b-2 border-[#a67c6d] dark:border-gray-700' 
+            : 'bg-[#f5ebe5] dark:bg-gray-950 border-b-2 border-[#e8d5cc]/30 dark:border-gray-800'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -124,10 +119,11 @@ export default function Navbar() {
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: indice * 0.1 }}
-                    className="text-gray-700 dark:text-gray-300 hover:text-primary transition-colors duration-300 font-medium text-sm sm:text-base relative group"
+                    whileHover={{ scale: 1.05 }}
+                    className="text-gray-700 dark:text-gray-300 transition-transform duration-300 font-medium text-sm sm:text-base relative group"
                   >
                     {item.nome}
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary transition-all duration-300 group-hover:w-full" />
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#d4a5a5] to-[#b8968a] dark:from-primary dark:to-secondary transition-all duration-300 group-hover:w-full" />
                   </motion.a>
                 ))}
               </div>
@@ -215,7 +211,7 @@ export default function Navbar() {
             )}
           </div>
         </div>
-      </motion.nav>
+      </nav>
 
       {/* Menu Mobile */}
       <AnimatePresence>

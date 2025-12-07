@@ -75,7 +75,7 @@ export default function Projects() {
     setCurrentImageIndexBackend(0)
   }, [viewModeBackend])
 
-  const projetos = t('projects.items') as Array<{
+  interface Project {
     title: string
     subtitle: string | null
     description: string
@@ -83,10 +83,27 @@ export default function Projects() {
     linkSite: string | null
     linkGithub: string | null
     linkVideo: string | null
-  }>
+  }
+
+  const projetos: Project[] = t('projects.items')
+
+  // Funções auxiliares para determinar modo e índice
+  const getViewMode = (indice: number) => indice === 0 ? viewModeFrontend : viewModeBackend
+  const setViewMode = (indice: number, mode: 'desktop' | 'mobile') => {
+    if (indice === 0) setViewModeFrontend(mode)
+    else setViewModeBackend(mode)
+  }
+  const getCurrentImageIndex = (indice: number) => indice === 0 ? currentImageIndexFrontend : currentImageIndexBackend
+  const setCurrentImageIndex = (indice: number, idx: number) => {
+    if (indice === 0) setCurrentImageIndexFrontend(idx)
+    else setCurrentImageIndexBackend(idx)
+  }
+  const handlePrevImage = (indice: number) => indice === 0 ? handlePrevImageFrontend() : handlePrevImageBackend()
+  const handleNextImage = (indice: number) => indice === 0 ? handleNextImageFrontend() : handleNextImageBackend()
+  const getCurrentImages = (indice: number) => indice === 0 ? currentImagesFrontend : currentImagesBackend
 
   return (
-    <section id="projects" className="relative pt-4 pb-12 sm:py-20 px-4 sm:px-6 lg:px-8 section-blur">
+    <section id="projects" className="relative pt-4 pb-12 sm:py-20 px-4 sm:px-6 lg:px-8 section-blur section-divider">
       <div className="max-w-6xl mx-auto">
         <div ref={ref}>
           <h2 className="text-4xl sm:text-5xl font-bold text-center mb-8 sm:mb-16">
@@ -109,9 +126,9 @@ export default function Projects() {
                       {/* Botões de alternância Desktop/Mobile */}
                       <div className="flex justify-center gap-2 mb-4">
                         <button
-                          onClick={() => indice === 0 ? setViewModeFrontend('desktop') : setViewModeBackend('desktop')}
+                          onClick={() => setViewMode(indice, 'desktop')}
                           className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${
-                            (indice === 0 ? viewModeFrontend : viewModeBackend) === 'desktop'
+                            getViewMode(indice) === 'desktop'
                               ? 'bg-[#b8968a] dark:bg-white text-white dark:text-gray-900 shadow-md'
                               : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
                           }`}
@@ -120,9 +137,9 @@ export default function Projects() {
                           Desktop
                         </button>
                         <button
-                          onClick={() => indice === 0 ? setViewModeFrontend('mobile') : setViewModeBackend('mobile')}
+                          onClick={() => setViewMode(indice, 'mobile')}
                           className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${
-                            (indice === 0 ? viewModeFrontend : viewModeBackend) === 'mobile'
+                            getViewMode(indice) === 'mobile'
                               ? 'bg-[#b8968a] dark:bg-white text-white dark:text-gray-900 shadow-md'
                               : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
                           }`}
@@ -133,7 +150,7 @@ export default function Projects() {
                       </div>
 
                       {/* Visualização Desktop (Monitor) */}
-                      {(indice === 0 ? viewModeFrontend : viewModeBackend) === 'desktop' ? (
+                      {getViewMode(indice) === 'desktop' ? (
                         <div className="pb-0">
                           {/* Frame da TV com padding para as bordas */}
                           <div className="relative bg-gray-100 dark:bg-gradient-to-br dark:from-black dark:via-gray-950 dark:to-black border-4 dark:border-white/10 shadow-lg rounded-lg p-3 sm:p-4 mb-0.5">
@@ -141,8 +158,8 @@ export default function Projects() {
                             <div className="relative aspect-video rounded overflow-hidden bg-gray-200 dark:bg-gray-900">
                               <div style={indice === 1 ? { transform: 'scale(1.0)', width: '100%', height: '100%' } : undefined} className="relative w-full h-full">
                                 <Image
-                                  src={indice === 0 ? currentImagesFrontend[currentImageIndexFrontend] : currentImagesBackend[currentImageIndexBackend]}
-                                  alt={`LUIGARAH Screenshot ${(indice === 0 ? currentImageIndexFrontend : currentImageIndexBackend) + 1}`}
+                                  src={getCurrentImages(indice)[getCurrentImageIndex(indice)]}
+                                  alt={`LUIGARAH Screenshot ${getCurrentImageIndex(indice) + 1}`}
                                   fill
                                   className={indice === 0 ? "object-cover" : "object-contain"}
                                   sizes="(max-width: 780px) 100vw, 40vw"
@@ -152,14 +169,14 @@ export default function Projects() {
 
                             {/* Botões de navegação nas laterais da borda (sem fundo) */}
                             <button
-                              onClick={indice === 0 ? handlePrevImageFrontend : handlePrevImageBackend}
+                              onClick={() => handlePrevImage(indice)}
                               className="absolute left-0 top-1/2 -translate-y-1/2 hover:scale-110 transition-all z-20"
                               aria-label="Imagem anterior"
                             >
                               <FaChevronLeft size={15} className="text-gray-700 dark:text-white drop-shadow-lg" />
                             </button>
                             <button
-                              onClick={indice === 0 ? handleNextImageFrontend : handleNextImageBackend}
+                              onClick={() => handleNextImage(indice)}
                               className="absolute right-0 top-1/2 -translate-y-1/2 hover:scale-110 transition-all z-20"
                               aria-label="Próxima imagem"
                             >
@@ -168,12 +185,12 @@ export default function Projects() {
 
                             {/* Indicadores (bolinhas) embaixo da imagem, dentro da borda */}
                             <div className="flex justify-center gap-2 pt-3">
-                              {(indice === 0 ? currentImagesFrontend : currentImagesBackend).map((_, idx) => (
+                              {getCurrentImages(indice).map((img, idx) => (
                                 <button
-                                  key={idx}
-                                  onClick={() => indice === 0 ? setCurrentImageIndexFrontend(idx) : setCurrentImageIndexBackend(idx)}
+                                  key={`indicator-${indice}-${idx}`}
+                                  onClick={() => setCurrentImageIndex(indice, idx)}
                                   className={`h-2 rounded-full transition-all shadow-sm ${
-                                    idx === (indice === 0 ? currentImageIndexFrontend : currentImageIndexBackend)
+                                    idx === getCurrentImageIndex(indice)
                                       ? 'bg-[#b8968a] dark:bg-white w-6'
                                       : 'bg-gray-400 dark:bg-gray-500 hover:bg-gray-500 dark:hover:bg-gray-400 w-2'
                                   }`}
@@ -196,15 +213,7 @@ export default function Projects() {
                         <div className="pb-0">
                           <div className="flex justify-center items-center p-4">
                             {/* Container do celular - estilo Samsung S25 (mais quadrado) */}
-                            <div className="relative mobile-shadow-light">
-                              <style jsx>{`
-                                .mobile-shadow-light {
-                                  filter: drop-shadow(0 0 12px rgba(100, 116, 139, 0.25));
-                                }
-                                :global(.dark) .mobile-shadow-light {
-                                  filter: none;
-                                }
-                              `}</style>
+                            <div className="relative [filter:drop-shadow(0_0_12px_rgba(100,116,139,0.25))] dark:[filter:none]">
                               {/* Frame do celular - bordas menos arredondadas (Samsung) - branco puro no light, preto no dark */}
                               <div 
                                 className="relative bg-gradient-to-b from-gray-50 to-gray-100 dark:bg-gradient-to-b dark:from-gray-950 dark:to-black rounded-2xl shadow-2xl p-2 border border-gray-200 dark:border-gray-800" 
@@ -218,14 +227,14 @@ export default function Projects() {
                                 
                                 {/* Setas de navegação na borda do celular */}
                                 <button
-                                  onClick={indice === 0 ? handlePrevImageFrontend : handlePrevImageBackend}
+                                  onClick={() => handlePrevImage(indice)}
                                   className="absolute left-0 top-1/2 -translate-y-1/2 hover:scale-110 transition-all z-30"
                                   aria-label="Imagem anterior"
                                 >
                                   <FaChevronLeft size={10} className="text-gray-900 dark:text-white drop-shadow-lg" />
                                 </button>
                                 <button
-                                  onClick={indice === 0 ? handleNextImageFrontend : handleNextImageBackend}
+                                  onClick={() => handleNextImage(indice)}
                                   className="absolute right-0 top-1/2 -translate-y-1/2 hover:scale-110 transition-all z-30"
                                   aria-label="Próxima imagem"
                                 >
@@ -248,8 +257,8 @@ export default function Projects() {
                                   <div className="absolute top-4 left-0 right-0 bottom-8 overflow-hidden">
                                     <div className="relative w-full h-full" style={{ transform: 'scaleX(1.15)' }}>
                                       <Image
-                                        src={indice === 0 ? currentImagesFrontend[currentImageIndexFrontend] : currentImagesBackend[currentImageIndexBackend]}
-                                        alt={`LUIGARAH Screenshot ${(indice === 0 ? currentImageIndexFrontend : currentImageIndexBackend) + 1}`}
+                                        src={getCurrentImages(indice)[getCurrentImageIndex(indice)]}
+                                        alt={`LUIGARAH Screenshot ${getCurrentImageIndex(indice) + 1}`}
                                         fill
                                         className="object-contain"
                                         sizes="160px"
@@ -257,12 +266,12 @@ export default function Projects() {
 
                                       {/* Indicadores */}
                                       <div className="absolute bottom-0.5 left-0 right-0 flex justify-center gap-1 z-30">
-                                        {(indice === 0 ? currentImagesFrontend : currentImagesBackend).map((_, idx) => (
+                                        {getCurrentImages(indice).map((img, idx) => (
                                           <button
-                                            key={idx}
-                                            onClick={() => indice === 0 ? setCurrentImageIndexFrontend(idx) : setCurrentImageIndexBackend(idx)}
+                                            key={`mobile-indicator-${indice}-${idx}`}
+                                            onClick={() => setCurrentImageIndex(indice, idx)}
                                             className={`h-1 rounded-full transition-all ${
-                                              idx === (indice === 0 ? currentImageIndexFrontend : currentImageIndexBackend)
+                                              idx === getCurrentImageIndex(indice)
                                                 ? 'bg-[#b8968a] dark:bg-white w-3'
                                                 : 'bg-gray-400 dark:bg-gray-500 hover:bg-gray-500 dark:hover:bg-gray-400 w-1'
                                             }`}

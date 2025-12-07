@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useContext, useEffect, useState, ReactNode } from 'react'
+import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react'
 
 type Theme = 'light' | 'dark'
 
@@ -11,7 +11,7 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
-export function ThemeProvider({ children }: { children: ReactNode }) {
+export function ThemeProvider({ children }: Readonly<{ children: ReactNode }>) {
   const [theme, setTheme] = useState<Theme>('light')
   const [mounted, setMounted] = useState(false)
 
@@ -36,7 +36,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     html.classList.add(newTheme)
 
     // Aplicar também via atributo e style para garantir
-    html.setAttribute('data-theme', newTheme)
+    html.dataset.theme = newTheme
     html.style.colorScheme = newTheme
   }
 
@@ -47,12 +47,14 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     localStorage.setItem('portfolio-theme', newTheme)
   }
 
+  const value = React.useMemo(() => ({ theme, toggleTheme }), [theme])
+
   if (!mounted) {
     return <>{children}</>
   }
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={value}>
       {children}
     </ThemeContext.Provider>
   )

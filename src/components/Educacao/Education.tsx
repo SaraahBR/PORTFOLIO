@@ -1,25 +1,26 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { useInView } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { FaGraduationCap } from 'react-icons/fa'
 import { useLanguage } from '@/app/internacionalizacao/LanguageContext'
+
+interface Education {
+  institution: string
+  course: string
+  period: string
+  status: string
+}
 
 export default function Education() {
   const { t } = useLanguage()
   const ref = useRef(null)
   const estaVisivel = useInView(ref, { once: true, amount: 0.3 })
 
-  const formacoes = t('education.items') as Array<{
-    institution: string
-    course: string
-    period: string
-    status: string
-  }>
+  const formacoes: Education[] = t('education.items')
 
   return (
-    <section id="education" className="relative py-20 px-4 sm:px-6 lg:px-8 section-blur">
+    <section id="education" className="relative py-20 px-4 sm:px-6 lg:px-8 section-blur section-divider">
       <div className="max-w-5xl mx-auto">
         <motion.div
           ref={ref}

@@ -1,14 +1,21 @@
+/* Fonts */
+@import "@fontsource/poppins/400.css";
+@import "@fontsource/poppins/500.css";
+@import "@fontsource/poppins/600.css";
+@import "@fontsource/poppins/700.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  html, body {
+  html {
     @apply overflow-x-hidden;
   }
 
   body {
-    @apply bg-nude-100 dark:bg-dark text-gray-800 dark:text-gray-100 antialiased transition-colors;
+    @apply bg-[#f5ebe5] dark:bg-[#0a0a14] text-gray-800 dark:text-gray-100 antialiased transition-colors;
+    position: relative;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -51,7 +58,40 @@
   }
 
   .section-blur {
-    @apply bg-[#f0e5e0] dark:bg-black/20 backdrop-blur-[2px];
+    @apply backdrop-blur-[8px];
+  }
+
+  .section-divider {
+    position: relative;
+  }
+
+  .section-divider::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(180, 150, 140, 0.3) 20%,
+      rgba(180, 150, 140, 0.5) 50%,
+      rgba(180, 150, 140, 0.3) 80%,
+      transparent
+    );
+  }
+
+  .dark .section-divider::before {
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(100, 100, 120, 0.3) 20%,
+      rgba(120, 100, 150, 0.5) 50%,
+      rgba(100, 100, 120, 0.3) 80%,
+      transparent
+    );
   }
 
   .glow-effect {
@@ -176,8 +216,3 @@
   animation: blink 1s infinite;
   margin-left: 2px;
 }
-/* Fonts */
-@import "@fontsource/poppins/400.css";
-@import "@fontsource/poppins/500.css";
-@import "@fontsource/poppins/600.css";
-@import "@fontsource/poppins/700.css";

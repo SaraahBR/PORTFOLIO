@@ -1,7 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { useInView } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { useLanguage } from '@/app/internacionalizacao/LanguageContext'
 
@@ -11,7 +10,7 @@ export default function About() {
   const estaVisivel = useInView(ref, { once: true, amount: 0.3 })
 
   return (
-    <section id="about" className="relative pt-12 pb-6 sm:py-20 px-4 sm:px-6 lg:px-8 section-blur">
+    <section id="about" className="relative pt-12 pb-6 sm:py-20 px-4 sm:px-6 lg:px-8 section-blur section-divider">
       <div className="max-w-4xl mx-auto">
         <motion.div
           ref={ref}

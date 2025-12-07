@@ -2,9 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FaGlobe } from 'react-icons/fa'
+import { FaGlobe, FaSun, FaMoon } from 'react-icons/fa'
 import { useLanguage } from '@/app/internacionalizacao/LanguageContext'
-import { FaSun, FaMoon } from 'react-icons/fa'
 import { useThemeContext } from '@/components/Tema/ThemeContext'
 import BR from 'country-flag-icons/react/3x2/BR'
 import US from 'country-flag-icons/react/3x2/US'

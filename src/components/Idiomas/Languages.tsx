@@ -1,20 +1,24 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { useInView } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { FaLanguage, FaGlobe } from 'react-icons/fa'
+import { FaGlobe } from 'react-icons/fa'
 import { useLanguage } from '@/app/internacionalizacao/LanguageContext'
+
+interface Language {
+  name: string
+  level: string
+}
 
 export default function Languages() {
   const { t } = useLanguage()
   const ref = useRef(null)
   const visible = useInView(ref, { once: true, amount: 0.2 })
 
-  const items = t('languagesSection.items') as Array<{ name: string; level: string }>
+  const items: Language[] = t('languagesSection.items')
 
   return (
-    <section id="languages" className="relative py-20 px-4 sm:px-6 lg:px-8 section-blur">
+    <section id="languages" className="relative py-20 px-4 sm:px-6 lg:px-8 section-blur section-divider">
       <div className="max-w-5xl mx-auto">
         <motion.div
           ref={ref}

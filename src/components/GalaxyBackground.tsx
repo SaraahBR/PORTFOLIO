@@ -72,7 +72,7 @@ export default function GalaxyBackground() {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
       // Animar estrelas
-      stars.forEach((star) => {
+      for (const star of stars) {
         star.x += star.speedX
         star.y += star.speedY
         star.opacity += star.twinkleSpeed
@@ -104,7 +104,7 @@ export default function GalaxyBackground() {
         ctx.beginPath()
         ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2)
         ctx.fill()
-      })
+      }
 
       // Criar glitter ocasionalmente
       glitterTimer++
@@ -174,8 +174,8 @@ export default function GalaxyBackground() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed top-0 left-0 w-full h-full pointer-events-none z-0"
-      style={{ opacity: theme === 'dark' ? 0.7 : 0.2 }}
+      className="fixed top-0 left-0 w-full h-full pointer-events-none"
+      style={{ opacity: theme === 'dark' ? 0.7 : 0.2, zIndex: -1 }}
     />
   )
 }
