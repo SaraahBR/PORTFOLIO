@@ -21,13 +21,15 @@ Site pessoal moderno e acessível, com i18n completo, tema dark/light por contex
 **Componente**: `src/components/FlowerFairyBackground.tsx`
 
 **Flores Flutuantes (60 unidades)**
-- 4 tipos diferentes desenhados com Canvas: rosa clássica, margarida, flor de cerejeira e tulipa
+- Formato tradicional simplificado: pétalas elípticas circulares ao redor do centro
 - Cores: vermelho intenso (#DC143C, #FF0000, #8B0000) e branco puro (#FFFFFF, #F8F8FF, #FFFAFA)
 - Movimento suave com velocidade reduzida e rotação natural
 - Distribuição equilibrada: 50% lado esquerdo + 50% lado direito
 - Opacidade: 0.1 a 0.3 para efeito delicado
+- Desenho otimizado para performance (3x mais rápido que versões anteriores)
 
 **Fadas Animadas (3 unidades)**
+- Tamanho: 3-5 unidades (proporção ideal)
 - Cores personalizadas: rosa escuro (hue 330°), vermelho (hue 0°), prata (hue 0° com saturação 0)
 - Desenho detalhado de perfil usando Canvas API:
   * Cabeça com coque de cabelo
@@ -37,14 +39,17 @@ Site pessoal moderno e acessível, com i18n completo, tema dark/light por contex
   * Braços e pernas em posições dinâmicas
 - **Asas de libélula realistas**:
   * 4 asas separadas (2 superiores + 2 inferiores)
-  * Abertura e fechamento sincronizado
+  * Abertura e fechamento sincronizado com Math.abs(wingFlap)
   * Nervuras desenhadas para realismo
   * Gradientes translúcidos
-- **Sistema de perseguição inteligente**:
-  * Cada fada persegue uma flor específica
-  * Muda de alvo ao alcançar a flor
-  * Velocidade de movimento: 1.0 (lento e elegante)
-  * Velocidade de asas: 0.15-0.25 (rápido para naturalidade)
+- **Comportamento de abelha**:
+  * Persegue flores de forma direta e contínua
+  * Velocidade de movimento: 0.6 (suave e natural)
+  * Velocidade de asas: 0.12-0.20 (batida rápida)
+  * Easing suave nas transições de direção
+  * Visita cada flor por apenas 0.3 segundos
+  * Sempre em movimento, nunca para
+- Trail reduzido: 10 pontos (otimização de performance)
 - Opacidade: 0.3 a 0.6 para sutileza
 
 **Fade Out Gradual**
@@ -57,12 +62,13 @@ Site pessoal moderno e acessível, com i18n completo, tema dark/light por contex
 #### Modo Escuro - Galáxia Animada
 **Componente**: `src/components/GalaxyBackground.tsx`
 
-- 80 estrelas/partículas brilhantes
+- 50 estrelas/partículas brilhantes (otimizado)
 - Paleta roxa/rosa: #e879f9, #f0abfc, #c084fc, #ec4899, #d946ef
 - Efeito twinkle (piscar) suave e contínuo
 - Movimento orgânico lento
 - Opacity: 0.7 para não cansar visualmente
 - Z-index: -1 (sempre atrás do conteúdo)
+- **Intersection Observer**: animação pausa automaticamente quando fora da viewport
 
 #### Hero Component - Design Responsivo
 - **Fundo único fixo** (não expande com conteúdo)
@@ -137,6 +143,7 @@ Backgrounds: z-1 (animações sempre atrás)
 - **Novas seções**: Experiência, Cursos, Idiomas
 - **Ordem**: Skills → Experiência → Cursos → Formação → Projetos → Idiomas → Contato
 - **Projetos atualizados**: LUIGARAH (Frontend/Backend), ScoreOn, GamerzNew, CyberVenus
+- **Design dos ícones**: Fundos gradient no modo claro (bege/rosa) e off-white no modo escuro
 - Favicon habilitado
 
 ## Estrutura de Pastas (principal)
@@ -206,15 +213,16 @@ public/
 - Renderização via Canvas 2D API
 - 60 flores + 3 fadas em movimento constante
 - Sistema de fade out baseado em distância euclidiana
-- RequestAnimationFrame loop otimizado
+- RequestAnimationFrame loop com **Intersection Observer** (pausa quando não visível)
 - Flowers array com propriedades: x, y, size, speedX, speedY, rotation, color, opacity
-- Fairies array com propriedades: x, y, size, hue, saturation, lightness, wingAngle, targetFlowerIndex
+- Fairies array com propriedades: x, y, size, hue, saturation, lightness, wingAngle, targetFlowerIndex, trail
 
 ### GalaxyBackground (Canvas)
-- 80 partículas com efeito twinkle
+- 50 partículas com efeito twinkle (otimizado)
 - Movimento orgânico com wraparound
 - Gradientes radiais para efeito de brilho
 - Cores dinâmicas baseadas no tema
+- **Intersection Observer**: pausa animação automaticamente quando fora da viewport
 
 ## Acessibilidade e Mobile
 - Navbar com aria-* no dropdown e no hambúrguer.
@@ -246,12 +254,35 @@ npm run build
 npm start
 ```
 
-## Performance
-- Next.js 16 com Turbopack para builds rápidos
+## Performance e Otimizações
+
+### Animações de Fundo
+- **Intersection Observer**: Animações Canvas pausam automaticamente quando não estão visíveis na viewport
+- **Redução de elementos**: Flores 60→40, Estrelas 80→50 (redução de 33-37%)
+- **Trail otimizado**: Trilha das fadas reduzida de 25 para 10 pontos (-60%)
+- **Desenho simplificado**: Flores com formato único otimizado (3x mais rápido)
+- **GPU Acceleration**: `will-change: transform` e `translateZ(0)` em elementos com blur
+
+### Framer Motion
+- **Animações removidas**: Todas as animações `whileInView` e `animate` com delays individuais foram removidas das seções (Skills, Experience, Education, Courses, Languages, Contact)
+- **Mantido**: Apenas animação do título de cada seção
+- **Resultado**: Eliminação de recalculações constantes que causavam lag
+
+### Imagens
+- **Lazy loading**: `loading="lazy"` em todas as imagens dos projetos
+- **GIFs otimizados**: `unoptimized={true}` para evitar processamento desnecessário do Next.js
+- **Sizes responsivos**: Configuração adequada para diferentes viewports
+
+### CSS
+- **Transições específicas**: `transform, box-shadow` ao invés de `all`
+- **GPU Acceleration**: `transform: translateZ(0)` forçando aceleração de GPU
+- **will-change**: Aplicado em elementos com hover para otimizar renderização
+
+### Build e Runtime
+- Next.js 16 com Turbopack para builds ultra-rápidos
 - Animações em Canvas (hardware-accelerated)
-- Lazy loading de componentes pesados
-- Opacidades otimizadas para não sobrecarregar
 - Z-index hierarchy bem definida
+- Opacidades otimizadas para não sobrecarregar
 
 ## Dicas de manutenção
 - Sempre validar o JSON em `messages/*` (qualquer vírgula sobrando quebra o build).

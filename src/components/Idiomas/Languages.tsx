@@ -31,12 +31,9 @@ export default function Languages() {
           </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {items.map((lang, i) => (
-              <motion.div
+            {items.map((lang) => (
+              <div
                 key={lang.name}
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={visible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
-                transition={{ delay: i * 0.05, duration: 0.4 }}
                 className="glass-effect rounded-xl p-6 flex items-center gap-4 hover-glow glitter"
               >
                 <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#d4b5a8] via-[#c4a199] to-[#b8968a] dark:from-[#f5f1ed] dark:to-[#e8dfd6] flex items-center justify-center flex-shrink-0">
@@ -46,7 +43,7 @@ export default function Languages() {
                   <p className="text-gray-800 dark:text-white font-bold">{lang.name}</p>
                   <p className="text-gray-600 dark:text-gray-400">{lang.level}</p>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </motion.div>

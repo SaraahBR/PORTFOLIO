@@ -33,12 +33,9 @@ export default function Education() {
           </h2>
 
           <div className="space-y-6">
-            {formacoes.map((formacao, indice) => (
-              <motion.div
+            {formacoes.map((formacao) => (
+              <div
                 key={formacao.institution + formacao.period}
-                initial={{ opacity: 0, x: -50 }}
-                animate={estaVisivel ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-                transition={{ delay: indice * 0.15, duration: 0.6 }}
                 className="glass-effect rounded-xl p-6 hover-glow flex items-start space-x-4 glitter"
               >
                 <div className="flex-shrink-0">
@@ -53,7 +50,7 @@ export default function Education() {
                     {formacao.period} • {formacao.status}
                   </p>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </motion.div>

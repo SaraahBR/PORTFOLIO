@@ -59,6 +59,8 @@
 
   .section-blur {
     @apply backdrop-blur-[8px];
+    will-change: transform;
+    transform: translateZ(0);
   }
 
   .section-divider {
@@ -104,13 +106,14 @@
   }
 
   .hover-glow {
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    will-change: transform;
   }
 
   .hover-glow:hover {
     box-shadow: 0 8px 20px rgba(198, 142, 130, 0.3),
                 0 4px 10px rgba(180, 120, 105, 0.2);
-    transform: translateY(-3px);
+    transform: translateY(-3px) translateZ(0);
   }
   
   .dark .hover-glow:hover {

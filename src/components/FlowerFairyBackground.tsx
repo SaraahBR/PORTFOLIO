@@ -93,7 +93,7 @@ export default function FlowerFairyBackground() {
       fairies.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        size: Math.random() * 2.5 + 2,
+        size: Math.random() * 2 + 3, // Tamanho médio: 3-5
         speedX: 0,
         speedY: 0,
         hue: color.hue,
@@ -102,7 +102,7 @@ export default function FlowerFairyBackground() {
         opacity: Math.random() * 0.3 + 0.3,
         trail: [],
         wingAngle: 0,
-        wingSpeed: 0.15 + Math.random() * 0.1,
+        wingSpeed: 0.12 + Math.random() * 0.08, // Velocidade das asas: 0.12-0.20
         targetFlowerIndex: Math.floor(Math.random() * flowerCount),
         reachTime: 0
       })
@@ -116,66 +116,16 @@ export default function FlowerFairyBackground() {
       ctx.rotate(flower.rotation)
       ctx.globalAlpha = flower.opacity * 0.25 // Muito mais discreto
 
-      const flowerType = flower.petalCount % 4 // 4 tipos diferentes
-
-      if (flowerType === 0) {
-        // Rosa clássica
-        for (let i = 0; i < flower.petalCount; i++) {
-          const angle = (Math.PI * 2 * i) / flower.petalCount
-          ctx.save()
-          ctx.rotate(angle)
-          ctx.fillStyle = flower.color
-          ctx.beginPath()
-          ctx.ellipse(0, -flower.size * 0.6, flower.size * 0.35, flower.size * 0.5, 0, 0, Math.PI * 2)
-          ctx.fill()
-          ctx.restore()
-        }
-      } else if (flowerType === 1) {
-        // Margarida/Girassol
-        for (let i = 0; i < flower.petalCount; i++) {
-          const angle = (Math.PI * 2 * i) / flower.petalCount
-          ctx.save()
-          ctx.rotate(angle)
-          ctx.fillStyle = flower.color
-          ctx.beginPath()
-          ctx.moveTo(0, 0)
-          ctx.lineTo(-flower.size * 0.2, -flower.size * 0.8)
-          ctx.lineTo(0, -flower.size * 0.9)
-          ctx.lineTo(flower.size * 0.2, -flower.size * 0.8)
-          ctx.closePath()
-          ctx.fill()
-          ctx.restore()
-        }
-      } else if (flowerType === 2) {
-        // Flor de cerejeira (5 pétalas arredondadas)
-        for (let i = 0; i < 5; i++) {
-          const angle = (Math.PI * 2 * i) / 5
-          ctx.save()
-          ctx.rotate(angle)
-          ctx.fillStyle = flower.color
-          ctx.beginPath()
-          ctx.arc(0, -flower.size * 0.5, flower.size * 0.4, 0, Math.PI * 2)
-          ctx.fill()
-          ctx.restore()
-        }
-      } else {
-        // Tulipa/Flor simples
-        ctx.fillStyle = flower.color
+      // Formato tradicional: pétalas circulares ao redor do centro
+      ctx.fillStyle = flower.color
+      for (let i = 0; i < flower.petalCount; i++) {
+        const angle = (Math.PI * 2 * i) / flower.petalCount
+        ctx.save()
+        ctx.rotate(angle)
         ctx.beginPath()
-        ctx.moveTo(0, -flower.size * 0.8)
-        ctx.quadraticCurveTo(-flower.size * 0.5, -flower.size * 0.4, -flower.size * 0.3, 0)
-        ctx.quadraticCurveTo(-flower.size * 0.1, flower.size * 0.2, 0, flower.size * 0.1)
-        ctx.quadraticCurveTo(flower.size * 0.1, flower.size * 0.2, flower.size * 0.3, 0)
-        ctx.quadraticCurveTo(flower.size * 0.5, -flower.size * 0.4, 0, -flower.size * 0.8)
+        ctx.ellipse(0, -flower.size * 0.6, flower.size * 0.35, flower.size * 0.5, 0, 0, Math.PI * 2)
         ctx.fill()
-        
-        // Pétalas laterais
-        ctx.beginPath()
-        ctx.arc(-flower.size * 0.4, -flower.size * 0.2, flower.size * 0.35, 0, Math.PI * 2)
-        ctx.fill()
-        ctx.beginPath()
-        ctx.arc(flower.size * 0.4, -flower.size * 0.2, flower.size * 0.35, 0, Math.PI * 2)
-        ctx.fill()
+        ctx.restore()
       }
 
       // Centro da flor (menor e mais discreto)
@@ -558,30 +508,33 @@ export default function FlowerFairyBackground() {
         const dy = targetFlower.y - fairy.y
         const distance = Math.sqrt(dx * dx + dy * dy)
         
-        // Se chegou perto da flor, escolher nova flor alvo
-        if (distance < 30) {
+        // Comportamento de abelha: voa direto até o centro e já escolhe outra flor
+        if (distance < 15) { // Chegou perto do centro
           fairy.reachTime++
-          if (fairy.reachTime > 60) { // Fica 1 segundo na flor
+          // Troca rapidamente de flor (como abelha visitando flores)
+          if (fairy.reachTime > 20) { // Apenas 0.3 segundos por flor
             fairy.targetFlowerIndex = Math.floor(Math.random() * flowers.length)
             fairy.reachTime = 0
           }
-          // Diminuir velocidade ao chegar perto
-          fairy.speedX *= 0.95
-          fairy.speedY *= 0.95
         } else {
-          // Voar em direção à flor (mais devagar)
-          const speed = 1.0
-          fairy.speedX = (dx / distance) * speed
-          fairy.speedY = (dy / distance) * speed
           fairy.reachTime = 0
         }
+        
+        // Voo direto e suave em direção à flor (estilo abelha)
+        const speed = 0.6 // Velocidade mais suave
+        const targetSpeedX = (dx / distance) * speed
+        const targetSpeedY = (dy / distance) * speed
+        
+        // Suavizar transição de velocidade (easing)
+        fairy.speedX += (targetSpeedX - fairy.speedX) * 0.1
+        fairy.speedY += (targetSpeedY - fairy.speedY) * 0.1
         
         fairy.x += fairy.speedX
         fairy.y += fairy.speedY
         
-        // Atualizar trilha (mais longa para mostrar o caminho)
+        // Atualizar trilha (reduzida para performance)
         fairy.trail.push({ x: fairy.x, y: fairy.y, opacity: 1 })
-        if (fairy.trail.length > 25) fairy.trail.shift()
+        if (fairy.trail.length > 10) fairy.trail.shift()
         
         // Reduzir opacidade da trilha
         for (const point of fairy.trail) {
@@ -629,9 +582,26 @@ export default function FlowerFairyBackground() {
       setCanvasSize()
     }
 
+    // Intersection Observer para pausar quando não está visível
+    let isVisible = true
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting
+        if (!isVisible) {
+          cancelAnimationFrame(animationFrameId)
+        } else {
+          animate()
+        }
+      },
+      { threshold: 0 }
+    )
+
+    observer.observe(canvas)
+
     window.addEventListener('resize', handleResize)
 
     return () => {
+      observer.disconnect()
       window.removeEventListener('resize', handleResize)
       cancelAnimationFrame(animationFrameId)
     }

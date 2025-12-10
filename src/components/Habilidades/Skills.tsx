@@ -57,35 +57,27 @@ export default function Skills() {
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {categorias.map((categoria, indice) => (
-              <motion.div
+            {categorias.map((categoria) => (
+              <div
                 key={categoria.titulo}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ delay: indice * 0.1, duration: 0.6 }}
                 className="glass-effect rounded-xl p-6 hover-glow glitter"
               >
                 <div className="flex flex-col items-center text-center">
                   {categoria.icone}
                   <h3 className="text-xl font-bold mb-4 text-gray-800 dark:text-white">{categoria.titulo}</h3>
                   <ul className="space-y-2 w-full text-left">
-                    {categoria.habilidades.map((habilidade, idx) => (
-                      <motion.li
+                    {categoria.habilidades.map((habilidade) => (
+                      <li
                         key={habilidade}
-                        initial={{ opacity: 0, x: -10 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true, amount: 0.2 }}
-                        transition={{ delay: (indice * 0.1) + (idx * 0.05), duration: 0.4 }}
                         className="flex items-start text-gray-800 dark:text-gray-300"
                       >
                         <span className="text-primary mr-2 mt-[2px]">✓</span>
                         <span className="text-sm break-words whitespace-normal leading-snug">{habilidade}</span>
-                      </motion.li>
+                      </li>
                     ))}
                   </ul>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </motion.div>

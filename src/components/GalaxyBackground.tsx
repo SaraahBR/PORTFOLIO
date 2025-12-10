@@ -14,6 +14,8 @@ export default function GalaxyBackground() {
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
+    let animationFrameId: number
+
     const setCanvasSize = () => {
       canvas.width = window.innerWidth
       canvas.height = window.innerHeight
@@ -42,7 +44,7 @@ export default function GalaxyBackground() {
       color: string
     }> = []
 
-    const starCount = theme === 'dark' ? 80 : 30
+    const starCount = theme === 'dark' ? 50 : 30
     const isDark = theme === 'dark'
 
     // Cores para modo claro (prateado/dourado) e escuro (galáxia roxa/rosa)
@@ -155,7 +157,7 @@ export default function GalaxyBackground() {
         ctx.fill()
       }
 
-      requestAnimationFrame(animate)
+      animationFrameId = requestAnimationFrame(animate)
     }
 
     animate()
@@ -164,10 +166,28 @@ export default function GalaxyBackground() {
       setCanvasSize()
     }
 
+    // Intersection Observer para pausar quando não está visível
+    let isVisible = true
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting
+        if (!isVisible) {
+          cancelAnimationFrame(animationFrameId)
+        } else {
+          animate()
+        }
+      },
+      { threshold: 0 }
+    )
+
+    observer.observe(canvas)
+
     window.addEventListener('resize', handleResize)
 
     return () => {
+      observer.disconnect()
       window.removeEventListener('resize', handleResize)
+      cancelAnimationFrame(animationFrameId)
     }
   }, [theme])
 

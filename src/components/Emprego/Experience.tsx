@@ -34,17 +34,14 @@ export default function Experience() {
           </h2>
 
           <div className="space-y-6">
-            {items.map((job, i) => (
-              <motion.div
+            {items.map((job) => (
+              <div
                 key={job.company + job.period}
-                initial={{ opacity: 0, x: -40 }}
-                animate={visible ? { opacity: 1, x: 0 } : { opacity: 0, x: -40 }}
-                transition={{ delay: i * 0.1, duration: 0.5 }}
                 className="glass-effect rounded-xl p-6 hover-glow w-full max-w-full overflow-hidden glitter"
               >
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#d4b5a8] via-[#c4a199] to-[#b8968a] dark:from-gray-700 dark:to-gray-800 flex items-center justify-center flex-shrink-0">
-                    <FaBriefcase className="text-white dark:text-dark text-2xl" />
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#d4b5a8] via-[#c4a199] to-[#b8968a] dark:from-[#f5f1ed] dark:to-[#e8dfd6] flex items-center justify-center flex-shrink-0">
+                    <FaBriefcase className="text-white dark:text-gray-800 text-2xl" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <h3 className="text-xl font-bold text-gray-800 dark:text-white break-words leading-snug">{job.role}</h3>
@@ -57,7 +54,7 @@ export default function Experience() {
                     </ul>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </motion.div>

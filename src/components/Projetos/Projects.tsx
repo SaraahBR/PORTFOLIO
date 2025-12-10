@@ -163,6 +163,8 @@ export default function Projects() {
                                   fill
                                   className={indice === 0 ? "object-cover" : "object-contain"}
                                   sizes="(max-width: 780px) 100vw, 40vw"
+                                  loading="lazy"
+                                  unoptimized={getCurrentImages(indice)[getCurrentImageIndex(indice)].endsWith('.gif')}
                                 />
                               </div>
                             </div>

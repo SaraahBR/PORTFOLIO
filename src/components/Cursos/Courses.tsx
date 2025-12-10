@@ -32,13 +32,9 @@ export default function Courses() {
           </h2>
 
           <div className="space-y-6">
-            {items.map((course, i) => (
-              <motion.div
+            {items.map((course) => (
+              <div
                 key={course.title + course.period}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ delay: i * 0.1, duration: 0.5 }}
                 className="glass-effect rounded-xl p-6 hover-glow flex items-start gap-4 glitter"
               >
                 <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#d4b5a8] via-[#c4a199] to-[#b8968a] dark:from-[#f5f1ed] dark:to-[#e8dfd6] flex items-center justify-center flex-shrink-0">
@@ -49,7 +45,7 @@ export default function Courses() {
                   <p className="text-gray-700 dark:text-gray-400 mb-2">{course.description}</p>
                   <p className="text-[#b8968a] dark:text-[#f5f1ed] font-medium">{course.period}</p>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </motion.div>

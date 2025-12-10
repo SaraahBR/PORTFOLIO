@@ -66,18 +66,13 @@ export default function Contact() {
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {redesSociais.map((rede, indice) => (
-              <motion.a
+            {redesSociais.map((rede) => (
+              <a
                 key={rede.nome}
                 href={rede.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={estaVisivel ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-                transition={{ delay: indice * 0.1, duration: 0.5 }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="glass-effect rounded-xl p-6 flex items-center space-x-4 hover-glow group glitter"
+                className="glass-effect rounded-xl p-6 flex items-center space-x-4 hover-glow group glitter transition-transform hover:scale-105"
               >
                 <div className={`p-4 rounded-full bg-gradient-to-br ${rede.cor} text-white group-hover:scale-110 transition-transform`}>
                   {rede.icone}
@@ -86,7 +81,7 @@ export default function Contact() {
                   <h3 className="text-gray-800 dark:text-white font-bold text-lg break-words">{rede.nome}</h3>
                   <p className="text-gray-600 dark:text-gray-400 text-sm break-all">{rede.texto}</p>
                 </div>
-              </motion.a>
+              </a>
             ))}
           </div>
         </motion.div>
