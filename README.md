@@ -4,7 +4,7 @@ Site pessoal moderno e acessível, com internacionalização completa em 4 idiom
 
 
 <div align="center">
-  <img src="./public/images/sarah_logo.svg" alt="Sarah Logo" width="270" height="270" />
+  <img src="./public/images/sarah_logo.png" alt="Sarah Logo" width="270" height="270" />
 </div>
 
 ## Stack Tecnológico
