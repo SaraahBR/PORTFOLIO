@@ -128,7 +128,7 @@
     "items": [
       {
         "title": "🛍️ LUIGARAH - Frontend",
-        "subtitle": null,
+        "subtitle": "Luxury Fashion Marketplace",
         "description": "Luxury fashion e-commerce built with Next.js 15 (App Router), React 19 and TypeScript. Filters, universal pagination, wishlist/cart, A11Y, Redux Toolkit + RTK Query, NextAuth (Google/Facebook/Credentials/JWT), admin panel with CRUD and roles. Integrates Spring Boot API, Oracle DB and Cloudflare R2.",
         "technologies": ["Next.js", "React", "TypeScript", "Redux Toolkit", "RTK Query", "NextAuth", "Tailwind"],
         "linkSite": "https://luigarah.vercel.app/",
@@ -145,6 +145,15 @@
         "linkVideo": null
       },
       {
+        "title": "💸 VittaCash",
+        "subtitle": "Personal Expense Management Site",
+        "description": "Personal finance management system built with Next.js 15, React 19 and JavaScript. Dashboard, expense CRUD, interactive reports, filters by period/category, email sending, cache and user isolation (GDPR). Google OAuth + JWT authentication. Backend in Node.js/Express with Prisma, PostgreSQL (Supabase), validations and Swagger. Deployed on Vercel + Render.",
+        "technologies": ["Next.js", "React", "Node.js", "PostgreSQL", "Prisma", "JWT", "OAuth", "Full Stack", "REST API"],
+        "linkSite": "https://vittacash.vercel.app/",
+        "linkGithub": "https://github.com/SaraahBR/Vitta-Cash",
+        "linkVideo": null
+      },
+      {
         "title": "🧠 Atonic Clitic Pronouns Identifier",
         "subtitle": "FREELANCE PROJECT",
         "description": "I developed a robust system in Python to identify atonic clitic pronouns in journalistic texts and classify them as proclisis, enclisis or mesoclisis, based on morphosyntactic rules. I used the spaCy pt_core_news_lg model, regular expressions to handle compound mesoclisis (e.g.: entregar-lhe-ei) and generate automated reports with context and grammatical classification. The project was carried out as part of a PhD research in Computer Science at the State University of Londrina (UEL).",
@@ -154,21 +163,21 @@
         "linkVideo": "https://drive.google.com/file/d/1vt7lu-QAWxtiKVmqNp1rhBoltAlpR5Sf/view?usp=sharing"
       },
       {
-        "title": "🎮 GamerzNew — Discover, favorite and track games",
-        "subtitle": null,
-        "description": "Modern site for game discovery and favorites using Angular 20 (Standalone), SSR/Prerender on Vercel, Neon serverless Postgres and Google OAuth. Responsive UI with nude‑pink theme.",
-        "technologies": ["Angular", "TypeScript", "SSR", "Vercel Functions", "Neon Postgres", "OAuth2"],
-        "linkSite": "https://gamerz-new.vercel.app/",
-        "linkGithub": "https://github.com/SaraahBR/GamerzNew",
-        "linkVideo": null
-      },
-      {
         "title": "🧮 ScoreOn",
         "subtitle": "Grades Management System",
         "description": "Modern, accessible and multilingual (pt, en, es) with Next.js 15, React 19, TypeScript and MUI; NextAuth, Vercel Postgres and charts with Recharts.",
         "technologies": ["Next.js", "React", "TypeScript", "MUI", "NextAuth", "Vercel Postgres", "Recharts"],
         "linkSite": "https://score-on.vercel.app/",
         "linkGithub": "https://github.com/SaraahBR/ScoreOn",
+        "linkVideo": null
+      },
+      {
+        "title": "🎮 GamerzNew — Discover, favorite and track games",
+        "subtitle": null,
+        "description": "Modern site for game discovery and favorites using Angular 20 (Standalone), SSR/Prerender on Vercel, Neon serverless Postgres and Google OAuth. Responsive UI with nude‑pink theme.",
+        "technologies": ["Angular", "TypeScript", "SSR", "Vercel Functions", "Neon Postgres", "OAuth2"],
+        "linkSite": "https://gamerz-new.vercel.app/",
+        "linkGithub": "https://github.com/SaraahBR/GamerzNew",
         "linkVideo": null
       },
       {

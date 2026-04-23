@@ -12,8 +12,13 @@ export default function Projects() {
   const ref = useRef(null)
   const [currentImageIndexFrontend, setCurrentImageIndexFrontend] = useState(0)
   const [currentImageIndexBackend, setCurrentImageIndexBackend] = useState(0)
+  const [currentImageIndexIdentificador, setCurrentImageIndexIdentificador] = useState(0)
+  const [currentImageIndexScoreOn, setCurrentImageIndexScoreOn] = useState(0)
+  const [currentImageIndexVittaCash, setCurrentImageIndexVittaCash] = useState(0)
   const [viewModeFrontend, setViewModeFrontend] = useState<'desktop' | 'mobile'>('desktop')
   const [viewModeBackend, setViewModeBackend] = useState<'desktop' | 'mobile'>('desktop')
+  const [viewModeScoreOn, setViewModeScoreOn] = useState<'desktop' | 'mobile'>('desktop')
+  const [viewModeVittaCash, setViewModeVittaCash] = useState<'desktop' | 'mobile'>('desktop')
 
   // Imagens do projeto LUIGARAH Frontend - Desktop
   const luigarahFrontendDesktopImages = [
@@ -32,7 +37,7 @@ export default function Projects() {
     'LUIGARAH-front/4oVIDEO-MOBILE-LUIGARAHF.gif'
   ]
 
-  // Imagens do projeto LUIGARAH Backend - Desktop (por enquanto só desktop)
+  // Imagens do projeto LUIGARAH Backend - Desktop
   const luigarahBackendDesktopImages = [
     'LUIGARAH-back/1oVIDEO-LUIGARAH-BACKEND.gif',
     'LUIGARAH-back/2oVIDEO-LUIGARAH-BACKEND.gif',
@@ -46,9 +51,48 @@ export default function Projects() {
     'LUIGARAH-back/1oVIDEO-LUIGARAH-BACKEND-MOBILE.gif'
   ]
 
+  // Imagens do projeto Identificador de Pronomes - Desktop
+  const identificadorPronomesImages = [
+    'Identificador-Pronomes/codigo_identificadorpronomes.gif',
+    'Identificador-Pronomes/terminal_identificadorpronomes.gif',
+    'Identificador-Pronomes/terminal_executado_identificadorpronomes.gif',
+    'Identificador-Pronomes/resultado_final_identificadorpronomes.png'
+  ]
+
+  // Imagens do projeto ScoreOn - Desktop
+  const scoreOnDesktopImages = [
+    'ScoreOn-front/Introducao-ScoreOn.gif',
+    'ScoreOn-front/Execucao-ScoreOn.gif',
+    'ScoreOn-back/Backend-ScoreOn.gif'
+  ]
+
+  // Imagens do projeto ScoreOn - Mobile
+  const scoreOnMobileImages = [
+    'ScoreOn-front/Inicio-Mobile-ScoreOn.gif',
+    'ScoreOn-front/Final-Mobile-ScoreOn.gif'
+  ]
+
+  // Imagens do projeto VittaCash - Desktop
+  const vittacashDesktopImages = [
+    'VittaCash-front/Introducao-Vittacash.gif',
+    'VittaCash-front/Execucao-Vittacash.gif',
+    'VittaCash-front/Email-Vittacash.gif',
+    'VittaCash-back/Swagger-Render-Vittacash.png',
+    'VittaCash-back/BancoDeDados-Vittacash.png'
+  ]
+
+  // Imagens do projeto VittaCash - Mobile
+  const vittacashMobileImages = [
+    'VittaCash-front/Introducao-Mobile-Vittacash.gif',
+    'VittaCash-front/Execucao-Mobile-Vittacash.gif',
+    'VittaCash-front/Email-Mobile-Vittacash.gif'
+  ]
+
   // Seleciona as imagens baseado no modo de visualização e projeto
   const currentImagesFrontend = viewModeFrontend === 'desktop' ? luigarahFrontendDesktopImages : luigarahFrontendMobileImages
   const currentImagesBackend = viewModeBackend === 'desktop' ? luigarahBackendDesktopImages : luigarahBackendMobileImages
+  const currentImagesScoreOn = viewModeScoreOn === 'desktop' ? scoreOnDesktopImages : scoreOnMobileImages
+  const currentImagesVittaCash = viewModeVittaCash === 'desktop' ? vittacashDesktopImages : vittacashMobileImages
 
   const handleNextImageFrontend = () => {
     setCurrentImageIndexFrontend((prev) => (prev + 1) % currentImagesFrontend.length)
@@ -66,6 +110,30 @@ export default function Projects() {
     setCurrentImageIndexBackend((prev) => (prev - 1 + currentImagesBackend.length) % currentImagesBackend.length)
   }
 
+  const handleNextImageIdentificador = () => {
+    setCurrentImageIndexIdentificador((prev) => (prev + 1) % identificadorPronomesImages.length)
+  }
+
+  const handlePrevImageIdentificador = () => {
+    setCurrentImageIndexIdentificador((prev) => (prev - 1 + identificadorPronomesImages.length) % identificadorPronomesImages.length)
+  }
+
+  const handleNextImageScoreOn = () => {
+    setCurrentImageIndexScoreOn((prev) => (prev + 1) % currentImagesScoreOn.length)
+  }
+
+  const handlePrevImageScoreOn = () => {
+    setCurrentImageIndexScoreOn((prev) => (prev - 1 + currentImagesScoreOn.length) % currentImagesScoreOn.length)
+  }
+
+  const handleNextImageVittaCash = () => {
+    setCurrentImageIndexVittaCash((prev) => (prev + 1) % currentImagesVittaCash.length)
+  }
+
+  const handlePrevImageVittaCash = () => {
+    setCurrentImageIndexVittaCash((prev) => (prev - 1 + currentImagesVittaCash.length) % currentImagesVittaCash.length)
+  }
+
   // Resetar índice ao mudar entre desktop e mobile
   useEffect(() => {
     setCurrentImageIndexFrontend(0)
@@ -74,6 +142,14 @@ export default function Projects() {
   useEffect(() => {
     setCurrentImageIndexBackend(0)
   }, [viewModeBackend])
+
+  useEffect(() => {
+    setCurrentImageIndexScoreOn(0)
+  }, [viewModeScoreOn])
+
+  useEffect(() => {
+    setCurrentImageIndexVittaCash(0)
+  }, [viewModeVittaCash])
 
   interface Project {
     title: string
@@ -88,19 +164,24 @@ export default function Projects() {
   const projetos: Project[] = t('projects.items')
 
   // Funções auxiliares para determinar modo e índice
-  const getViewMode = (indice: number) => indice === 0 ? viewModeFrontend : viewModeBackend
+  const getViewMode = (indice: number) => indice === 0 ? viewModeFrontend : indice === 1 ? viewModeBackend : indice === 2 ? viewModeVittaCash : indice === 4 ? viewModeScoreOn : null
   const setViewMode = (indice: number, mode: 'desktop' | 'mobile') => {
     if (indice === 0) setViewModeFrontend(mode)
-    else setViewModeBackend(mode)
+    else if (indice === 1) setViewModeBackend(mode)
+    else if (indice === 2) setViewModeVittaCash(mode)
+    else if (indice === 4) setViewModeScoreOn(mode)
   }
-  const getCurrentImageIndex = (indice: number) => indice === 0 ? currentImageIndexFrontend : currentImageIndexBackend
+  const getCurrentImageIndex = (indice: number) => indice === 0 ? currentImageIndexFrontend : indice === 1 ? currentImageIndexBackend : indice === 2 ? currentImageIndexVittaCash : indice === 3 ? currentImageIndexIdentificador : indice === 4 ? currentImageIndexScoreOn : 0
   const setCurrentImageIndex = (indice: number, idx: number) => {
     if (indice === 0) setCurrentImageIndexFrontend(idx)
-    else setCurrentImageIndexBackend(idx)
+    else if (indice === 1) setCurrentImageIndexBackend(idx)
+    else if (indice === 2) setCurrentImageIndexVittaCash(idx)
+    else if (indice === 3) setCurrentImageIndexIdentificador(idx)
+    else if (indice === 4) setCurrentImageIndexScoreOn(idx)
   }
-  const handlePrevImage = (indice: number) => indice === 0 ? handlePrevImageFrontend() : handlePrevImageBackend()
-  const handleNextImage = (indice: number) => indice === 0 ? handleNextImageFrontend() : handleNextImageBackend()
-  const getCurrentImages = (indice: number) => indice === 0 ? currentImagesFrontend : currentImagesBackend
+  const handlePrevImage = (indice: number) => indice === 0 ? handlePrevImageFrontend() : indice === 1 ? handlePrevImageBackend() : indice === 2 ? handlePrevImageVittaCash() : indice === 3 ? handlePrevImageIdentificador() : indice === 4 ? handlePrevImageScoreOn() : null
+  const handleNextImage = (indice: number) => indice === 0 ? handleNextImageFrontend() : indice === 1 ? handleNextImageBackend() : indice === 2 ? handleNextImageVittaCash() : indice === 3 ? handleNextImageIdentificador() : indice === 4 ? handleNextImageScoreOn() : null
+  const getCurrentImages = (indice: number) => indice === 0 ? currentImagesFrontend : indice === 1 ? currentImagesBackend : indice === 2 ? currentImagesVittaCash : indice === 3 ? identificadorPronomesImages : indice === 4 ? currentImagesScoreOn : []
 
   return (
     <section id="projects" className="relative pt-4 pb-12 sm:py-20 px-4 sm:px-6 lg:px-8 section-blur section-divider">
@@ -119,43 +200,45 @@ export default function Projects() {
                 transition={{ delay: indice * 0.1, duration: 0.6 }}
                 className="glass-effect rounded-xl p-6 sm:p-8 hover-glow w-full max-w-full overflow-hidden glitter"
               >
-                <div className={`flex flex-col ${(indice === 0 || indice === 1) ? 'lg:flex-row' : ''} gap-6`}>
+                <div className={`flex flex-col ${(indice === 0 || indice === 1 || indice === 2 || indice === 3 || indice === 4) ? 'lg:flex-row' : ''} gap-6`}>
                   {/* Imagem/Vídeo/Carousel */}
-                  {(indice === 0 || indice === 1) ? (
+                  {(indice === 0 || indice === 1 || indice === 2 || indice === 3 || indice === 4) ? (
                     <div className="w-full md:w-2/5 flex-shrink-0 relative">
-                      {/* Botões de alternância Desktop/Mobile */}
-                      <div className="flex justify-center gap-2 mb-4">
-                        <button
-                          onClick={() => setViewMode(indice, 'desktop')}
-                          className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${
-                            getViewMode(indice) === 'desktop'
-                              ? 'bg-[#b8968a] dark:bg-white text-white dark:text-gray-900 shadow-md'
-                              : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
-                          }`}
-                        >
-                          <FaDesktop size={16} />
-                          Desktop
-                        </button>
-                        <button
-                          onClick={() => setViewMode(indice, 'mobile')}
-                          className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${
-                            getViewMode(indice) === 'mobile'
-                              ? 'bg-[#b8968a] dark:bg-white text-white dark:text-gray-900 shadow-md'
-                              : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
-                          }`}
-                        >
-                          <FaMobileAlt size={16} />
-                          Mobile
-                        </button>
-                      </div>
+                      {/* Botões de alternância Desktop/Mobile - Para LUIGARAH (índices 0 e 1), VittaCash (índice 2) e ScoreOn (índice 4) */}
+                      {(indice === 0 || indice === 1 || indice === 2 || indice === 4) && (
+                        <div className="flex justify-center gap-2 mb-4">
+                          <button
+                            onClick={() => setViewMode(indice, 'desktop')}
+                            className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${
+                              getViewMode(indice) === 'desktop'
+                                ? 'bg-[#b8968a] dark:bg-white text-white dark:text-gray-900 shadow-md'
+                                : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
+                            }`}
+                          >
+                            <FaDesktop size={16} />
+                            Desktop
+                          </button>
+                          <button
+                            onClick={() => setViewMode(indice, 'mobile')}
+                            className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${
+                              getViewMode(indice) === 'mobile'
+                                ? 'bg-[#b8968a] dark:bg-white text-white dark:text-gray-900 shadow-md'
+                                : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
+                            }`}
+                          >
+                            <FaMobileAlt size={16} />
+                            Mobile
+                          </button>
+                        </div>
+                      )}
 
                       {/* Visualização Desktop (Monitor) */}
-                      {getViewMode(indice) === 'desktop' ? (
-                        <div className="pb-0">
+                      {(getViewMode(indice) === 'desktop' || indice === 3) ? (
+                        <div className={indice === 3 ? 'pb-0 mt-8' : 'pb-0'}>
                           {/* Frame da TV com padding para as bordas */}
                           <div className="relative bg-gray-100 dark:bg-gradient-to-br dark:from-black dark:via-gray-950 dark:to-black border-4 dark:border-white/10 shadow-lg rounded-lg p-3 sm:p-4 mb-0.5">
                             {/* Área da imagem */}
-                            <div className="relative aspect-video rounded overflow-hidden bg-gray-200 dark:bg-gray-900">
+                            <div className={`relative ${indice === 2 ? 'h-[153px] md:h-[188px]' : 'aspect-video'} rounded overflow-hidden bg-gray-200 dark:bg-gray-900`} style={indice === 2 ? undefined : undefined}>
                               <div style={indice === 1 ? { transform: 'scale(1.0)', width: '100%', height: '100%' } : undefined} className="relative w-full h-full">
                                 <Image
                                   src={getCurrentImages(indice)[getCurrentImageIndex(indice)]}
@@ -211,7 +294,7 @@ export default function Projects() {
                           </div>
                         </div>
                       ) : (
-                        /* Visualização Mobile (Celular) */
+                        /* Visualização Mobile (Celular) - Apenas para LUIGARAH */
                         <div className="pb-0">
                           <div className="flex justify-center items-center p-4">
                             {/* Container do celular - estilo Samsung S25 (mais quadrado) */}
@@ -301,7 +384,7 @@ export default function Projects() {
                   ) : null}
 
                   {/* Conteúdo do Card */}
-                  <div className="flex-1">
+                  <div className={`flex-1 ${(indice === 0 || indice === 1 || indice === 2 || indice === 3 || indice === 4) ? 'flex flex-col justify-between' : ''}`}>
                     <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-2 break-words leading-snug">{projeto.title}</h3>
                     {projeto.subtitle && (
                       <p className="text-[#c4a199] dark:text-[#d4c4b8] font-semibold mb-3 break-words">{projeto.subtitle}</p>
@@ -338,7 +421,7 @@ export default function Projects() {
                           href={projeto.linkVideo}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-2 px-4 py-2 bg-nude-100 dark:bg-white/10 text-gray-800 dark:text-white font-semibold rounded-lg hover:bg-nude-200 dark:hover:bg-white/20 transition-colors border border-nude-200 dark:border-white/20"
+                          className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#d4b5a8] via-[#c4a199] to-[#b8968a] dark:from-gray-700 dark:to-gray-800 text-gray-800 dark:text-white font-semibold rounded-lg hover:scale-105 transition-transform border border-[#c4a199]/30 dark:border-gray-600"
                         >
                           <FaVideo />
                           {t('projects.viewVideo')}

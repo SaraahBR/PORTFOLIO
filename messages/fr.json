@@ -128,7 +128,7 @@
     "items": [
       {
         "title": "🛍️ LUIGARAH - Frontend",
-        "subtitle": null,
+        "subtitle": "Place de Mode de Luxe",
         "description": "E-commerce de luxe avec Next.js 15 (App Router), React 19 et TypeScript. Filtres, pagination universelle, wishlist/panier, A11Y, Redux Toolkit + RTK Query, NextAuth (Google/Facebook/Identifiants/JWT), panneau admin avec CRUD et rôles. Intègre API Spring Boot, Oracle DB et Cloudflare R2.",
         "technologies": ["Next.js", "React", "TypeScript", "Redux Toolkit", "RTK Query", "NextAuth", "Tailwind"],
         "linkSite": "https://luigarah.vercel.app/",
@@ -145,6 +145,15 @@
         "linkVideo": null
       },
       {
+        "title": "💸 VittaCash",
+        "subtitle": "Site de Gestion des Dépenses Personnelles",
+        "description": "Système de gestion des finances personnelles avec Next.js 15, React 19 et JavaScript. Tableau de bord, CRUD des dépenses, rapports interactifs, filtres par période/catégorie, envoi par e-mail, cache et isolement des utilisateurs (RGPD). Authentification Google OAuth + JWT. Backend en Node.js/Express avec Prisma, PostgreSQL (Supabase), validations et Swagger. Déployé sur Vercel + Render.",
+        "technologies": ["Next.js", "React", "Node.js", "PostgreSQL", "Prisma", "JWT", "OAuth", "Full Stack", "REST API"],
+        "linkSite": "https://vittacash.vercel.app/",
+        "linkGithub": "https://github.com/SaraahBR/Vitta-Cash",
+        "linkVideo": null
+      },
+      {
         "title": "🧠 Identificateur de Pronoms Clitiques Atones",
         "subtitle": "PROJET FREELANCE",
         "description": "J'ai développé un système robuste en Python pour identifier les pronoms clitiques atones dans les textes journalistiques et les classer en proclise, enclise ou mésoclise, basé sur des règles morphosyntaxiques. J'ai utilisé le modèle spaCy pt_core_news_lg, des expressions régulières pour gérer les mésoclises composées (ex: entregar-lhe-ei) et générer des rapports automatisés avec contexte et classification grammaticale. Le projet a été réalisé dans le cadre d'une recherche doctorale en informatique à l'Université d'État de Londrina (UEL).",
@@ -154,21 +163,21 @@
         "linkVideo": "https://drive.google.com/file/d/1vt7lu-QAWxtiKVmqNp1rhBoltAlpR5Sf/view?usp=sharing"
       },
       {
-        "title": "🎮 GamerzNew — Découvrir, ajouter en favoris et suivre des jeux",
-        "subtitle": null,
-        "description": "Site moderne pour la découverte et les favoris avec Angular 20 (Standalone), SSR/Prerender sur Vercel, Neon Postgres serverless et Google OAuth. UI responsive au thème rose nude.",
-        "technologies": ["Angular", "TypeScript", "SSR", "Vercel Functions", "Neon Postgres", "OAuth2"],
-        "linkSite": "https://gamerz-new.vercel.app/",
-        "linkGithub": "https://github.com/SaraahBR/GamerzNew",
-        "linkVideo": null
-      },
-      {
         "title": "🧮 ScoreOn",
         "subtitle": "Système de Gestion de Notes",
         "description": "Système moderne, accessible et multilingue (pt, en, es) avec Next.js 15, React 19, TypeScript et MUI; NextAuth, Vercel Postgres et graphiques Recharts.",
         "technologies": ["Next.js", "React", "TypeScript", "MUI", "NextAuth", "Vercel Postgres", "Recharts"],
         "linkSite": "https://score-on.vercel.app/",
         "linkGithub": "https://github.com/SaraahBR/ScoreOn",
+        "linkVideo": null
+      },
+      {
+        "title": "🎮 GamerzNew — Découvrir, ajouter en favoris et suivre des jeux",
+        "subtitle": null,
+        "description": "Site moderne pour la découverte et les favoris avec Angular 20 (Standalone), SSR/Prerender sur Vercel, Neon Postgres serverless et Google OAuth. UI responsive au thème rose nude.",
+        "technologies": ["Angular", "TypeScript", "SSR", "Vercel Functions", "Neon Postgres", "OAuth2"],
+        "linkSite": "https://gamerz-new.vercel.app/",
+        "linkGithub": "https://github.com/SaraahBR/GamerzNew",
         "linkVideo": null
       },
       {
