@@ -2,6 +2,11 @@
 
 Site pessoal moderno e acessível, com internacionalização completa em 4 idiomas, suporte a tema dark/light com animações de fundo customizadas (fadas e flores no modo claro, galáxia no modo escuro), minigame interativo e showcase de projetos com visualizadores desktop/mobile. Baseado em Next.js (App Router), TypeScript e Tailwind CSS.
 
+
+<div align="center">
+  <img src="./public/images/sarah_logo.svg" alt="Sarah Logo" width="270" height="270" />
+</div>
+
 ## Stack Tecnológico
 
 - **Next.js** 16.0.7 (App Router com Turbopack)
