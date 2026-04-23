@@ -1,152 +1,244 @@
 # Portfólio – Sarah Hernandes
 
-Site pessoal moderno e acessível, com i18n completo, tema dark/light por contexto, **animações de fadas e flores no modo claro** e **galáxia no modo escuro**, jogos e showcase de projetos. Baseado em Next.js (App Router), TypeScript e Tailwind.
+Site pessoal moderno e acessível, com internacionalização completa em 4 idiomas, suporte a tema dark/light com animações de fundo customizadas (fadas e flores no modo claro, galáxia no modo escuro), minigame interativo e showcase de projetos com visualizadores desktop/mobile. Baseado em Next.js (App Router), TypeScript e Tailwind CSS.
 
-## Stack
-- Next.js 16.0.7 (App Router com Turbopack)
-- React 18
-- TypeScript
-- Tailwind CSS (darkMode: 'class')
-- Framer Motion (animações + useInView)
-- React Icons, country-flag-icons (bandeiras SVG)
-- react-type-animation (texto no Hero)
-- sonner (toasts)
-- Canvas API (animações customizadas de fundo)
+## Stack Tecnológico
 
-## Principais Recursos Implementados
+- **Next.js** 16.0.7 (App Router com Turbopack)
+- **React** 19.2.1
+- **TypeScript** 5.6.3
+- **Tailwind CSS** 3.4.1 (darkMode: 'class')
+- **Framer Motion** 11.11.17 (animações)
+- **React Icons** 5.3.0, country-flag-icons 1.5.21 (ícones e bandeiras SVG)
+- **react-type-animation** 3.2.0 (animação de texto)
+- **next-intl** 4.4.0 (internacionalização)
+- **sonner** 2.0.7 (notificações toast)
+- **Canvas API** (animações de fundo)
 
-### 🎨 Sistema de Animações de Fundo (Destaque!)
+## Recursos Principais
 
-#### Modo Claro - Fadas e Flores
-**Componente**: `src/components/FlowerFairyBackground.tsx`
+### Sistema de Animações de Fundo
+
+#### Modo Claro: Fadas e Flores 🧚✨🌸
+**Arquivo**: `src/components/FlowerFairyBackground.tsx`
 
 **Flores Flutuantes (60 unidades)**
-- Formato tradicional simplificado: pétalas elípticas circulares ao redor do centro
-- Cores: vermelho intenso (#DC143C, #FF0000, #8B0000) e branco puro (#FFFFFF, #F8F8FF, #FFFAFA)
-- Movimento suave com velocidade reduzida e rotação natural
-- Distribuição equilibrada: 50% lado esquerdo + 50% lado direito
+- Formato tradicional: pétalas elípticas circulares ao redor de um centro
+- Cores: tons de vermelho (#DC143C, #FF0000, #8B0000) e branco (#FFFFFF, #F8F8FF)
+- Movimento suave com rotação natural e velocidade reduzida
+- Distribuição: 50% lado esquerdo, 50% lado direito
 - Opacidade: 0.1 a 0.3 para efeito delicado
-- Desenho otimizado para performance (3x mais rápido que versões anteriores)
+- Renderização otimizada via Canvas 2D
 
 **Fadas Animadas (3 unidades)**
-- Tamanho: 3-5 unidades (proporção ideal)
-- Cores personalizadas: rosa escuro (hue 330°), vermelho (hue 0°), prata (hue 0° com saturação 0)
-- Desenho detalhado de perfil usando Canvas API:
+- Tamanho: 3-5 unidades
+- Cores personalizadas: rosa escuro, vermelho e prata
+- Desenho detalhado em Canvas com:
   * Cabeça com coque de cabelo
-  * Cabelo comprido fluindo para trás
-  * Corpo feminino com curvas naturais
-  * Vestido fluido com detalhes de pregas
-  * Braços e pernas em posições dinâmicas
-- **Asas de libélula realistas**:
-  * 4 asas separadas (2 superiores + 2 inferiores)
-  * Abertura e fechamento sincronizado com Math.abs(wingFlap)
-  * Nervuras desenhadas para realismo
-  * Gradientes translúcidos
-- **Comportamento de abelha**:
-  * Persegue flores de forma direta e contínua
-  * Velocidade de movimento: 0.6 (suave e natural)
-  * Velocidade de asas: 0.12-0.20 (batida rápida)
-  * Easing suave nas transições de direção
-  * Visita cada flor por apenas 0.3 segundos
-  * Sempre em movimento, nunca para
-- Trail reduzido: 10 pontos (otimização de performance)
-- Opacidade: 0.3 a 0.6 para sutileza
+  * Cabelo comprido fluindo
+  * Corpo feminino com proporções naturais
+  * Vestido fluido com pregas
+  * Braços e pernas em posição dinâmica
+- Asas de libélula com 4 seções (2 superiores, 2 inferiores), nervuras e gradientes translúcidos
+- Comportamento de perseguição: busca flores próximas com velocidade 0.6
+- Batida de asas: 0.12-0.20 (rápida e contínua)
+- Trail reduzido a 10 pontos para otimização
+- Opacidade: 0.3 a 0.6
 
 **Fade Out Gradual**
-- Algoritmo de transparência baseado em distância do centro (área do Hero)
-- Área de fade: 30% da largura × 40% da altura a partir do centro
-- Curva quártica (x⁴) para transição ultra suave e natural
-- Fadas e flores desaparecem gradualmente ao se aproximar do conteúdo
-- Nunca aparecem sobre elementos importantes
+- Transparência baseada em distância euclidiana do centro
+- Área de fade: 30% da largura × 40% da altura
+- Curva quártica (x⁴) para transição suave
+- Animações desaparecem ao se aproximar do conteúdo principal
 
-#### Modo Escuro - Galáxia Animada
-**Componente**: `src/components/GalaxyBackground.tsx`
+#### Modo Escuro: Galáxia Animada 🌌
+**Arquivo**: `src/components/GalaxyBackground.tsx`
 
-- 50 estrelas/partículas brilhantes (otimizado)
-- Paleta roxa/rosa: #e879f9, #f0abfc, #c084fc, #ec4899, #d946ef
-- Efeito twinkle (piscar) suave e contínuo
-- Movimento orgânico lento
-- Opacity: 0.7 para não cansar visualmente
-- Z-index: -1 (sempre atrás do conteúdo)
-- **Intersection Observer**: animação pausa automaticamente quando fora da viewport
+- 50 partículas brilhantes com efeito twinkle
+- Paleta de cores: roxo e rosa (#e879f9, #f0abfc, #c084fc, #ec4899, #d946ef)
+- Movimento orgânico lento com efeito de wraparound
+- Opacidade: 0.7 para conforto visual
+- Intersection Observer: pausa automática quando fora da viewport
+- Posicionamento: z-index -1 (sempre atrás do conteúdo)
 
-#### Hero Component - Design Responsivo
-- **Fundo único fixo** (não expande com conteúdo)
-- Gradiente radial esfumado nas bordas:
-  * Centro: 40% opacidade 95% (sólido)
-  * Transição: 70% opacidade 70%
-  * Bordas: 100% transparente (fusão natural)
-- Cores por tema:
-  * Claro: rgba(245, 235, 229) - bege/rosa
-  * Escuro: rgba(10, 10, 20) - preto galáxia
-- Sem bolas de luz no modo escuro
-- Responsivo: largura otimizada para ver animações no mobile
+#### Hero Component
+- Fundo único fixo com gradiente radial
+- Gradiente esfumado: centro 95% opaco, transição suave nas bordas
+- Cores por tema: bege/rosa (claro), preto escuro (escuro)
+- Layout responsivo com otimização para visualização de animações em mobile
 
-### 📐 Hierarquia de Camadas (Z-Index)
+### Hierarquia de Camadas
+
 ```
-Navbar: z-50 (sempre no topo, fixa)
-Hero: z-20 (conteúdo principal)
-Seções: z-10 (com backdrop-blur)
-Backgrounds: z-1 (animações sempre atrás)
+Navbar:      z-50 (sempre visível, posição fixa)
+Hero:        z-20 (conteúdo principal)
+Seções:      z-10 (com backdrop-blur)
+Backgrounds: z-1  (animações de fundo)
 ```
 
-### 🎯 Navbar - UX Otimizada
-- **Posição fixed permanente** (visível ao rolar)
-- Fundo opaco em todos os estados (claro/escuro)
-- Efeito hover: scale 1.05 sem mudança de cor
-- Linha decorativa inferior:
-  * Modo claro: gradiente rosa (#d4a5a5 → #b8968a)
-  * Modo escuro: mantém gradiente original
-- Corrigido bug de overflow-x-hidden que interferia com position:fixed
+### Navbar
 
-### ✨ Divisórias Sutis Entre Seções
-- Classe CSS: `section-divider`
-- Linha de 1px com gradiente suave
-- **Modo claro**: bege/rosa (rgba(180, 150, 140))
-- **Modo escuro**: azul/roxo (rgba(120, 100, 150))
-- Largura: 60% da seção, centralizada
-- Transição: transparente → visível no centro → transparente
-
-### 🎨 Seções com Efeito Vidro Fosco
-- Classe: `section-blur` com `backdrop-blur-[8px]`
-- Aplicado em: About, Skills, Experience, Courses, Education, Projects, Languages, Contact
-- Efeito: animações de fundo visíveis através de blur suave
-- Funciona em ambos os temas
-
-### 🌐 Internacionalização Completa
-- 4 idiomas: pt-BR, en, es, fr
-- Context API: `LanguageContext` + JSONs em `messages/`
-- Todas as seções, navbar, projetos, rodapé e toasts traduzidos
-- Seletor de idioma com bandeiras SVG
-
-### 🎨 Sistema de Temas
-- Context próprio: `ThemeContext` (sem dependências externas)
-- Persistência em localStorage
-- Classes Tailwind: `dark:*`
-- Script anti-FOUC no layout
-- Cores de fundo unificadas para transição natural
-
-### 🧭 Navegação Acessível
-- Dropdown fecha com ESC ou clique fora
-- Bloqueio de scroll quando menu mobile aberto
-- ARIA labels e roles adequados
+- Posição fixa permanente (visível ao rolar)
+- Fundo opaco em todos os temas
+- Efeito hover: escala 1.05
+- Linha decorativa com gradiente rosa
+- Menu mobile com bloqueio de scroll quando aberto
+- Fechamento por ESC ou clique fora
 - Responsivo em todas as resoluções
 
-### 🎮 Jogo da Cobrinha
-- Olhos com pupilas dinâmicas
+### Divisórias Entre Seções
+
+- Linha de 1px com gradiente suave
+- Modo claro: tons bege/rosa (rgba(180, 150, 140))
+- Modo escuro: tons azul/roxo (rgba(120, 100, 150))
+- Largura: 60% da seção, centralizada
+- Transição: transparente → visível → transparente
+
+### Seções com Efeito Vidro
+
+Backdrop-blur de 8px aplicado em todas as seções de conteúdo:
+- Sobre
+- Habilidades
+- Experiência
+- Cursos
+- Formação Acadêmica
+- Projetos
+- Idiomas
+- Contato
+
+Efeito permite visualizar animações de fundo através de desfoque suave.
+
+### Visualizadores de Projetos 🖥️ 📱
+
+Componente interativo para showcase de projetos em desktop e mobile com galeria de imagens:
+
+**Identificador de Pronomes Oblíquos Átonos**
+- Visualizador desktop com moldura de monitor
+- 4 imagens: código, terminal (2x), resultado final
+- Sem modo mobile
+
+**ScoreOn**
+- Visualizador desktop e mobile com toggle
+- 3 imagens desktop + 2 imagens mobile
+- Navegação com setas (anterior/próxima)
+- Indicadores de slides ativos
+
+**VittaCash (Gerenciador de Despesas)**
+- Visualizador desktop e mobile com toggle
+- 5 imagens desktop + 3 imagens mobile
+- Stack: Next.js 15, React 19, Node.js, PostgreSQL, Prisma, JWT, OAuth
+- Links: [Site](https://vittacash.vercel.app/) | [Código](https://github.com/SaraahBR/Vitta-Cash)
+
+**LUIGARAH - Frontend e Backend**
+- Frontend: Marketplace de Moda de Luxo
+- Ambos com visualizador desktop e mobile
+- Toggle de visualização
+- Múltiplas imagens em galeria
+- Frontend: 5 desktop + 4 mobile
+- Backend: 5 desktop + 1 mobile
+
+**Moldura Mobile**
+- Inspirada no design clássico do iPhone 5s
+- Notch bar superior simulado
+- Botões laterais (volume e power)
+- Home button inferior
+- Altura: 270px padrão, 350px para alguns projetos
+- Rounded corners com proporção correta
+
+### Internacionalização
+
+4 idiomas suportados: Português (pt-BR), Inglês (en), Espanhol (es), Francês (fr)
+
+**Implementação**:
+- Context API: `src/app/internacionalizacao/LanguageContext.tsx`
+- Mensagens: `messages/{pt-BR,en,es,fr}.json`
+- Seletor com bandeiras SVG
+- Persistência em localStorage
+- Todas as seções traduzidas: navbar, hero, seções, projetos, footer, notificações
+
+### Sistema de Temas
+
+**Implementação**:
+- Context próprio: `src/components/Tema/ThemeContext.tsx`
+- Sem dependências externas
+- Persistência em localStorage
+- Tailwind: `darkMode: 'class'` com classes `dark:*`
+- Anti-FOUC via script inline
+
+**Backgrounds por Tema**:
+- Light: FlowerFairyBackground (fadas e flores)
+- Dark: GalaxyBackground (galáxia com estrelas)
+
+### Minigame - Jogo da Cobrinha
+
+**Arquivo**: `src/app/jogo-cobrinha/SnakeGame.jsx`
+
+Jogo interativo com:
+- Olhos com pupilas dinâmicas que seguem a cobra
 - Língua bifurcada animada
-- Aparência da demo idêntica ao jogo
-- i18n completa (títulos e toasts)
+- Interface de pontuação
+- Internacionalização completa
+- Controles: setas do teclado ou WASD
+- Detecção de colisão com paredes e auto-colisão
 
-### 💼 Conteúdo Organizado
-- **Skills**: 6 cards incluindo "Comportamentais"
-- **Novas seções**: Experiência, Cursos, Idiomas
-- **Ordem**: Skills → Experiência → Cursos → Formação → Projetos → Idiomas → Contato
-- **Projetos atualizados**: LUIGARAH (Frontend/Backend), ScoreOn, GamerzNew, CyberVenus
-- **Design dos ícones**: Fundos gradient no modo claro (bege/rosa) e off-white no modo escuro
-- Favicon habilitado
+### Organização de Conteúdo
 
-## Estrutura de Pastas (principal)
+**Seções** (em ordem de exibição):
+1. Hero com animação de texto
+2. Sobre mim
+3. Habilidades (6 categorias)
+4. Experiência profissional
+5. Cursos
+6. Formação Acadêmica
+7. Projetos com visualizadores
+8. Idiomas
+9. Contato
+
+**Projetos Destacados**:
+1. LUIGARAH - Frontend (Marketplace de Moda de Luxo)
+2. LUIGARAH - Backend (API RESTful)
+3. VittaCash (Gerenciador de Despesas)
+4. Identificador de Pronomes Oblíquos Átonos (Projeto Freelance)
+5. ScoreOn (Sistema de Controle de Notas)
+6. GamerzNew (Angular + SSR + OAuth2)
+7. CyberVenus (Portal Educacional)
+8. E mais 4 projetos adicionais
+
+### Acessibilidade
+
+- Atributos ARIA em componentes interativos
+- Navegação por teclado
+- Contraste de cores adequado
+- Suporte a leitor de tela
+- Links semânticos
+- Estrutura de headings hierárquica
+- Texto alternativo em imagens
+
+### Performance
+
+**Otimizações de Animações**:
+- Intersection Observer: animações pausam quando fora da viewport
+- Elementos reduzidos: 60 flores, 50 estrelas
+- Trail otimizado: 10 pontos para fadas
+- GPU acceleration: `will-change: transform`, `translateZ(0)`
+
+**Otimizações de Imagens**:
+- Lazy loading em todas as imagens
+- Next.js Image component com sizes responsivos
+- GIFs com `unoptimized={true}` para evitar processamento desnecessário
+
+**Otimizações de CSS**:
+- Transições específicas em propriedades (transform, box-shadow)
+- `will-change` estratégico para elementos com hover
+- GPU acceleration via transforms
+
+**Build**:
+- Next.js 16 com Turbopack (builds ultra-rápidos)
+- Tree-shaking automático
+- Code splitting por rota
+
+## Estrutura de Pastas
+
 ```
 src/
 ├── app/
@@ -160,7 +252,8 @@ src/
 │       └── SnakeGame.jsx
 ├── components/
 │   ├── Navbar/
-│   │   └── Navbar.tsx
+│   │   ├── Navbar.tsx
+│   │   └── TopButtons.tsx
 │   ├── Hero/
 │   │   └── Hero.tsx
 │   ├── Sobre/
@@ -182,8 +275,9 @@ src/
 │   ├── Tema/
 │   │   ├── ThemeContext.tsx
 │   │   └── ThemeToggle.tsx
-│   ├── GalaxyBackground.tsx (modo escuro)
-│   └── FlowerFairyBackground.tsx (modo claro)
+│   ├── ParticlesBackground.tsx
+│   ├── GalaxyBackground.tsx
+│   └── FlowerFairyBackground.tsx
 messages/
 ├── pt-BR.json
 ├── en.json
@@ -191,109 +285,89 @@ messages/
 └── fr.json
 public/
 ├── favicon.ico
-└── images/
+├── images/
+├── Identificador-Pronomes/
+├── LUIGARAH-front/
+├── LUIGARAH-back/
+├── ScoreOn-front/
+├── ScoreOn-back/
+├── VittaCash-front/
+└── VittaCash-back/
 ```
 
-## i18n (como funciona)
+## Internacionalização
+
+Implementada com Context API e arquivos JSON centralizados.
+
 - Provider: `src/app/internacionalizacao/LanguageContext.tsx`
-  - Lê `idioma` do localStorage, expõe `t(chave)` genérico (suporta string e arrays), `setIdioma`.
 - Mensagens: `messages/{pt-BR,en,es,fr}.json`
-  - Ex.: `skills.lists.programming`, `projects.items`, `snake.*`, `footer.rights`.
-- Para adicionar um idioma: crie `messages/xx.json`, inclua no `LanguageContext` e traduza as chaves existentes.
+- Seletor com bandeiras SVG
+- Persistência em localStorage
+- Para adicionar um idioma: crie `messages/xx.json`, inclua no `LanguageContext` e traduza as chaves existentes
 
-## Tema (dark/light)
-- Provider: `src/components/Tema/ThemeContext.tsx` (toggle + persistência).
-- Tailwind: `darkMode: 'class'` e classes `dark:*` em todo o site.
-- Backgrounds diferentes por tema:
-  * Light: FlowerFairyBackground (fadas e flores)
-  * Dark: GalaxyBackground (estrelas e galáxia)
+## Como Rodar
 
-## Animações Customizadas
-### FlowerFairyBackground (Canvas)
-- Renderização via Canvas 2D API
-- 60 flores + 3 fadas em movimento constante
-- Sistema de fade out baseado em distância euclidiana
-- RequestAnimationFrame loop com **Intersection Observer** (pausa quando não visível)
-- Flowers array com propriedades: x, y, size, speedX, speedY, rotation, color, opacity
-- Fairies array com propriedades: x, y, size, hue, saturation, lightness, wingAngle, targetFlowerIndex, trail
-
-### GalaxyBackground (Canvas)
-- 50 partículas com efeito twinkle (otimizado)
-- Movimento orgânico com wraparound
-- Gradientes radiais para efeito de brilho
-- Cores dinâmicas baseadas no tema
-- **Intersection Observer**: pausa animação automaticamente quando fora da viewport
-
-## Acessibilidade e Mobile
-- Navbar com aria-* no dropdown e no hambúrguer.
-- Fechamento por ESC e clique fora.
-- Body sem scroll quando menu mobile aberto.
-- Listas com `break-words` para não "estourar" no mobile (ex.: cards de contato e skills).
-- Animações otimizadas para não interferir na leitura do conteúdo
-- Backdrop-blur leve para manter legibilidade
-
-## Projetos (dados e ordem)
-- Definidos em `messages/*.json` em `projects.items` – facilitando reordenação/edição por idioma.
-- Itens recentes adicionados:
-  - LUIGARAH – Frontend/Backend (links corrigidos para backend).
-  - GamerzNew (Angular + SSR + Neon Postgres + OAuth2).
-  - ScoreOn (Next.js + MUI + NextAuth + Vercel Postgres + Recharts).
-  - CyberVenus (Next.js 14 + TypeScript + Sass Modules).
-
-## Favicon
-- Arquivo: `public/favicon.ico`.
-- Configuração: `src/app/layout.tsx` com `metadata.icons` e `<link rel="icon" href="/favicon.ico" />`.
-
-## Como rodar
 ```bash
+# Instalação
 npm install
-npm run dev      # http://localhost:3000
+
+# Desenvolvimento
+npm run dev
+# Abrir http://localhost:3000
 
 # Produção
 npm run build
 npm start
 ```
 
-## Performance e Otimizações
+## Componente Projects.tsx
 
-### Animações de Fundo
-- **Intersection Observer**: Animações Canvas pausam automaticamente quando não estão visíveis na viewport
-- **Redução de elementos**: Flores 60→40, Estrelas 80→50 (redução de 33-37%)
-- **Trail otimizado**: Trilha das fadas reduzida de 25 para 10 pontos (-60%)
-- **Desenho simplificado**: Flores com formato único otimizado (3x mais rápido)
-- **GPU Acceleration**: `will-change: transform` e `translateZ(0)` em elementos com blur
+Sistema de visualizadores de projetos com desktop/mobile toggle.
 
-### Framer Motion
-- **Animações removidas**: Todas as animações `whileInView` e `animate` com delays individuais foram removidas das seções (Skills, Experience, Education, Courses, Languages, Contact)
-- **Mantido**: Apenas animação do título de cada seção
-- **Resultado**: Eliminação de recalculações constantes que causavam lag
+**Estado Management**:
+- Índices de imagens separados por projeto
+- View modes (desktop/mobile) por projeto
+- Navegação anterior/próxima com wraparound
 
-### Imagens
-- **Lazy loading**: `loading="lazy"` em todas as imagens dos projetos
-- **GIFs otimizados**: `unoptimized={true}` para evitar processamento desnecessário do Next.js
-- **Sizes responsivos**: Configuração adequada para diferentes viewports
+**Visualizadores**:
+- LUIGARAH Frontend: 5 imagens desktop, 4 mobile
+- LUIGARAH Backend: 5 imagens desktop, 1 mobile
+- VittaCash: 5 imagens desktop, 3 mobile
+- Identificador: 4 imagens desktop (sem mobile)
+- ScoreOn: 3 imagens desktop, 2 mobile
 
-### CSS
-- **Transições específicas**: `transform, box-shadow` ao invés de `all`
-- **GPU Acceleration**: `transform: translateZ(0)` forçando aceleração de GPU
-- **will-change**: Aplicado em elementos com hover para otimizar renderização
+**Moldura Mobile**:
+- Inspiração: design clássico do iPhone 5s
+- Notch bar superior
+- Botões laterais (volume, power)
+- Home button
+- Rounded corners com proporção correta
+- Altura padrão: 270px (350px para VittaCash)
 
-### Build e Runtime
-- Next.js 16 com Turbopack para builds ultra-rápidos
-- Animações em Canvas (hardware-accelerated)
-- Z-index hierarchy bem definida
-- Opacidades otimizadas para não sobrecarregar
+## Projetos em Destaque
 
-## Dicas de manutenção
-- Sempre validar o JSON em `messages/*` (qualquer vírgula sobrando quebra o build).
-- Para novos projetos/seções, prefira alimentar via arquivos de mensagens (mantém i18n e conteúdo centralizado).
-- Evite `next-themes` – o projeto usa `ThemeContext` próprio.
-- Animações de fundo: ajustar opacidades em `FlowerFairyBackground.tsx` e `GalaxyBackground.tsx`
-- Fade out: modificar `fadeRadiusX/Y` e curva (multiplicação) em ambos os componentes
+1. LUIGARAH - Frontend (Marketplace de Moda de Luxo)
+2. LUIGARAH - Backend (API RESTful Java/Spring Boot)
+3. VittaCash (Gerenciador de Despesas - Next.js + Node.js + PostgreSQL)
+4. Identificador de Pronomes Oblíquos Átonos (Python + NLP)
+5. ScoreOn (Sistema de Notas - Next.js + MUI + Recharts)
 
-## Melhorias Futuras Possíveis
-- [ ] Modo de economia de energia (reduzir animações)
-- [ ] Easter eggs interativos nas animações
+## Dicas de Manutenção
+
+- Validar JSON em `messages/*` antes de fazer commit
+- Adicionar novo visualizador: criar pastas em `public/`, adicionar estados em `Projects.tsx`, adicionar dados em `messages/*.json`
+- Reordenar projetos: atualizar `messages/*.json` mantendo sincronização entre idiomas
+- Tema: ajustar opacidades em `FlowerFairyBackground.tsx` e `GalaxyBackground.tsx`
+- Animações: `will-change`, `transform: translateZ(0)` para GPU acceleration
+
+## Melhorias Futuras
+
+- Modo de economia de energia
+- Filtro de projetos por tags
+- Previews em tempo real dos projetos
+- Lightbox para imagens dos visualizadores
+- Animações de transição entre slides
 
 ## Licença
-MIT License © 2025 Sarah Hernandes. Veja o arquivo `LICENSE` na raiz do projeto.
+
+MIT License © 2025 Sarah Hernandes. Veja [LICENSE](./LICENSE).
