@@ -3,22 +3,26 @@
 import { motion } from 'framer-motion'
 import { useRef, useState, useEffect } from 'react'
 import { FaGithub, FaExternalLinkAlt, FaVideo, FaChevronLeft, FaChevronRight, FaDesktop, FaMobileAlt } from 'react-icons/fa'
-import Image from 'next/image'
+import FrozenGif from './FrozenGif'
 import SnakeGame from '../../app/jogo-cobrinha/SnakeGame.jsx'
 import { useLanguage } from '@/app/internacionalizacao/LanguageContext'
+import { useAccessibility } from '@/components/Acessibilidade/AccessibilityContext'
 
 export default function Projects() {
   const { t } = useLanguage()
+  const { reduceMotion } = useAccessibility()
   const ref = useRef(null)
   const [currentImageIndexFrontend, setCurrentImageIndexFrontend] = useState(0)
   const [currentImageIndexBackend, setCurrentImageIndexBackend] = useState(0)
   const [currentImageIndexIdentificador, setCurrentImageIndexIdentificador] = useState(0)
   const [currentImageIndexScoreOn, setCurrentImageIndexScoreOn] = useState(0)
   const [currentImageIndexVittaCash, setCurrentImageIndexVittaCash] = useState(0)
+  const [currentImageIndexGamerznew, setCurrentImageIndexGamerznew] = useState(0)
   const [viewModeFrontend, setViewModeFrontend] = useState<'desktop' | 'mobile'>('desktop')
   const [viewModeBackend, setViewModeBackend] = useState<'desktop' | 'mobile'>('desktop')
   const [viewModeScoreOn, setViewModeScoreOn] = useState<'desktop' | 'mobile'>('desktop')
   const [viewModeVittaCash, setViewModeVittaCash] = useState<'desktop' | 'mobile'>('desktop')
+  const [viewModeGamerznew, setViewModeGamerznew] = useState<'desktop' | 'mobile'>('desktop')
 
   // Imagens do projeto LUIGARAH Frontend - Desktop
   const luigarahFrontendDesktopImages = [
@@ -88,11 +92,26 @@ export default function Projects() {
     'VittaCash-front/Email-Mobile-Vittacash.gif'
   ]
 
+  // Imagens do projeto GamersNew - Desktop
+  const gamerznewDesktopImages = [
+    'GamerzNew/Home-GamerzNew.gif',
+    'GamerzNew/Jogos-GamerzNew.gif',
+    'GamerzNew/Testes-GamerzNew.gif',
+    'GamerzNew/Sobre-GamerzNew.gif'
+  ]
+
+  // Imagens do projeto GamersNew - Mobile
+  const gamerznewMobileImages = [
+    'GamerzNew/MOBILE-Home-Gamerznew.gif',
+    'GamerzNew/MOBILE-SESSOES-Gamerznew.gif'
+  ]
+
   // Seleciona as imagens baseado no modo de visualização e projeto
   const currentImagesFrontend = viewModeFrontend === 'desktop' ? luigarahFrontendDesktopImages : luigarahFrontendMobileImages
   const currentImagesBackend = viewModeBackend === 'desktop' ? luigarahBackendDesktopImages : luigarahBackendMobileImages
   const currentImagesScoreOn = viewModeScoreOn === 'desktop' ? scoreOnDesktopImages : scoreOnMobileImages
   const currentImagesVittaCash = viewModeVittaCash === 'desktop' ? vittacashDesktopImages : vittacashMobileImages
+  const currentImagesGamerznew = viewModeGamerznew === 'desktop' ? gamerznewDesktopImages : gamerznewMobileImages
 
   const handleNextImageFrontend = () => {
     setCurrentImageIndexFrontend((prev) => (prev + 1) % currentImagesFrontend.length)
@@ -134,6 +153,14 @@ export default function Projects() {
     setCurrentImageIndexVittaCash((prev) => (prev - 1 + currentImagesVittaCash.length) % currentImagesVittaCash.length)
   }
 
+  const handleNextImageGamerznew = () => {
+    setCurrentImageIndexGamerznew((prev) => (prev + 1) % currentImagesGamerznew.length)
+  }
+
+  const handlePrevImageGamerznew = () => {
+    setCurrentImageIndexGamerznew((prev) => (prev - 1 + currentImagesGamerznew.length) % currentImagesGamerznew.length)
+  }
+
   // Resetar índice ao mudar entre desktop e mobile
   useEffect(() => {
     setCurrentImageIndexFrontend(0)
@@ -151,6 +178,10 @@ export default function Projects() {
     setCurrentImageIndexVittaCash(0)
   }, [viewModeVittaCash])
 
+  useEffect(() => {
+    setCurrentImageIndexGamerznew(0)
+  }, [viewModeGamerznew])
+
   interface Project {
     title: string
     subtitle: string | null
@@ -164,24 +195,26 @@ export default function Projects() {
   const projetos: Project[] = t('projects.items')
 
   // Funções auxiliares para determinar modo e índice
-  const getViewMode = (indice: number) => indice === 0 ? viewModeFrontend : indice === 1 ? viewModeBackend : indice === 2 ? viewModeVittaCash : indice === 4 ? viewModeScoreOn : null
+  const getViewMode = (indice: number) => indice === 0 ? viewModeFrontend : indice === 1 ? viewModeBackend : indice === 2 ? viewModeVittaCash : indice === 4 ? viewModeScoreOn : indice === 5 ? viewModeGamerznew : null
   const setViewMode = (indice: number, mode: 'desktop' | 'mobile') => {
     if (indice === 0) setViewModeFrontend(mode)
     else if (indice === 1) setViewModeBackend(mode)
     else if (indice === 2) setViewModeVittaCash(mode)
     else if (indice === 4) setViewModeScoreOn(mode)
+    else if (indice === 5) setViewModeGamerznew(mode)
   }
-  const getCurrentImageIndex = (indice: number) => indice === 0 ? currentImageIndexFrontend : indice === 1 ? currentImageIndexBackend : indice === 2 ? currentImageIndexVittaCash : indice === 3 ? currentImageIndexIdentificador : indice === 4 ? currentImageIndexScoreOn : 0
+  const getCurrentImageIndex = (indice: number) => indice === 0 ? currentImageIndexFrontend : indice === 1 ? currentImageIndexBackend : indice === 2 ? currentImageIndexVittaCash : indice === 3 ? currentImageIndexIdentificador : indice === 4 ? currentImageIndexScoreOn : indice === 5 ? currentImageIndexGamerznew : 0
   const setCurrentImageIndex = (indice: number, idx: number) => {
     if (indice === 0) setCurrentImageIndexFrontend(idx)
     else if (indice === 1) setCurrentImageIndexBackend(idx)
     else if (indice === 2) setCurrentImageIndexVittaCash(idx)
     else if (indice === 3) setCurrentImageIndexIdentificador(idx)
     else if (indice === 4) setCurrentImageIndexScoreOn(idx)
+    else if (indice === 5) setCurrentImageIndexGamerznew(idx)
   }
-  const handlePrevImage = (indice: number) => indice === 0 ? handlePrevImageFrontend() : indice === 1 ? handlePrevImageBackend() : indice === 2 ? handlePrevImageVittaCash() : indice === 3 ? handlePrevImageIdentificador() : indice === 4 ? handlePrevImageScoreOn() : null
-  const handleNextImage = (indice: number) => indice === 0 ? handleNextImageFrontend() : indice === 1 ? handleNextImageBackend() : indice === 2 ? handleNextImageVittaCash() : indice === 3 ? handleNextImageIdentificador() : indice === 4 ? handleNextImageScoreOn() : null
-  const getCurrentImages = (indice: number) => indice === 0 ? currentImagesFrontend : indice === 1 ? currentImagesBackend : indice === 2 ? currentImagesVittaCash : indice === 3 ? identificadorPronomesImages : indice === 4 ? currentImagesScoreOn : []
+  const handlePrevImage = (indice: number) => indice === 0 ? handlePrevImageFrontend() : indice === 1 ? handlePrevImageBackend() : indice === 2 ? handlePrevImageVittaCash() : indice === 3 ? handlePrevImageIdentificador() : indice === 4 ? handlePrevImageScoreOn() : indice === 5 ? handlePrevImageGamerznew() : null
+  const handleNextImage = (indice: number) => indice === 0 ? handleNextImageFrontend() : indice === 1 ? handleNextImageBackend() : indice === 2 ? handleNextImageVittaCash() : indice === 3 ? handleNextImageIdentificador() : indice === 4 ? handleNextImageScoreOn() : indice === 5 ? handleNextImageGamerznew() : null
+  const getCurrentImages = (indice: number) => indice === 0 ? currentImagesFrontend : indice === 1 ? currentImagesBackend : indice === 2 ? currentImagesVittaCash : indice === 3 ? identificadorPronomesImages : indice === 4 ? currentImagesScoreOn : indice === 5 ? currentImagesGamerznew : []
 
   return (
     <section id="projects" className="relative pt-4 pb-12 sm:py-20 px-4 sm:px-6 lg:px-8 section-blur section-divider">
@@ -195,17 +228,17 @@ export default function Projects() {
             {projetos.map((projeto, indice) => (
               <motion.div
                 key={projeto.title}
-                initial={{ opacity: 0, y: 16 }}
+                initial={reduceMotion ? false : { opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: indice * 0.1, duration: 0.6 }}
+                transition={{ delay: reduceMotion ? 0 : indice * 0.1, duration: reduceMotion ? 0 : 0.6 }}
                 className="glass-effect rounded-xl p-6 sm:p-8 hover-glow w-full max-w-full overflow-hidden glitter"
               >
-                <div className={`flex flex-col ${(indice === 0 || indice === 1 || indice === 2 || indice === 3 || indice === 4) ? 'lg:flex-row' : ''} gap-6`}>
+                <div className={`flex flex-col ${(indice === 0 || indice === 1 || indice === 2 || indice === 3 || indice === 4 || indice === 5) ? 'lg:flex-row' : ''} gap-6`}>
                   {/* Imagem/Vídeo/Carousel */}
-                  {(indice === 0 || indice === 1 || indice === 2 || indice === 3 || indice === 4) ? (
+                  {(indice === 0 || indice === 1 || indice === 2 || indice === 3 || indice === 4 || indice === 5) ? (
                     <div className="w-full md:w-2/5 flex-shrink-0 relative">
-                      {/* Botões de alternância Desktop/Mobile - Para LUIGARAH (índices 0 e 1), VittaCash (índice 2) e ScoreOn (índice 4) */}
-                      {(indice === 0 || indice === 1 || indice === 2 || indice === 4) && (
+                      {/* Botões de alternância Desktop/Mobile - Para LUIGARAH (índices 0 e 1), VittaCash (índice 2), ScoreOn (índice 4) e GamersNew (índice 5) */}
+                      {(indice === 0 || indice === 1 || indice === 2 || indice === 4 || indice === 5) && (
                         <div className="flex justify-center gap-2 mb-4">
                           <button
                             onClick={() => setViewMode(indice, 'desktop')}
@@ -238,16 +271,15 @@ export default function Projects() {
                           {/* Frame da TV com padding para as bordas */}
                           <div className="relative bg-gray-100 dark:bg-gradient-to-br dark:from-black dark:via-gray-950 dark:to-black border-4 dark:border-white/10 shadow-lg rounded-lg p-3 sm:p-4 mb-0.5">
                             {/* Área da imagem */}
-                            <div className={`relative ${indice === 2 ? 'h-[153px] md:h-[188px]' : 'aspect-video'} rounded overflow-hidden bg-gray-200 dark:bg-gray-900`} style={indice === 2 ? undefined : undefined}>
+                            <div className={`relative ${indice === 2 ? 'h-[158px] md:h-[188px]' : 'aspect-video'} rounded overflow-hidden bg-gray-200 dark:bg-gray-900`} style={indice === 2 ? undefined : undefined}>
                               <div style={indice === 1 ? { transform: 'scale(1.0)', width: '100%', height: '100%' } : undefined} className="relative w-full h-full">
-                                <Image
+                                <FrozenGif
                                   src={getCurrentImages(indice)[getCurrentImageIndex(indice)]}
                                   alt={`LUIGARAH Screenshot ${getCurrentImageIndex(indice) + 1}`}
                                   fill
                                   className={indice === 0 ? "object-cover" : "object-contain"}
                                   sizes="(max-width: 780px) 100vw, 40vw"
                                   loading="lazy"
-                                  unoptimized={getCurrentImages(indice)[getCurrentImageIndex(indice)].endsWith('.gif')}
                                 />
                               </div>
                             </div>
@@ -341,7 +373,7 @@ export default function Projects() {
                                   {/* Conteúdo da tela com imagem */}
                                   <div className="absolute top-4 left-0 right-0 bottom-8 overflow-hidden">
                                     <div className="relative w-full h-full" style={{ transform: 'scaleX(1.15)' }}>
-                                      <Image
+                                      <FrozenGif
                                         src={getCurrentImages(indice)[getCurrentImageIndex(indice)]}
                                         alt={`LUIGARAH Screenshot ${getCurrentImageIndex(indice) + 1}`}
                                         fill
@@ -384,7 +416,7 @@ export default function Projects() {
                   ) : null}
 
                   {/* Conteúdo do Card */}
-                  <div className={`flex-1 ${(indice === 0 || indice === 1 || indice === 2 || indice === 3 || indice === 4) ? 'flex flex-col justify-between' : ''}`}>
+                  <div className={`flex-1 ${(indice === 0 || indice === 1 || indice === 2 || indice === 3 || indice === 4 || indice === 5) ? 'flex flex-col justify-between' : ''}`}>
                     <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-2 break-words leading-snug">{projeto.title}</h3>
                     {projeto.subtitle && (
                       <p className="text-[#c4a199] dark:text-[#d4c4b8] font-semibold mb-3 break-words">{projeto.subtitle}</p>
@@ -446,9 +478,9 @@ export default function Projects() {
 
             {/* Jogo da Cobrinha */}
             <motion.div
-              initial={{ opacity: 0, y: 16 }}
+              initial={reduceMotion ? false : { opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: projetos.length * 0.1, duration: 0.6 }}
+              transition={{ delay: reduceMotion ? 0 : projetos.length * 0.1, duration: reduceMotion ? 0 : 0.6 }}
             >
               <SnakeGame />
             </motion.div>

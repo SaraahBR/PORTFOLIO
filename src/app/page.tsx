@@ -14,14 +14,16 @@ import GalaxyBackground from '@/components/GalaxyBackground'
 import FlowerFairyBackground from '@/components/FlowerFairyBackground'
 import { useLanguage } from '@/app/internacionalizacao/LanguageContext'
 import { useThemeContext } from '@/components/Tema/ThemeContext'
+import { useAccessibility } from '@/components/Acessibilidade/AccessibilityContext'
 
 export default function Home() {
   const { t } = useLanguage()
   const { theme } = useThemeContext()
+  const { reduceMotion } = useAccessibility()
   const year = new Date().getFullYear()
   return (
     <main className="relative min-h-screen">
-      {theme === 'dark' ? <GalaxyBackground /> : <FlowerFairyBackground />}
+      {!reduceMotion && (theme === 'dark' ? <GalaxyBackground /> : <FlowerFairyBackground />)}
       <Navbar />
       <Hero />
       <About />

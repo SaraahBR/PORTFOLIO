@@ -174,6 +174,21 @@ Componente interativo para showcase de projetos em desktop e mobile com galeria 
 - Light: FlowerFairyBackground (fadas e flores)
 - Dark: GalaxyBackground (galáxia com estrelas)
 
+### Acessibilidade
+
+**Respeito à Preferência de Redução de Movimento**:
+- Detecta `prefers-reduced-motion` do sistema
+- Pseudo-elementos com `pointer-events: none` para evitar bloqueios de clique
+- Animações de fundo desabilitadas quando o usuário prefere redução de movimento
+- Todos os controles (botões, links) mantêm interatividade total
+- Context próprio: `src/components/Acessibilidade/AccessibilityContext.tsx`
+
+**Correção Implementada**:
+- Removidas animações que bloqueavam a interação com elementos clicáveis
+- Adicionado `pointer-events: none` a pseudo-elementos decorativos (`.glitter::before`, `.glitter::after`)
+- Aplicado a todos os pseudo-elementos quando `reduce-motion` está ativo
+- Garante que botões de projetos, links e componentes interativos funcionem sem obstáculos
+
 ### Minigame - Jogo da Cobrinha
 
 **Arquivo**: `src/app/jogo-cobrinha/SnakeGame.jsx`
@@ -249,6 +264,7 @@ src/
 ├── app/
 │   ├── globals.css
 │   ├── layout.tsx
+│   ├── not-found.tsx
 │   ├── page.tsx
 │   ├── internacionalizacao/
 │   │   ├── LanguageContext.tsx
@@ -256,6 +272,8 @@ src/
 │   └── jogo-cobrinha/
 │       └── SnakeGame.jsx
 ├── components/
+│   ├── Acessibilidade/
+│   │   └── AccessibilityContext.tsx
 │   ├── Navbar/
 │   │   ├── Navbar.tsx
 │   │   └── TopButtons.tsx
@@ -274,15 +292,17 @@ src/
 │   ├── Idiomas/
 │   │   └── Languages.tsx
 │   ├── Projetos/
+│   │   ├── FrozenGif.tsx
 │   │   └── Projects.tsx
 │   ├── Contato/
 │   │   └── Contact.tsx
 │   ├── Tema/
 │   │   ├── ThemeContext.tsx
 │   │   └── ThemeToggle.tsx
-│   ├── ParticlesBackground.tsx
+│   ├── FlowerFairyBackground.tsx
 │   ├── GalaxyBackground.tsx
-│   └── FlowerFairyBackground.tsx
+│   └── ParticlesBackground.tsx
+├── global.d.ts
 messages/
 ├── pt-BR.json
 ├── en.json
@@ -291,6 +311,7 @@ messages/
 public/
 ├── favicon.ico
 ├── images/
+├── GamerzNew/
 ├── Identificador-Pronomes/
 ├── LUIGARAH-front/
 ├── LUIGARAH-back/

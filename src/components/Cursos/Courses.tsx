@@ -4,6 +4,7 @@ import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { FaCertificate } from 'react-icons/fa'
 import { useLanguage } from '@/app/internacionalizacao/LanguageContext'
+import { useAccessibility } from '@/components/Acessibilidade/AccessibilityContext'
 
 interface Course {
   title: string
@@ -13,8 +14,9 @@ interface Course {
 
 export default function Courses() {
   const { t } = useLanguage()
+  const { reduceMotion } = useAccessibility()
   const ref = useRef(null)
-  const visible = useInView(ref, { once: true, amount: 0.2 })
+  const visible = useInView(ref, { once: true, amount: 0.2 }) || reduceMotion
 
   const items: Course[] = t('courses.items')
 
@@ -23,7 +25,7 @@ export default function Courses() {
       <div className="max-w-6xl mx-auto">
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 50 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 50 }}
           animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
           transition={{ duration: 0.6 }}
         >

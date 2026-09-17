@@ -4,6 +4,7 @@ import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { FaBriefcase } from 'react-icons/fa'
 import { useLanguage } from '@/app/internacionalizacao/LanguageContext'
+import { useAccessibility } from '@/components/Acessibilidade/AccessibilityContext'
 
 interface Experience {
   company: string
@@ -15,8 +16,9 @@ interface Experience {
 
 export default function Experience() {
   const { t } = useLanguage()
+  const { reduceMotion } = useAccessibility()
   const ref = useRef(null)
-  const visible = useInView(ref, { once: true, amount: 0.2 })
+  const visible = useInView(ref, { once: true, amount: 0.2 }) || reduceMotion
 
   const items: Experience[] = t('experience.items')
 
@@ -25,7 +27,7 @@ export default function Experience() {
       <div className="max-w-6xl mx-auto">
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 50 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 50 }}
           animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
           transition={{ duration: 0.6 }}
         >

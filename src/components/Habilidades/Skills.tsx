@@ -4,9 +4,11 @@ import { motion } from 'framer-motion'
 import { useRef } from 'react'
 import { FaCode, FaPalette, FaServer, FaDatabase, FaBrain, FaUsers } from 'react-icons/fa'
 import { useLanguage } from '@/app/internacionalizacao/LanguageContext'
+import { useAccessibility } from '@/components/Acessibilidade/AccessibilityContext'
 
 export default function Skills() {
   const { t } = useLanguage()
+  const { reduceMotion } = useAccessibility()
   const ref = useRef(null)
 
   const categorias = [
@@ -47,8 +49,9 @@ export default function Skills() {
       <div className="max-w-7xl mx-auto">
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 40 }}
+          whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+          animate={reduceMotion ? { opacity: 1, y: 0 } : undefined}
           viewport={{ once: true, amount: 0.15 }}
           transition={{ duration: 0.6 }}
         >

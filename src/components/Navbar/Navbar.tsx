@@ -4,7 +4,8 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useLanguage } from '@/app/internacionalizacao/LanguageContext'
 import { useThemeContext } from '@/components/Tema/ThemeContext'
-import { FaSun, FaMoon, FaBars, FaTimes } from 'react-icons/fa'
+import { useAccessibility } from '@/components/Acessibilidade/AccessibilityContext'
+import { FaSun, FaMoon, FaBars, FaTimes, FaRunning, FaWalking } from 'react-icons/fa'
 import BR from 'country-flag-icons/react/3x2/BR'
 import US from 'country-flag-icons/react/3x2/US'
 import ES from 'country-flag-icons/react/3x2/ES'
@@ -20,6 +21,7 @@ const idiomas = [
 export default function Navbar() {
   const { t, idioma, setIdioma } = useLanguage()
   const { theme, toggleTheme } = useThemeContext()
+  const { reduceMotion, toggleReduceMotion } = useAccessibility()
   const [rolagemAtiva, setRolagemAtiva] = useState(false)
   const [dropdownAberto, setDropdownAberto] = useState(false)
   const [menuMobileAberto, setMenuMobileAberto] = useState(false)
@@ -188,6 +190,23 @@ export default function Navbar() {
                     <FaSun className="text-base sm:text-xl text-[#a89583] dark:text-white" />
                   ) : (
                     <FaMoon className="text-base sm:text-xl text-[#a89583] dark:text-white" />
+                  )}
+                </motion.button>
+
+                {/* Toggle de Acessibilidade (desativa animações) */}
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={toggleReduceMotion}
+                  className="p-2 bg-white dark:bg-black backdrop-blur-md rounded-full border border-[#e8dfd6]/50 dark:border-white/20 transition-colors shadow-lg"
+                  aria-label={reduceMotion ? 'Ativar animações' : 'Desativar animações (modo acessibilidade)'}
+                  aria-pressed={reduceMotion}
+                  title={reduceMotion ? 'Ativar animações' : 'Desativar animações'}
+                >
+                  {reduceMotion ? (
+                    <FaWalking className="text-base sm:text-xl text-[#a89583] dark:text-white" />
+                  ) : (
+                    <FaRunning className="text-base sm:text-xl text-[#a89583] dark:text-white" />
                   )}
                 </motion.button>
 

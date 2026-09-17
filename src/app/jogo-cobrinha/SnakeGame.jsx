@@ -3,10 +3,13 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { toast } from 'sonner'
+import { FaLock } from 'react-icons/fa'
 import { useLanguage } from '@/app/internacionalizacao/LanguageContext'
+import { useAccessibility } from '@/components/Acessibilidade/AccessibilityContext'
 
 export default function SnakeGame() {
   const { t } = useLanguage()
+  const { reduceMotion } = useAccessibility()
   const canvasRef = useRef(null)
   const [jogoRodando, setJogoRodando] = useState(false)
   const [pontuacao, setPontuacao] = useState(0)
@@ -352,10 +355,13 @@ export default function SnakeGame() {
     setJogoRodando(false)
     pontuacaoRef.current = 0
     setPontuacao(0)
-    iniciarDemo()
+    if (!reduceMotion) iniciarDemo()
   }
 
   const iniciarJogo = () => {
+    // Com animações desativadas, o jogo fica bloqueado
+    if (reduceMotion) return
+
     // Parar e limpar completamente a demo
     if (intervaloDemoRef.current) {
       clearInterval(intervaloDemoRef.current)
@@ -423,11 +429,22 @@ export default function SnakeGame() {
     return () => document.removeEventListener('keydown', handleKeyDown)
   }, [])
 
-  // Iniciar demo ao montar
+  // Iniciar demo ao montar (bloqueada quando as animações estão desativadas)
   useEffect(() => {
+    if (reduceMotion) {
+      if (intervaloDemoRef.current) {
+        clearInterval(intervaloDemoRef.current)
+        intervaloDemoRef.current = null
+      }
+      const canvas = canvasRef.current
+      const ctx = canvas?.getContext('2d')
+      if (ctx) desenharGradeFundo(ctx)
+      return
+    }
+
     // Pequeno delay para garantir que o canvas está pronto
     const timer = setTimeout(() => {
-      iniciarDemo()
+      if (!jogoRodandoRef.current) iniciarDemo()
     }, 100)
 
     return () => {
@@ -441,12 +458,13 @@ export default function SnakeGame() {
         intervaloJogoRef.current = null
       }
     }
-  }, [])
+  }, [reduceMotion])
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.9 }}
-      whileInView={{ opacity: 1, scale: 1 }}
+      initial={reduceMotion ? false : { opacity: 0, scale: 0.9 }}
+      whileInView={reduceMotion ? undefined : { opacity: 1, scale: 1 }}
+      animate={reduceMotion ? { opacity: 1, scale: 1 } : undefined}
       transition={{ duration: 0.5 }}
       className="glass-effect rounded-xl p-6 hover-glow"
     >
@@ -464,7 +482,7 @@ export default function SnakeGame() {
         )}
       </div>
 
-      <div className="flex justify-center items-center px-2">
+      <div className="flex justify-center items-center px-2 relative">
         <canvas
           ref={canvasRef}
           width={400}
@@ -472,10 +490,18 @@ export default function SnakeGame() {
           className="border-2 border-primary/30 rounded-lg bg-[#1a1a1a] max-w-full h-auto"
           style={{ maxWidth: 'min(400px, 100%)' }}
         />
+        {reduceMotion && (
+          <div className="absolute inset-0 rounded-lg flex flex-col items-center justify-center text-center gap-2 sm:gap-3 px-4 sm:px-6 bg-[#f5ebe5]/95 dark:bg-gray-900/95 border-2 border-[#e8d5cc] dark:border-gray-700">
+            <FaLock className="text-2xl sm:text-3xl text-[#b8968a] dark:text-gray-300" />
+            <p className="text-gray-800 dark:text-white text-xs sm:text-sm md:text-base font-semibold leading-snug">
+              Para jogar, habilite as animações
+            </p>
+          </div>
+        )}
       </div>
 
       <div className="text-center mt-4">
-        {!jogoRodando && (
+        {!jogoRodando && !reduceMotion && (
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}

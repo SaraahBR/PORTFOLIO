@@ -4,11 +4,13 @@ import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { FaEnvelope, FaLinkedin, FaGithub, FaInstagram, FaFacebook } from 'react-icons/fa'
 import { useLanguage } from '@/app/internacionalizacao/LanguageContext'
+import { useAccessibility } from '@/components/Acessibilidade/AccessibilityContext'
 
 export default function Contact() {
   const { t } = useLanguage()
+  const { reduceMotion } = useAccessibility()
   const ref = useRef(null)
-  const estaVisivel = useInView(ref, { once: true, amount: 0.3 })
+  const estaVisivel = useInView(ref, { once: true, amount: 0.3 }) || reduceMotion
 
   const redesSociais = [
     {
@@ -53,7 +55,7 @@ export default function Contact() {
       <div className="max-w-5xl mx-auto">
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 50 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 50 }}
           animate={estaVisivel ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
           transition={{ duration: 0.6 }}
         >

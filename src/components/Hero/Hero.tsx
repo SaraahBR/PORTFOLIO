@@ -4,10 +4,12 @@ import { motion } from 'framer-motion'
 import { TypeAnimation } from 'react-type-animation'
 import Image from 'next/image'
 import { useLanguage } from '@/app/internacionalizacao/LanguageContext'
+import { useAccessibility } from '@/components/Acessibilidade/AccessibilityContext'
 import { useState } from 'react'
 
 export default function Hero() {
   const { t, idioma } = useLanguage()
+  const { reduceMotion } = useAccessibility()
   const [isHovered, setIsHovered] = useState(false)
   
   return (
@@ -29,7 +31,7 @@ export default function Hero() {
         {/* Foto de Perfil - Fixa e Centralizada */}
         <div className="flex justify-center mb-8">
           <motion.div
-            initial={{ scale: 0 }}
+            initial={reduceMotion ? false : { scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ type: 'spring', stiffness: 60, damping: 15, duration: 1.2 }}
             className="relative z-10"
@@ -63,9 +65,9 @@ export default function Hero() {
 
         <div className="flex justify-center mb-4">
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
+            initial={reduceMotion ? false : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
+            transition={{ delay: reduceMotion ? 0 : 0.5, duration: 0.8 }}
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold px-6 relative z-10 inline-block text-center"
           >
             <span className="text-gradient">Sarah</span>
@@ -76,9 +78,9 @@ export default function Hero() {
 
         <div className="flex justify-center mb-8">
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
+            initial={reduceMotion ? false : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.8 }}
+            transition={{ delay: reduceMotion ? 0 : 0.8, duration: 0.8 }}
             className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-gray-700 dark:text-gray-300 px-6 relative z-10 inline-block text-center"
           >
             {t('hero.subtitle')}
@@ -87,9 +89,9 @@ export default function Hero() {
 
         <div className="flex justify-center mb-8">
           <motion.div
-            initial={{ opacity: 0 }}
+            initial={reduceMotion ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1.1, duration: 0.8 }}
+            transition={{ delay: reduceMotion ? 0 : 1.1, duration: 0.8 }}
             className="bg-black dark:bg-white/15 backdrop-blur-[1px] border border-gray-700 dark:border-white/5 shadow-sm rounded-lg p-3 relative z-10 w-[60%] sm:w-auto max-w-full"
           >
             <div className="font-mono text-[#C68E82] dark:text-[#CE9178] text-sm sm:text-base md:text-lg lg:text-xl px-2 min-h-[32px]">
@@ -119,9 +121,9 @@ export default function Hero() {
         </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.4, duration: 0.8 }}
+          transition={{ delay: reduceMotion ? 0 : 1.4, duration: 0.8 }}
           className="relative z-10 inline-block"
         >
           <a
@@ -134,15 +136,15 @@ export default function Hero() {
 
         {/* Indicador de Rolagem */}
         <motion.div
-          initial={{ opacity: 0 }}
+          initial={reduceMotion ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1, repeat: Infinity, duration: 2 }}
+          transition={reduceMotion ? { duration: 0 } : { delay: 1, repeat: Infinity, duration: 2 }}
           className="absolute bottom-4 sm:-bottom-3 md:-bottom-4 lg:bottom-2 left-1/2 -translate-x-1/2 z-10"
         >
           <div className="w-6 h-10 border-2 border-[#c4b5a6] dark:border-gray-500 rounded-full flex justify-center p-2">
             <motion.div
-              animate={{ y: [0, 12, 0] }}
-              transition={{ repeat: Infinity, duration: 1.5 }}
+              animate={reduceMotion ? { y: 0 } : { y: [0, 12, 0] }}
+              transition={{ repeat: reduceMotion ? 0 : Infinity, duration: 1.5 }}
               className="w-1 h-2 bg-[#c4b5a6] dark:bg-gray-400 rounded-full"
             />
           </div>

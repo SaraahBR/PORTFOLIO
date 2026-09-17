@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { ThemeProvider } from '@/components/Tema/ThemeContext'
+import { AccessibilityProvider } from '@/components/Acessibilidade/AccessibilityContext'
 import { LanguageProvider } from '@/app/internacionalizacao/LanguageContext'
 import { Toaster } from 'sonner'
 
@@ -55,6 +56,9 @@ export default function RootLayout({
                   document.documentElement.classList.add(theme);
                   document.documentElement.setAttribute('data-theme', theme);
                   document.documentElement.style.colorScheme = theme;
+
+                  const reduceMotion = localStorage.getItem('portfolio-reduce-motion') === 'true';
+                  document.documentElement.classList.toggle('reduce-motion', reduceMotion);
                 } catch (e) {}
               })();
             `,
@@ -63,10 +67,12 @@ export default function RootLayout({
       </head>
       <body className="font-sans">
         <ThemeProvider>
-          <LanguageProvider>
-            {children}
-            <Toaster position="top-right" richColors closeButton />
-          </LanguageProvider>
+          <AccessibilityProvider>
+            <LanguageProvider>
+              {children}
+              <Toaster position="top-right" richColors closeButton />
+            </LanguageProvider>
+          </AccessibilityProvider>
         </ThemeProvider>
       </body>
     </html>

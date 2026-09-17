@@ -4,6 +4,7 @@ import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { FaGraduationCap } from 'react-icons/fa'
 import { useLanguage } from '@/app/internacionalizacao/LanguageContext'
+import { useAccessibility } from '@/components/Acessibilidade/AccessibilityContext'
 
 interface Education {
   institution: string
@@ -14,8 +15,9 @@ interface Education {
 
 export default function Education() {
   const { t } = useLanguage()
+  const { reduceMotion } = useAccessibility()
   const ref = useRef(null)
-  const estaVisivel = useInView(ref, { once: true, amount: 0.3 })
+  const estaVisivel = useInView(ref, { once: true, amount: 0.3 }) || reduceMotion
 
   const formacoes: Education[] = t('education.items')
 
@@ -24,7 +26,7 @@ export default function Education() {
       <div className="max-w-5xl mx-auto">
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 50 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 50 }}
           animate={estaVisivel ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
           transition={{ duration: 0.6 }}
         >
