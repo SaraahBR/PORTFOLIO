@@ -23,6 +23,13 @@ export default function Projects() {
   const [viewModeScoreOn, setViewModeScoreOn] = useState<'desktop' | 'mobile'>('desktop')
   const [viewModeVittaCash, setViewModeVittaCash] = useState<'desktop' | 'mobile'>('desktop')
   const [viewModeGamerznew, setViewModeGamerznew] = useState<'desktop' | 'mobile'>('desktop')
+  
+  // Estados de loading para cada projeto
+  const [loadingStates, setLoadingStates] = useState<{[key: number]: boolean}>({})
+
+  const handleLoadingChange = (projectIndex: number, isLoading: boolean) => {
+    setLoadingStates(prev => ({ ...prev, [projectIndex]: isLoading }))
+  }
 
   // Imagens do projeto LUIGARAH Frontend - Desktop
   const luigarahFrontendDesktopImages = [
@@ -182,6 +189,46 @@ export default function Projects() {
     setCurrentImageIndexGamerznew(0)
   }, [viewModeGamerznew])
 
+  // Preload das imagens de forma inteligente
+  useEffect(() => {
+    // Preload apenas das imagens desktop (mais usadas) em primeiro lugar
+    const priorityImages = [
+      ...luigarahFrontendDesktopImages,
+      ...luigarahBackendDesktopImages,
+      ...scoreOnDesktopImages,
+      ...vittacashDesktopImages,
+      ...gamerznewDesktopImages,
+    ]
+
+    // Preload de prioridade alta
+    priorityImages.forEach((img) => {
+      const link = document.createElement('link')
+      link.rel = 'prefetch'
+      link.as = 'image'
+      link.href = `${img}`
+      document.head.appendChild(link)
+    })
+
+    // Preload de mobile em segundo plano
+    setTimeout(() => {
+      const mobileImages = [
+        ...luigarahFrontendMobileImages,
+        ...luigarahBackendMobileImages,
+        ...scoreOnMobileImages,
+        ...vittacashMobileImages,
+        ...gamerznewMobileImages
+      ]
+
+      mobileImages.forEach((img) => {
+        const link = document.createElement('link')
+        link.rel = 'prefetch'
+        link.as = 'image'
+        link.href = `${img}`
+        document.head.appendChild(link)
+      })
+    }, 2000) // Delay de 2 segundos
+  }, [])
+
   interface Project {
     title: string
     subtitle: string | null
@@ -215,6 +262,13 @@ export default function Projects() {
   const handlePrevImage = (indice: number) => indice === 0 ? handlePrevImageFrontend() : indice === 1 ? handlePrevImageBackend() : indice === 2 ? handlePrevImageVittaCash() : indice === 3 ? handlePrevImageIdentificador() : indice === 4 ? handlePrevImageScoreOn() : indice === 5 ? handlePrevImageGamerznew() : null
   const handleNextImage = (indice: number) => indice === 0 ? handleNextImageFrontend() : indice === 1 ? handleNextImageBackend() : indice === 2 ? handleNextImageVittaCash() : indice === 3 ? handleNextImageIdentificador() : indice === 4 ? handleNextImageScoreOn() : indice === 5 ? handleNextImageGamerznew() : null
   const getCurrentImages = (indice: number) => indice === 0 ? currentImagesFrontend : indice === 1 ? currentImagesBackend : indice === 2 ? currentImagesVittaCash : indice === 3 ? identificadorPronomesImages : indice === 4 ? currentImagesScoreOn : indice === 5 ? currentImagesGamerznew : []
+  
+  // Função auxiliar para obter a imagem de forma segura
+  const getSafeImageSrc = (indice: number): string | undefined => {
+    const images = getCurrentImages(indice)
+    const imageIndex = getCurrentImageIndex(indice)
+    return images && images.length > 0 ? images[imageIndex] : undefined
+  }
 
   return (
     <section id="projects" className="relative pt-4 pb-12 sm:py-20 px-4 sm:px-6 lg:px-8 section-blur section-divider">
@@ -274,12 +328,13 @@ export default function Projects() {
                             <div className={`relative ${indice === 2 ? 'h-[158px] md:h-[188px]' : 'aspect-video'} rounded overflow-hidden bg-gray-200 dark:bg-gray-900`} style={indice === 2 ? undefined : undefined}>
                               <div style={indice === 1 ? { transform: 'scale(1.0)', width: '100%', height: '100%' } : undefined} className="relative w-full h-full">
                                 <FrozenGif
-                                  src={getCurrentImages(indice)[getCurrentImageIndex(indice)]}
+                                  src={getSafeImageSrc(indice)}
                                   alt={`LUIGARAH Screenshot ${getCurrentImageIndex(indice) + 1}`}
                                   fill
                                   className={indice === 0 ? "object-cover" : "object-contain"}
                                   sizes="(max-width: 780px) 100vw, 40vw"
-                                  loading="lazy"
+                                  loading="eager"
+                                  onLoadingChange={(isLoading) => handleLoadingChange(indice, isLoading)}
                                 />
                               </div>
                             </div>
@@ -374,11 +429,13 @@ export default function Projects() {
                                   <div className="absolute top-4 left-0 right-0 bottom-8 overflow-hidden">
                                     <div className="relative w-full h-full" style={{ transform: 'scaleX(1.15)' }}>
                                       <FrozenGif
-                                        src={getCurrentImages(indice)[getCurrentImageIndex(indice)]}
+                                        src={getSafeImageSrc(indice)}
                                         alt={`LUIGARAH Screenshot ${getCurrentImageIndex(indice) + 1}`}
                                         fill
                                         className="object-contain"
                                         sizes="160px"
+                                        loading="eager"
+                                        onLoadingChange={(isLoading) => handleLoadingChange(indice, isLoading)}
                                       />
 
                                       {/* Indicadores */}

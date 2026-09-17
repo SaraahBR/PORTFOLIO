@@ -3,6 +3,7 @@ import './globals.css'
 import { ThemeProvider } from '@/components/Tema/ThemeContext'
 import { AccessibilityProvider } from '@/components/Acessibilidade/AccessibilityContext'
 import { LanguageProvider } from '@/app/internacionalizacao/LanguageContext'
+import { ServiceWorkerInit } from '@/components/ServiceWorkerInit'
 import { Toaster } from 'sonner'
 
 // Fonte padrão via sistema (evita download de Google Fonts na build)
@@ -66,6 +67,7 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans">
+        <ServiceWorkerInit />
         <ThemeProvider>
           <AccessibilityProvider>
             <LanguageProvider>
