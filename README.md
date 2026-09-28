@@ -131,7 +131,7 @@ Componente interativo para showcase de projetos em desktop e mobile com galeria 
 **VittaCash (Gerenciador de Despesas)**
 - Visualizador desktop e mobile com toggle
 - 5 imagens desktop + 3 imagens mobile
-- Stack: Next.js 15, React 19, Node.js, PostgreSQL, Prisma, JWT, OAuth
+- Stack: Next.js 16, React 19, Node.js, PostgreSQL, Prisma, Recharts, Brevo, JWT, OAuth, Jest
 - Links: [Site](https://vittacash.vercel.app/) | [Código](https://github.com/SaraahBR/Vitta-Cash)
 
 **LUIGARAH - Frontend e Backend**

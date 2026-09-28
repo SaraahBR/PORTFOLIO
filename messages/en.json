@@ -129,8 +129,8 @@
       {
         "title": "🛍️ LUIGARAH - Frontend",
         "subtitle": "Luxury Fashion Marketplace",
-        "description": "Luxury fashion e-commerce built with Next.js 15 (App Router), React 19 and TypeScript. Filters, universal pagination, wishlist/cart, A11Y, Redux Toolkit + RTK Query, NextAuth (Google/Facebook/Credentials/JWT), admin panel with CRUD and roles. Integrates Spring Boot API, Oracle DB and Cloudflare R2.",
-        "technologies": ["Next.js", "React", "TypeScript", "Redux Toolkit", "RTK Query", "NextAuth", "Tailwind"],
+        "description": "Luxury fashion e-commerce built with Next.js 16 (App Router), React 19 and TypeScript. Multilingual (pt, en, es, fr) with next-intl, a flag-based language switcher and prices converted to each language's currency (BRL, USD, EUR) using daily exchange rates. Filters, universal pagination, wishlist, cart with real-time stock, A11Y, Redux Toolkit + RTK Query, NextAuth (Google/Facebook/Credentials/JWT) with social login validated on the backend, email verification and an admin panel with CRUD and roles. Integrates Spring Boot API, PostgreSQL (Supabase) and Cloudflare R2.",
+        "technologies": ["Next.js", "React", "TypeScript", "Redux Toolkit", "RTK Query", "NextAuth", "next-intl", "Tailwind"],
         "linkSite": "https://luigarah.vercel.app/",
         "linkGithub": "https://github.com/SaraahBR/Luigarah",
         "linkVideo": null
@@ -138,8 +138,8 @@
       {
         "title": "🧱 LUIGARAH - Backend",
         "subtitle": "RESTful API (Java/Spring Boot)",
-        "description": "DDD, DTO/Mapper, security with Spring Security, JWT, BCrypt, CORS, OAuth2; Oracle ADB with Flyway and HikariCP; Cloudflare R2 via AWS S3 SDK; Swagger/OpenAPI 3, structured logs, Docker and CI/CD (Render).",
-        "technologies": ["Java", "Spring Boot", "Oracle ADB", "Flyway", "JWT", "Swagger"],
+        "description": "Java 21 + Spring Boot 3 with DDD, DTO/Mapper and Spring Security (JWT, BCrypt, CORS, OAuth2 with Google/Facebook tokens verified against the provider and limited attempts on email codes). Database migrated from Oracle ADB to PostgreSQL (Supabase) with Flyway and RLS; automatic product translation with Google Translation; catalog caching with Caffeine and background warm-up; tests with Embedded Postgres; Cloudflare R2 via AWS S3 SDK; Swagger/OpenAPI 3, Docker and CI/CD (Render).",
+        "technologies": ["Java", "Spring Boot", "PostgreSQL", "Supabase", "Flyway", "JWT", "Caffeine", "Swagger"],
         "linkSite": "https://luigarah-backend.onrender.com/swagger-ui/index.html",
         "linkGithub": "https://github.com/SaraahBR/luigarah-backend",
         "linkVideo": null
@@ -147,8 +147,8 @@
       {
         "title": "💸 VittaCash",
         "subtitle": "Personal Expense Management Site",
-        "description": "Personal finance management system built with Next.js 15, React 19 and JavaScript. Dashboard, expense CRUD, interactive reports, filters by period/category, email sending, cache and user isolation (GDPR). Google OAuth + JWT authentication. Backend in Node.js/Express with Prisma, PostgreSQL (Supabase), validations and Swagger. Deployed on Vercel + Render.",
-        "technologies": ["Next.js", "React", "Node.js", "PostgreSQL", "Prisma", "JWT", "OAuth", "Full Stack", "REST API"],
+        "description": "Personal finance management system built with Next.js 16, React 19 and JavaScript. Dashboard with charts (Recharts), expense CRUD with monthly/yearly recurrence, interactive reports, filters by period/category, email reports and account verification (Brevo), multi-layer cache and user isolation (GDPR). WCAG accessibility, code quality checked with SonarQube and tests with Jest. Google OAuth + JWT authentication. Backend in Node.js/Express with Prisma, PostgreSQL (Supabase), validations and Swagger. Deployed on Vercel + Render.",
+        "technologies": ["Next.js", "React", "Node.js", "PostgreSQL", "Prisma", "Recharts", "Brevo", "JWT", "OAuth", "Jest", "Full Stack", "REST API"],
         "linkSite": "https://vittacash.vercel.app/",
         "linkGithub": "https://github.com/SaraahBR/Vitta-Cash",
         "linkVideo": null
