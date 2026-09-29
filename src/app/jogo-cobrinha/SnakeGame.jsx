@@ -18,6 +18,7 @@ export default function SnakeGame() {
   const jogoRodandoRef = useRef(false)
   const intervaloJogoRef = useRef(null)
   const intervaloDemoRef = useRef(null)
+  const reinicioDemoRef = useRef(null)
   const pontuacaoRef = useRef(0)
   const cobraRef = useRef([
     { x: 10, y: 10 },
@@ -25,6 +26,8 @@ export default function SnakeGame() {
     { x: 8, y: 10 }
   ])
   const velocidadeRef = useRef({ x: 0, y: 0 })
+  // Direção usada no último passo (evita virar para trás apertando duas teclas no mesmo passo)
+  const direcaoAtualRef = useRef({ x: 0, y: 0 })
   const comidaRef = useRef({ x: 15, y: 15 })
 
   // Estado da demonstração
@@ -189,8 +192,23 @@ export default function SnakeGame() {
     return novaComida
   }
 
+  // Para a demonstração e cancela um reinício pendente, garantindo um único loop ativo
+  const pararDemo = () => {
+    if (intervaloDemoRef.current) {
+      clearInterval(intervaloDemoRef.current)
+      intervaloDemoRef.current = null
+    }
+    if (reinicioDemoRef.current) {
+      clearTimeout(reinicioDemoRef.current)
+      reinicioDemoRef.current = null
+    }
+  }
+
   // Iniciar demonstração (modo automático)
   const iniciarDemo = () => {
+    pararDemo()
+    if (jogoRodandoRef.current) return
+
     cobraDemoRef.current = [
       { x: 5, y: 5 },
       { x: 4, y: 5 },
@@ -214,49 +232,42 @@ export default function SnakeGame() {
     if (jogoRodandoRef.current) return
 
     const cabeca = cobraDemoRef.current[0]
-    let direcaoAlvo = { x: 0, y: 0 }
+    const comida = comidaDemoRef.current
+    // A ponta da cauda sai do lugar neste passo, então pode ser ocupada
+    const corpo = cobraDemoRef.current.slice(0, -1)
 
-    // Lógica simples: ir em direção à comida
-    if (cabeca.x < comidaDemoRef.current.x) direcaoAlvo = { x: 1, y: 0 }
-    else if (cabeca.x > comidaDemoRef.current.x) direcaoAlvo = { x: -1, y: 0 }
-    else if (cabeca.y < comidaDemoRef.current.y) direcaoAlvo = { x: 0, y: 1 }
-    else if (cabeca.y > comidaDemoRef.current.y) direcaoAlvo = { x: 0, y: -1 }
+    // Só movimentos que não batem na parede nem no corpo, priorizando os que chegam mais perto da comida
+    const movimentosSeguros = [
+      { x: 1, y: 0 }, { x: -1, y: 0 },
+      { x: 0, y: 1 }, { x: 0, y: -1 }
+    ].filter(({ x, y }) => {
+      const novoX = cabeca.x + x
+      const novoY = cabeca.y + y
+      const semParede = novoX >= 0 && novoX < contagemQuadrados && novoY >= 0 && novoY < contagemQuadrados
+      const semCorpo = !corpo.some(s => s.x === novoX && s.y === novoY)
+      return semParede && semCorpo
+    })
 
-    const proximoX = cabeca.x + direcaoAlvo.x
-    const proximoY = cabeca.y + direcaoAlvo.y
-
-    // Evitar paredes
-    if (proximoX < 0 || proximoY < 0 || proximoX >= contagemQuadrados || proximoY >= contagemQuadrados) {
-      const movimentosseguros = [
-        { x: 0, y: -1 }, { x: 1, y: 0 },
-        { x: 0, y: 1 }, { x: -1, y: 0 }
-      ]
-      for (const movimento of movimentosseguros) {
-        const novoX = cabeca.x + movimento.x
-        const novoY = cabeca.y + movimento.y
-        const semParede = novoX >= 0 && novoX < contagemQuadrados && novoY >= 0 && novoY < contagemQuadrados
-        const semCorpo = !cobraDemoRef.current.some(s => s.x === novoX && s.y === novoY)
-        if (semParede && semCorpo) {
-          direcaoAlvo = movimento
-          break
-        }
-      }
+    // Encurralada: recomeça a demonstração
+    if (movimentosSeguros.length === 0) {
+      reiniciarDemo()
+      return
     }
 
-    // Se por algum motivo continuou zero, mantém a última direção
-    if (direcaoAlvo.x === 0 && direcaoAlvo.y === 0) {
-      direcaoAlvo = velocidadeDemoRef.current
-    }
+    const distanciaAteComida = ({ x, y }) =>
+      Math.abs(cabeca.x + x - comida.x) + Math.abs(cabeca.y + y - comida.y)
+    const direcaoAnterior = velocidadeDemoRef.current
+    const direcaoAlvo = movimentosSeguros.reduce((melhor, movimento) => {
+      const diferenca = distanciaAteComida(movimento) - distanciaAteComida(melhor)
+      if (diferenca < 0) return movimento
+      // Em caso de empate, mantém a direção atual para o movimento ficar mais natural
+      if (diferenca === 0 && movimento.x === direcaoAnterior.x && movimento.y === direcaoAnterior.y) return movimento
+      return melhor
+    })
 
     const novaCabeca = {
       x: cabeca.x + direcaoAlvo.x,
       y: cabeca.y + direcaoAlvo.y
-    }
-
-    // Verificar colisão com próprio corpo
-    if (cobraDemoRef.current.some(s => s.x === novaCabeca.x && s.y === novaCabeca.y)) {
-      reiniciarDemo()
-      return
     }
 
     cobraDemoRef.current.unshift(novaCabeca)
@@ -279,12 +290,9 @@ export default function SnakeGame() {
   }
 
   const reiniciarDemo = () => {
-    if (intervaloDemoRef.current) {
-      clearInterval(intervaloDemoRef.current)
-      intervaloDemoRef.current = null
-    }
+    pararDemo()
     if (!jogoRodandoRef.current) {
-      setTimeout(iniciarDemo, 300)
+      reinicioDemoRef.current = setTimeout(iniciarDemo, 300)
     }
   }
 
@@ -315,6 +323,7 @@ export default function SnakeGame() {
     }
 
     cobraRef.current.unshift({ x: cabecaX, y: cabecaY })
+    direcaoAtualRef.current = velocidadeRef.current
 
     // Verificar se comeu
     if (cabecaX === comidaRef.current.x && cabecaY === comidaRef.current.y) {
@@ -335,7 +344,12 @@ export default function SnakeGame() {
   }
 
   const finalizarJogo = () => {
-    if (intervaloJogoRef.current) clearInterval(intervaloJogoRef.current)
+    // Evita finalizar duas vezes a mesma partida
+    if (!jogoRodandoRef.current) return
+    if (intervaloJogoRef.current) {
+      clearInterval(intervaloJogoRef.current)
+      intervaloJogoRef.current = null
+    }
     toast.error(`${t('snake.gameOver')} 😅`, {
       description: `${t('snake.finalScore')}: ${pontuacaoRef.current}`,
       duration: 3000,
@@ -350,6 +364,7 @@ export default function SnakeGame() {
       { x: 8, y: 10 }
     ]
     velocidadeRef.current = { x: 0, y: 0 }
+    direcaoAtualRef.current = { x: 0, y: 0 }
     comidaRef.current = gerarComida(cobraRef.current)
     jogoRodandoRef.current = false
     setJogoRodando(false)
@@ -362,11 +377,8 @@ export default function SnakeGame() {
     // Com animações desativadas, o jogo fica bloqueado
     if (reduceMotion) return
 
-    // Parar e limpar completamente a demo
-    if (intervaloDemoRef.current) {
-      clearInterval(intervaloDemoRef.current)
-      intervaloDemoRef.current = null
-    }
+    // Parar e limpar completamente a demo (inclusive um reinício que ainda estava agendado)
+    pararDemo()
 
     // Resetar a cobra do jogo
     cobraRef.current = [
@@ -381,6 +393,7 @@ export default function SnakeGame() {
     jogoRodandoRef.current = true
     setJogoRodando(true)
     velocidadeRef.current = { x: 1, y: 0 } // Começa indo para direita
+    direcaoAtualRef.current = { x: 1, y: 0 }
 
     // Limpar qualquer intervalo anterior
     if (intervaloJogoRef.current) {
@@ -401,26 +414,28 @@ export default function SnakeGame() {
         e.preventDefault()
       }
 
+      // Compara com a direção do último passo, não com a última tecla apertada
+      const direcaoAtual = direcaoAtualRef.current
       switch (e.key) {
         case 'ArrowLeft':
         case 'a':
         case 'A':
-          if (velocidadeRef.current.x !== 1) velocidadeRef.current = { x: -1, y: 0 }
+          if (direcaoAtual.x !== 1) velocidadeRef.current = { x: -1, y: 0 }
           break
         case 'ArrowRight':
         case 'd':
         case 'D':
-          if (velocidadeRef.current.x !== -1) velocidadeRef.current = { x: 1, y: 0 }
+          if (direcaoAtual.x !== -1) velocidadeRef.current = { x: 1, y: 0 }
           break
         case 'ArrowUp':
         case 'w':
         case 'W':
-          if (velocidadeRef.current.y !== 1) velocidadeRef.current = { x: 0, y: -1 }
+          if (direcaoAtual.y !== 1) velocidadeRef.current = { x: 0, y: -1 }
           break
         case 'ArrowDown':
         case 's':
         case 'S':
-          if (velocidadeRef.current.y !== -1) velocidadeRef.current = { x: 0, y: 1 }
+          if (direcaoAtual.y !== -1) velocidadeRef.current = { x: 0, y: 1 }
           break
       }
     }
@@ -432,10 +447,7 @@ export default function SnakeGame() {
   // Iniciar demo ao montar (bloqueada quando as animações estão desativadas)
   useEffect(() => {
     if (reduceMotion) {
-      if (intervaloDemoRef.current) {
-        clearInterval(intervaloDemoRef.current)
-        intervaloDemoRef.current = null
-      }
+      pararDemo()
       const canvas = canvasRef.current
       const ctx = canvas?.getContext('2d')
       if (ctx) desenharGradeFundo(ctx)
@@ -449,13 +461,17 @@ export default function SnakeGame() {
 
     return () => {
       clearTimeout(timer)
-      if (intervaloDemoRef.current) {
-        clearInterval(intervaloDemoRef.current)
-        intervaloDemoRef.current = null
-      }
+      pararDemo()
       if (intervaloJogoRef.current) {
         clearInterval(intervaloJogoRef.current)
         intervaloJogoRef.current = null
+      }
+      // Se a partida foi interrompida (ex.: animações desativadas), volta ao estado inicial
+      if (jogoRodandoRef.current) {
+        jogoRodandoRef.current = false
+        setJogoRodando(false)
+        pontuacaoRef.current = 0
+        setPontuacao(0)
       }
     }
   }, [reduceMotion])
